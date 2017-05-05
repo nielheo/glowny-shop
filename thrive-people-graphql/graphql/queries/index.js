@@ -1,0 +1,1 @@
+export { default as echoQuery } from './echoQuery'

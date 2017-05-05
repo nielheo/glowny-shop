@@ -1,25 +1,17 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
-import { buildSchema } from 'graphql'
+import QueryType from './graphql/QueryType'
+import { GraphQLSchema } from 'graphql'
 
-// Construct a schema, using GraphQL schema language
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`)
-
-// The root provides a resolver function for each API endpoint
-const root = {
-  hello: () => {
-    return 'Hello world!'
-  },
-}
+var schema = new GraphQLSchema({
+  query: QueryType,
+// mutation: MutationType
+})
 
 const app = express()
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
+  query: QueryType,
   graphiql: true,
 }))
 app.listen(4000)

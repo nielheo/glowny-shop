@@ -25,3 +25,5 @@ db.sequelize
   }, function (err) { 
     console.log('Unable to connect to the database:', err)
   })
+
+export default app

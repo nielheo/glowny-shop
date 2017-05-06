@@ -1,13 +1,33 @@
-import { GraphQLObjectType } from 'graphql'
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLNonNull } from 'graphql'
 
-import { echoQuery, usersQuery } from './queries'
+import { echoQuery, usersQuery, userQuery } from './queries'
+
+const viewerType = new GraphQLObjectType({
+	name: 'Viewer',
+	description: 'A viewer',
+	fields: {
+		users: usersQuery,
+		user: userQuery,
+	},
+})
+
+var viewerQuery = {
+	type: viewerType,
+	//resolve: (_, args) => citiesResolver(args)
+	//args: { jwt: { type: new GraphQLNonNull(GraphQLString) } },
+	resolve: () => {
+		return {  }
+	}
+}
+
+
 
 const QueryType = new GraphQLObjectType({
 	name: 'query',
 	fields: {
 		echo: echoQuery,
-		users: usersQuery,
-	},
+		viewer: viewerQuery,
+	}
 })
 
 export default QueryType

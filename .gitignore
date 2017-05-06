@@ -22,3 +22,4 @@ obj/
 _ReSharper*/
 node_modules*/
 
+thrive-people-graphql/db.development.sqlite

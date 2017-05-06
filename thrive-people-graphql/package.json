@@ -9,9 +9,12 @@
     "express-graphql": "^0.6.4",
     "fs": "0.0.1-security",
     "graphql": "^0.9.6",
+    "graphql-relay": "^0.5.1",
+    "graphql-sequelize": "^5.3.2",
     "mysql": "^2.13.0",
     "path": "^0.12.7",
-    "sequelize": "^3.30.4"
+    "sequelize": "^3.30.4",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

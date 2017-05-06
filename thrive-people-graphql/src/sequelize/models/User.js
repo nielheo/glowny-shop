@@ -4,24 +4,9 @@ export default function(sequelize, DataTypes) {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     isActve: DataTypes.BOOLEAN,
-    fullName: {
-      type     : DataTypes.STRING,
-      get      : function()  {
-        var firstName = this.getDataValue('firstName')
-        var lastName = this.getDataValue('lastName')
-        
-        // 'this' allows you to access attributes of the instance
-        return firstName + ' ' + lastName
-      },
-    }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        User.hasMany(models.Role)
-      },
-    },
   })
 
+  
   User.sync({force: true}).then(function () {
     // Table created
     User.create({
@@ -30,7 +15,6 @@ export default function(sequelize, DataTypes) {
       lastName: 'Admin',
       isActve: true,
     })
-    
     User.create({
       email: 'user-admin@thrive-people.com',
       firstName: 'User',
@@ -46,7 +30,8 @@ export default function(sequelize, DataTypes) {
     })
 
     return User
-  });
-
+  })
+  
   return User
 }
+

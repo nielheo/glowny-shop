@@ -1,6 +1,8 @@
 'use strict'
 import {attributeFields} from 'graphql-sequelize'
-import {GraphQLObjectType,GraphQLString,GraphQLInt,GraphQLNonNull,GraphQLList} from 'graphql'
+import {GraphQLObjectType,GraphQLList} from 'graphql'
+import { resolver } from 'graphql-sequelize'
+import roleType from './roleType'
 var models = require('../../sequelize/models')
 import {_} from 'underscore'
 

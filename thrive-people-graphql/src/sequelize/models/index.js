@@ -57,7 +57,7 @@ if (env === 'development') {
               firstName: 'Super',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',
-              isActve: true,
+              isActive: true,
             }).then((user1) => {
               user1.setRoles([role1])
             })
@@ -68,7 +68,7 @@ if (env === 'development') {
               firstName: 'User',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',
-              isActve: true,
+              isActive: true,
             }).then((user2) => {
               user2.setRoles([role2])
             })
@@ -78,7 +78,7 @@ if (env === 'development') {
               firstName: 'Client',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',
-              isActve: false,
+              isActive: false,
             }).then((user3) => {
               user3.setRoles([role3])
             })
@@ -88,7 +88,7 @@ if (env === 'development') {
               firstName: 'Client',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',
-              isActve: false,
+              isActive: false,
             }).then((user4) => {
               user4.setRoles([role2,role3])
             })

@@ -1,17 +1,20 @@
 'use strict'
 import {attributeFields} from 'graphql-sequelize'
-import {GraphQLObjectType,GraphQLList} from 'graphql'
+import {GraphQLObjectType,GraphQLList,GraphQLString,GraphQLBoolean} from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import roleType from './roleType'
 var models = require('../../sequelize/models')
 import {_} from 'underscore'
 
-console.log(roleType)
-
 const userType = new GraphQLObjectType({
 	name: 'User',
 	description: 'A user',
-	fields: _.assign(attributeFields(models.User), {
+	fields: {
+		id: { type: GraphQLString },
+		email: { type: GraphQLString },
+    firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
+    isActive: { type: GraphQLBoolean },
 		roles: {
       type: new GraphQLList(roleType),
       resolve: resolver(models.User.Roles, {
@@ -20,7 +23,7 @@ const userType = new GraphQLObjectType({
         separate: false // load seperately, disables auto including - default: false
       })
     }
-	})
+	}
 })
 
 export default userType

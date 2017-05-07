@@ -11,4 +11,14 @@ describe('models/index', function () {
     var models = require('../../models')
     expect(models.User).to.be.ok()
   })
+
+  it('returns the role.users model', function () {
+    var models = require('../../models')
+    expect(models.Role.Users).to.be.ok()
+  })
+
+  it('returns the user.roles model', function () {
+    var models = require('../../models')
+    expect(models.User.Roles).to.be.ok()
+  })
 })

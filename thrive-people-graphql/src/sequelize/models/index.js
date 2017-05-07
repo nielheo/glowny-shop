@@ -32,13 +32,11 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-var User = db['User']
-var Role = db['Role']
+if (env === 'development') {
+  var User = db['User']
+  var Role = db['Role']
 
-//User.belongsToMany(Role, { as: 'Roles', through: 'UserRole' })
-//Role.belongsToMany(User, { as: 'Users', through: 'UserRole' })
-
-Role.sync({force: true}).then(function () {
+  Role.sync({force: true}).then(function () {
     // Table created
     Role.create({
       title: 'Super Admin',
@@ -106,7 +104,15 @@ Role.sync({force: true}).then(function () {
     return Role
   })
 
+} 
 
+if (env === 'test') {
+  var User = db['User']
+  var Role = db['Role']
+
+  Role.sync({force: true})
+  User.sync({force: true})
+}
 
 
 module.exports = db

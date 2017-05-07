@@ -6,6 +6,8 @@ import roleType from './roleType'
 var models = require('../../sequelize/models')
 import {_} from 'underscore'
 
+console.log(roleType)
+
 const userType = new GraphQLObjectType({
 	name: 'User',
 	description: 'A user',

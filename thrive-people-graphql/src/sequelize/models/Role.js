@@ -9,23 +9,5 @@ export default function(sequelize, DataTypes) {
     }
   })
 
-  Role.sync({force: true}).then(function () {
-    // Table created
-    Role.create({
-      title: 'Super Admin',
-      type: 'admin',
-    })
-    Role.create({
-      title: 'User Admin',
-      type: 'admin',
-    })
-    Role.create({
-      title: 'Client Admin',
-      type: 'admin',
-    })
-
-    return Role
-  })
-
   return Role
 }

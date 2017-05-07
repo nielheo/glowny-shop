@@ -1,13 +1,12 @@
 import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLNonNull } from 'graphql'
 
-import { echoQuery, usersQuery, userQuery, rolesQuery } from './queries'
+import { echoQuery, usersQuery, rolesQuery } from './queries'
 
 const viewerType = new GraphQLObjectType({
 	name: 'Viewer',
 	description: 'A viewer',
 	fields: {
 		users: usersQuery,
-		user: userQuery,
 		roles: rolesQuery,
 	},
 })

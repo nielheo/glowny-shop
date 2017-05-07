@@ -6,6 +6,10 @@ export default function(sequelize, DataTypes) {
     email: DataTypes.STRING,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
+    type: {
+      type:   DataTypes.ENUM,
+      values: ['admin', 'supplier', 'member']
+    },
     isActive: DataTypes.BOOLEAN,
     passwordHash: DataTypes.STRING,
     password: {

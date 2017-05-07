@@ -9,7 +9,7 @@ class Users extends React.Component {
     this.props.dispatch(getGraph(`
       {
         viewer {
-          users {
+          users(type:admin) {
             id
             email
             firstName

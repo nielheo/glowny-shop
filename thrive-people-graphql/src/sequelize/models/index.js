@@ -35,8 +35,8 @@ db.Sequelize = Sequelize
 var User = db['User']
 var Role = db['Role']
 
-User.belongsToMany(Role, { as: 'Roles', through: 'UserRole' })
-Role.belongsToMany(User, { as: 'Users', through: 'UserRole' })
+//User.belongsToMany(Role, { as: 'Roles', through: 'UserRole' })
+//Role.belongsToMany(User, { as: 'Users', through: 'UserRole' })
 
 Role.sync({force: true}).then(function () {
     // Table created

@@ -1,13 +1,14 @@
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import QueryType from './src/graphql/QueryType'
+import MutationType from './src/graphql/MutationType'
 import { GraphQLSchema } from 'graphql'
 import cors from 'cors'
 import db from './src/sequelize/models'
 
 var schema = new GraphQLSchema({
   query: QueryType,
-// mutation: MutationType
+  mutation: MutationType,
 })
 
 const app = express()

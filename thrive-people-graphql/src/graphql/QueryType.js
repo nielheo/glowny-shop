@@ -20,8 +20,6 @@ var viewerQuery = {
 	}
 }
 
-
-
 const QueryType = new GraphQLObjectType({
 	name: 'query',
 	fields: {

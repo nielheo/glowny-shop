@@ -1,0 +1,8 @@
+{
+  "presets":
+    {
+      "plugins": [
+        "./plugins/babelRelayPlugin"
+      ]
+    }
+}

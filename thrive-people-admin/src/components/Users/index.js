@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getGraph } from '../../actions/graphql.js'
+import Relay from 'react-relay'
 
 import UserList from './UserList'
 
@@ -46,5 +47,25 @@ const usersRedux = connect(
   mapStateToProps,
 )(Users)
 
-export default usersRedux
+
+export default Relay.createContainer(usersRedux, {
+  fragments: {
+    viewer: () => Relay.QL`
+      fragment on Viewer {
+        users(type:admin) {
+          id
+          email
+          firstName
+          lastName
+          isActive
+          roles {
+            id title
+          }
+        }
+      }
+    `,
+  },
+})
+
+//export default usersRedux
 

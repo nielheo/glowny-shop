@@ -1,0 +1,57 @@
+schema {
+  query: query
+  mutation: mutation
+}
+
+type mutation {
+  # Creates a new user
+  updateUserActive(
+    # User id
+    id: Int!
+
+    # active status
+    isActive: Boolean!
+  ): User
+}
+
+type query {
+  echo(message: String): String
+  viewer: Viewer
+}
+
+# A role
+type Role {
+  id: String
+  title: String
+  type: Site
+}
+
+enum Site {
+  admin
+  supplier
+  client
+}
+
+# A user
+type User {
+  id: String
+  email: String
+  firstName: String
+  lastName: String
+  type: Site
+  isActive: Boolean
+  roles: [Role]
+}
+
+# A viewer
+type Viewer {
+  users(
+    # id of the user
+    id: Int
+    type: Site!
+  ): [User]
+  roles(
+    # id of the role
+    id: Int
+  ): [Role]
+}

@@ -7,11 +7,21 @@ import {
 
 import environment from './createRelayEnvironment';
 import Feed from './Feed';
-import Layout from './components/Layout'
+
 import store from './store/store.js'
 import { Provider } from 'react-redux'
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+
+import Layout from './components/Layout'
+import Home from './components/Home'
+//import Login from './components/Login'
+//import Logout from './components/Logout'
+//import NotFound from './components/NotFound'
+//import AboutUs from './components/AboutUs'
+import Users from './components/Users'
+//import Forgot from './components/Forgot' 
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -37,6 +47,7 @@ class App extends Component {
                     id
                   }
                 }
+                ...Route
               }
             `}
 
@@ -44,10 +55,15 @@ class App extends Component {
               if (error) {
                 return <div>{error.message}</div>;
               } else if (props) {
-                console.log(this.props)
+                console.log(props.viewer)
                 return (
                   <Layout>
-                   </Layout>
+                    <Router history={hashHistory}>
+                      <Route path='/' />
+                      <Route path='/users' component={Users} data={props.viewer} />
+
+                    </Router>
+                  </Layout>
                 ) 
               }
               return <div>Loading</div>;

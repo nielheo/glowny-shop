@@ -1,50 +1,35 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { getGraph } from '../../actions/graphql.js'
+import {
+  graphql,
+  createFragmentContainer
+} from 'react-relay'
 
 import UserList from './UserList'
 
 class Users extends React.Component {
-  componentDidMount = () => {
-    this.props.dispatch(getGraph(`
-      {
-        viewer {
-          users(type:admin) {
-            id
-            email
-            firstName
-            lastName
-            isActive
-            roles {
-              id title
-            }
-          }
-        }
-      }`)
-    );
-  }
-
   render() {
     //let dispatch = this.props.dispatch
     //let fetchInProgress = String(this.props.store.get('fetching'));
     //let queryText;
     //let viewer = this.props.store.get('data').toObject()
     //console.log(this.props.store.data)
-    const { users } = this.props.store.data
-    //console.log(users)
+    console.log(this.props)
     return (
-      <UserList users={users} />
+      <div>User List</div>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  store: state.queryReducer,
-})
+export default createFragmentContainer(Users,
+  graphql`
+    fragment index on Viewer {
+      users(type: admin) {
+        id
+        firstName
+        lastName
+        email
+      }
 
-const usersRedux = connect(
-  mapStateToProps,
-)(Users)
-
-export default usersRedux
-
+    }
+  `
+)

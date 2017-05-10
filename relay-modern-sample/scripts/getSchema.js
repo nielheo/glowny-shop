@@ -9,7 +9,7 @@ const {
 
 console.log(introspectionQuery);
 
-fetch('http://api.githunt.com/graphql', {
+fetch('http://localhost:4000/graphql', {
   method: 'POST',
   headers: {
     'Accept': 'application/json',

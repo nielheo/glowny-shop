@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Feed.graphql
- * @generated SignedSource<<7aff61b5bf7d9c889cb4705fca187c8d>>
+ * @generated SignedSource<<6a1d835b4a6eca6542c51269c8f33928>>
  * @flow
  * @nogrep
  */
@@ -13,16 +13,11 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type Feed = {
-  repository: Feed_repository;
+  users?: ?Array<?Feed_users>;
 };
 
-export type Feed_repository_owner = {
-  login: string;
-};
-
-export type Feed_repository = {
-  owner?: ?Feed_repository_owner;
-  name: string;
+export type Feed_users = {
+  id?: ?string;
 };
 */
 
@@ -31,54 +26,36 @@ export type Feed_repository = {
 const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],
   "kind": "Fragment",
-  "metadata": {
-    "plural": true
-  },
+  "metadata": null,
   "name": "Feed",
   "selections": [
     {
       "kind": "LinkedField",
       "alias": null,
-      "args": null,
-      "concreteType": "Repository",
-      "name": "repository",
-      "plural": false,
-      "selections": [
+      "args": [
         {
-          "kind": "LinkedField",
-          "alias": null,
-          "args": null,
-          "concreteType": "User",
-          "name": "owner",
-          "plural": false,
-          "selections": [
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "login",
-              "storageKey": null
-            }
-          ],
-          "storageKey": null
-        },
+          "kind": "Literal",
+          "name": "type",
+          "value": "admin",
+          "type": "Site!"
+        }
+      ],
+      "concreteType": "User",
+      "name": "users",
+      "plural": true,
+      "selections": [
         {
           "kind": "ScalarField",
           "alias": null,
           "args": null,
-          "name": "name",
+          "name": "id",
           "storageKey": null
         }
       ],
-      "storageKey": null
-    },
-    {
-      "kind": "FragmentSpread",
-      "name": "FeedEntry",
-      "args": null
+      "storageKey": "users{\"type\":\"admin\"}"
     }
   ],
-  "type": "Entry"
+  "type": "Viewer"
 };
 
 module.exports = fragment;

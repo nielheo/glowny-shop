@@ -13,7 +13,7 @@ function fetchQuery(
   cacheConfig,
   uploadables,
 ) {
-  return fetch('http://api.githunt.com/graphql', {
+  return fetch('http://localhost:4000/graphql', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

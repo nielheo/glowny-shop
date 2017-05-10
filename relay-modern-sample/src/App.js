@@ -17,8 +17,8 @@ class App extends Component {
           environment={environment}
 
           query={graphql`
-            query AppFeedQuery {
-              feed (type: NEW, limit: 5) {
+            query AppQuery {
+              viewer {
                 ...Feed
               }
             }

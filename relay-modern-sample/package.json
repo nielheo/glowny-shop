@@ -1,11 +1,17 @@
 {
-  "name": "relay-modern",
+  "name": "thrive-people-admin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "material-ui": "^0.18.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-relay": "1.0.0-rc.3"
+    "react-redux": "^5.0.4",
+    "react-relay": "1.0.0-rc.3",
+    "react-router": "^2.8.1",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "autoprefixer": "6.7.2",

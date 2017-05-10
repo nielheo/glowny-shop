@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule AppQuery.graphql
- * @generated SignedSource<<685f8fa4628455dad1fb58f795e01617>>
- * @relayHash 1739fa238792f843d3f152036390f0b5
+ * @generated SignedSource<<67a1a05f70f7787b159963c4531e7d58>>
+ * @relayHash 60b404a79bcc72ef7496df2560c4edec
  * @flow
  * @nogrep
  */
@@ -21,13 +21,9 @@ import type {ConcreteBatch} from 'relay-runtime';
 /*
 query AppQuery {
   viewer {
-    ...Feed
-  }
-}
-
-fragment Feed on Viewer {
-  users(type: admin) {
-    id
+    users(type: admin) {
+      id
+    }
   }
 }
 */
@@ -48,9 +44,29 @@ const batch /*: ConcreteBatch*/ = {
         "plural": false,
         "selections": [
           {
-            "kind": "FragmentSpread",
-            "name": "Feed",
-            "args": null
+            "kind": "LinkedField",
+            "alias": null,
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "type",
+                "value": "admin",
+                "type": "Site!"
+              }
+            ],
+            "concreteType": "User",
+            "name": "users",
+            "plural": true,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "args": null,
+                "name": "id",
+                "storageKey": null
+              }
+            ],
+            "storageKey": "users{\"type\":\"admin\"}"
           }
         ],
         "storageKey": null
@@ -115,7 +131,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppQuery {\n  viewer {\n    ...Feed\n  }\n}\n\nfragment Feed on Viewer {\n  users(type: admin) {\n    id\n  }\n}\n"
+  "text": "query AppQuery {\n  viewer {\n    users(type: admin) {\n      id\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

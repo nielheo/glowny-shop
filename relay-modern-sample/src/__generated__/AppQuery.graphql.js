@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule AppQuery.graphql
- * @generated SignedSource<<67a1a05f70f7787b159963c4531e7d58>>
- * @relayHash 60b404a79bcc72ef7496df2560c4edec
+ * @generated SignedSource<<e9d6aff594d2dc66d985ae745a2adc34>>
+ * @relayHash 009f16ce47a760e9c46fe591197b1aff
  * @flow
  * @nogrep
  */
@@ -21,9 +21,25 @@ import type {ConcreteBatch} from 'relay-runtime';
 /*
 query AppQuery {
   viewer {
-    users(type: admin) {
-      id
-    }
+    ...Users_viewer
+  }
+}
+
+fragment Users_viewer on Viewer {
+  users(type: admin) {
+    ...UserList_users
+  }
+}
+
+fragment UserList_users on User {
+  id
+  firstName
+  lastName
+  email
+  isActive
+  roles {
+    id
+    title
   }
 }
 */
@@ -44,29 +60,9 @@ const batch /*: ConcreteBatch*/ = {
         "plural": false,
         "selections": [
           {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": [
-              {
-                "kind": "Literal",
-                "name": "type",
-                "value": "admin",
-                "type": "Site!"
-              }
-            ],
-            "concreteType": "User",
-            "name": "users",
-            "plural": true,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
-              }
-            ],
-            "storageKey": "users{\"type\":\"admin\"}"
+            "kind": "FragmentSpread",
+            "name": "Users_viewer",
+            "args": null
           }
         ],
         "storageKey": null
@@ -108,11 +104,70 @@ const batch /*: ConcreteBatch*/ = {
             "plural": true,
             "selections": [
               {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "id",
-                "storageKey": null
+                "kind": "InlineFragment",
+                "type": "User",
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "id",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "firstName",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "lastName",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "email",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "isActive",
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "Role",
+                    "name": "roles",
+                    "plural": true,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "id",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "title",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
+                  }
+                ]
               }
             ],
             "storageKey": "users{\"type\":\"admin\"}"
@@ -131,7 +186,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppQuery {\n  viewer {\n    users(type: admin) {\n      id\n    }\n  }\n}\n"
+  "text": "query AppQuery {\n  viewer {\n    ...Users_viewer\n  }\n}\n\nfragment Users_viewer on Viewer {\n  users(type: admin) {\n    ...UserList_users\n  }\n}\n\nfragment UserList_users on User {\n  id\n  firstName\n  lastName\n  email\n  isActive\n  roles {\n    id\n    title\n  }\n}\n"
 };
 
 module.exports = batch;

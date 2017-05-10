@@ -13,23 +13,21 @@ class Users extends React.Component {
     //let queryText;
     //let viewer = this.props.store.get('data').toObject()
     //console.log(this.props.store.data)
-    console.log(this.props)
+    console.log(this.props.viewer)
     return (
-      <div>User List</div>
+      <UserList users={this.props.viewer.users} />
     )
   }
 }
 
-export default createFragmentContainer(Users,
-  graphql`
-    fragment index on Viewer {
-      users(type: admin) {
-        id
-        firstName
-        lastName
-        email
-      }
+//export default Users
 
+export default createFragmentContainer(Users, {
+  viewer: graphql`
+    fragment Users_viewer on Viewer {
+      users(type: admin) {
+        ...UserList_users
+      }
     }
   `
-)
+})

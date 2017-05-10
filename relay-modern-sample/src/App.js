@@ -20,7 +20,7 @@ import Home from './components/Home'
 //import Logout from './components/Logout'
 //import NotFound from './components/NotFound'
 //import AboutUs from './components/AboutUs'
-import Users from './components/Users'
+import Users from './components/Users/Users'
 //import Forgot from './components/Forgot' 
 
 const muiTheme = getMuiTheme({
@@ -43,11 +43,9 @@ class App extends Component {
             query={graphql`
               query AppQuery {
                 viewer {
-                  users(type:admin) {
-                    id
-                  }
+                  ...Users_viewer
                 }
-                ...Route
+                
               }
             `}
 
@@ -58,11 +56,7 @@ class App extends Component {
                 console.log(props.viewer)
                 return (
                   <Layout>
-                    <Router history={hashHistory}>
-                      <Route path='/' />
-                      <Route path='/users' component={Users} data={props.viewer} />
-
-                    </Router>
+                    <Users viewer={props.viewer} />
                   </Layout>
                 ) 
               }

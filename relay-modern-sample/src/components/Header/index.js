@@ -5,7 +5,6 @@ import * as types from '../../actions/actionTypes.js'
 import { Link } from 'react-router'
 import AppBar from 'material-ui/AppBar'
 import LinearProgress from 'material-ui/LinearProgress'
-import RaisedButton from 'material-ui/RaisedButton'
 import {cyan500} from 'material-ui/styles/colors'
 
 

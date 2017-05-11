@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   QueryRenderer,
   graphql
-} from 'react-relay';
+} from 'react-relay'
 
 import environment from './createRelayEnvironment';
 import Feed from './Feed';
@@ -20,7 +20,7 @@ import Home from './components/Home'
 //import Logout from './components/Logout'
 //import NotFound from './components/NotFound'
 //import AboutUs from './components/AboutUs'
-import Users from './components/Users/Users'
+import Users from './components/Users'
 //import Forgot from './components/Forgot' 
 
 const muiTheme = getMuiTheme({
@@ -37,32 +37,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <MuiThemeProvider muiTheme={muiTheme}>
-          <QueryRenderer
-            environment={environment}
-
-            query={graphql`
-              query AppQuery {
-                viewer {
-                  ...Users_viewer
-                }
-                
-              }
-            `}
-
-            render={({error, props}) => {
-              if (error) {
-                return <div>{error.message}</div>;
-              } else if (props) {
-                console.log(props.viewer)
-                return (
-                  <Layout>
-                    <Users viewer={props.viewer} />
-                  </Layout>
-                ) 
-              }
-              return <div>Loading</div>;
-            }}
-          />
+          <Layout>
+            <Users environment={environment}/>
+          </Layout>
         </MuiThemeProvider>
       </Provider>
 

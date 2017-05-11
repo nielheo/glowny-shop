@@ -1,6 +1,10 @@
 import React from 'react'
 import UserItem from './UserItem'
 import Snackbar from 'material-ui/Snackbar'
+import {
+  graphql,
+  createFragmentContainer
+} from 'react-relay'
 
 import {
   Table,
@@ -32,7 +36,6 @@ class UserList extends React.Component {
 
   render()  {
     const { users } = this.props
-    console.log(users)
     return (
       <div>
         <Table fixedHeader={true} selectable={false}>
@@ -49,7 +52,7 @@ class UserList extends React.Component {
           <TableBody displayRowCheckbox={false}>
             {
               users && users.map(user => 
-                <UserItem user={user} key={user.id} setSnackbar={this._handleSetSnackbar} /> )
+                <UserItem key={user.id} user={user} key={user.id} setSnackbar={this._handleSetSnackbar} /> )
             }
           </TableBody>
         </Table>
@@ -64,4 +67,11 @@ class UserList extends React.Component {
   }
 }
 
-export default UserList
+export default createFragmentContainer(UserList, {
+  users: graphql`
+    fragment UserList_users on User @relay(plural: true) {
+      id
+      ...UserItem_user
+    }
+  `
+})

@@ -8,7 +8,6 @@ import UserList from './UserList'
 
 class Users extends React.Component {
   render() {
-    console.log(this.props.viewer)
     return (
       <UserList users={this.props.viewer.users} />
     )

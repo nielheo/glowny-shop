@@ -5,7 +5,7 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import AppBar from 'material-ui/AppBar'
 import Header from './Header'
-import { getUserToken } from './Common/Cookies'
+import { getUserToken } from '../components/Common/Cookies'
 
 const styles = {
   container: {
@@ -29,8 +29,6 @@ export default class LayoutPage extends React.Component {
   _handleClose = () => this.setState({open: false})
 
   render() {
-    console.log('Layout')
-  
     return (
       <div>
         <Header onNavigationClick={this._navigationClickHandler} />

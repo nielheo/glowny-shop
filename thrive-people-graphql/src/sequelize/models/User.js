@@ -1,8 +1,9 @@
 'use strict'
 import bcrypt from 'bcrypt'
-
+import Sequelize from 'sequelize'
 export default function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
+    id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
     email: DataTypes.STRING,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,

@@ -61,9 +61,8 @@ class Login extends React.Component {
   }
 
   _login = async () => {
-    let response
     try { 
-      response = await fetch(backendUrl+'/connect/token', {
+      await fetch(backendUrl+'/connect/token', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -95,7 +94,7 @@ class Login extends React.Component {
       this.props._updateHomeOnProgressAction(false)
       console.log(err)
       //this._changeLoadingStatus(false);
-      response = null;
+     // response = null;
     }
   }
 

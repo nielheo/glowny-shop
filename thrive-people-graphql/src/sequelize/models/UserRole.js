@@ -2,8 +2,8 @@
 
 export default function(sequelize, DataTypes) {
   var UserRole = sequelize.define('UserRole', {
-    userId: DataTypes.INTEGER,
-    roleId: DataTypes.INTEGER,
+    userId: DataTypes.UUID,
+    roleId: DataTypes.UUID,
   })
 
   

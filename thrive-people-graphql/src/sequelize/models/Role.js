@@ -1,7 +1,8 @@
 'use strict'
-
+import Sequelize from 'sequelize'
 export default function(sequelize, DataTypes) {
   var Role = sequelize.define('Role', {
+    id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
     title: DataTypes.STRING,
     type: {
       type:   DataTypes.ENUM,

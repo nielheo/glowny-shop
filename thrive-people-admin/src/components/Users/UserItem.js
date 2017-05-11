@@ -4,13 +4,15 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table'
+import {
+  graphql,
+  createFragmentContainer
+} from 'react-relay'
 import Toggle from 'material-ui/Toggle'
 
 class UserItem extends React.Component 
 { 
   _isActiveClickHandler = (value, e) => {
-    console.log(value)
-    console.log(e.target.checked)
     this.props.setSnackbar(true, value + ' is ' + (e.target.checked ? 'checked' : 'not checked'))
   }
   
@@ -32,4 +34,18 @@ class UserItem extends React.Component
 
 }
 
-export default UserItem
+export default createFragmentContainer(UserItem, {
+  user: graphql`
+    fragment UserItem_user on User {
+      id
+      firstName
+      lastName
+      email
+      isActive
+      roles {
+        id
+        title
+      }
+    }
+  `
+})

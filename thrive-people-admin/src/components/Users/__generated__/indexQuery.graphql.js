@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule indexQuery.graphql
- * @generated SignedSource<<948b4ad756e297e33efeec4a714f3d85>>
- * @relayHash 8c35b278f37ccffa119740c60ab5de5f
+ * @generated SignedSource<<85d1e3f0acbee9eadf77e2302826d964>>
+ * @relayHash 1df5a3ca17e98f1771601d9fd2faa319
  * @flow
  * @nogrep
  */
@@ -32,6 +32,11 @@ fragment Users_viewer on Viewer {
 }
 
 fragment UserList_users on User {
+  id
+  ...UserItem_user
+}
+
+fragment UserItem_user on User {
   id
   firstName
   lastName
@@ -186,7 +191,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query indexQuery {\n  viewer {\n    ...Users_viewer\n  }\n}\n\nfragment Users_viewer on Viewer {\n  users(type: admin) {\n    ...UserList_users\n  }\n}\n\nfragment UserList_users on User {\n  id\n  firstName\n  lastName\n  email\n  isActive\n  roles {\n    id\n    title\n  }\n}\n"
+  "text": "query indexQuery {\n  viewer {\n    ...Users_viewer\n  }\n}\n\nfragment Users_viewer on Viewer {\n  users(type: admin) {\n    ...UserList_users\n  }\n}\n\nfragment UserList_users on User {\n  id\n  ...UserItem_user\n}\n\nfragment UserItem_user on User {\n  id\n  firstName\n  lastName\n  email\n  isActive\n  roles {\n    id\n    title\n  }\n}\n"
 };
 
 module.exports = batch;

@@ -1,10 +1,6 @@
 import React from 'react'
 import UserItem from './UserItem'
 import Snackbar from 'material-ui/Snackbar'
-import {
-  graphql,
-  createFragmentContainer
-} from 'react-relay'
 
 import {
   Table,
@@ -68,18 +64,4 @@ class UserList extends React.Component {
   }
 }
 
-export default createFragmentContainer(UserList, {
-  users: graphql`
-    fragment UserList_users on User @relay(plural: true) {
-      id
-      firstName
-      lastName
-      email
-      isActive
-      roles {
-        id
-        title
-      }
-    }
-  `
-})
+export default UserList

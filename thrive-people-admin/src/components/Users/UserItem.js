@@ -9,11 +9,14 @@ import {
   createFragmentContainer
 } from 'react-relay'
 import Toggle from 'material-ui/Toggle'
+import UpdateUserActiveMutation from './UpdateUserActiveMutation'
+import environment from '../../createRelayEnvironment'
 
 class UserItem extends React.Component 
 { 
   _isActiveClickHandler = (value, e) => {
     this.props.setSnackbar(true, value + ' is ' + (e.target.checked ? 'checked' : 'not checked'))
+    UpdateUserActiveMutation(environment, value, e.target.checked)
   }
   
   render() {

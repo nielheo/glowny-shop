@@ -4,13 +4,10 @@ schema {
 }
 
 type mutation {
-  # Creates a new user
+  # Update user active status
   updateUserActive(
     # User id
-    id: Int!
-
-    # active status
-    isActive: Boolean!
+    input: UpdateUserActiveInput!
   ): User
 }
 
@@ -30,6 +27,14 @@ enum Site {
   admin
   supplier
   client
+}
+
+input UpdateUserActiveInput {
+  # User id
+  id: String!
+
+  # active status
+  isActive: Boolean!
 }
 
 # A user

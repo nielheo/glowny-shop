@@ -42,7 +42,7 @@ class App extends Component {
                 <Route path='/404' component={NotFound}/>
                 <PrivateRoute exact path='/' component={Home} />
                 <PrivateRoute path='/aboutus' component={AboutUs} />
-                <Route path='/users' component={Users} />
+                <PrivateRoute path='/users' component={Users} />
                 <PrivateNotFound to='/404'/>
               </Switch>
             </Layout>
@@ -57,7 +57,7 @@ class App extends Component {
 
 const PrivateNotFound = ({to, ...rest }) => (
   <Route {...rest} render={props => (
-    true//getUserToken() 
+    getUserToken() 
     ? (
       <Redirect to={{
         pathname: to,

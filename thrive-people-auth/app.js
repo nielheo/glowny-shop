@@ -33,7 +33,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // use morgan to log requests to the console
-app.use(morgan('dev'))
+app.use(
+  //function(req, res) {
+  //res.header('Access-Control-Allow-Origin', '*')
+  //res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  morgan('dev')
+//}
+)
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 
 // =======================
 // routes ================
@@ -70,10 +82,12 @@ apiRoutes.post('/authenticate', function(req, res) {
               token: token,
             })
           } else {
+            res.status(400)
             res.json({ success: false, message: 'Authentication failed.' })
           }
-        });
+        })
       } else {
+        res.status(400)
         res.json({ success: false, message: 'Authentication failed.' })
       }
     })
@@ -117,23 +131,6 @@ apiRoutes.post('/authenticate', function(req, res) {
 
   })*/
 })
-
-// TODO: route middleware to verify a token
-
-// route to show a random message (GET http://localhost:8080/api/)
-apiRoutes.get('/', function(req, res) {
-  res.json({ message: 'Welcome to the coolest API on earth!' })
-})
-
-// route to return all users (GET http://localhost:8080/api/users)
-apiRoutes.get('/users', function(req, res) {
-  
-  User.findAll()
-  .then(result => res.json(result))
- // db.Users.findAll({}, function(err, users) {
- //   res.json(users)
- // })
-})  
 
 // apply the routes to our application with the prefix /api
 app.use('/api', apiRoutes)

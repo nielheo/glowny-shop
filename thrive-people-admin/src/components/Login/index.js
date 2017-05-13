@@ -64,7 +64,6 @@ class Login extends React.Component {
   _login = async () => {
     try { 
       await fetch(backendUrlAuth, {
-        mode: 'no-cors',
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -72,27 +71,27 @@ class Login extends React.Component {
         },
         body: 'email=' + this.state.email + '&password=' + this.state.password, 
       })
-      .then(response => response)
       .then((response) => {
-        console.log(response.headers.get('Content-Type'))
-        var contentType = response.headers.get("content-type")
-        console.log(contentType)
-        console.log(response.json)
         this.props._updateHomeOnProgressAction(false)
-        if ((response.status >= 400 && response.status < 600) || !response.success) {
+        if ((response.status >= 400 && response.status < 600)) {
           this.setState({
             emailError: ' ',
             passwordError: 'Invalid login. Try again.',
           })
           throw new Error("Bad response from server");
         }
-        return response.json()
-      })
-      .then((response) => {
-        if(response.access_token) {
-          setUserToken(response.access_token)
-          this.props.history.push('/')
-        }
+        return response.json().then(response => {
+          if(response.success && response.token) {
+            setUserToken(response.token)
+            this.props.history.push('/')
+          } else {
+            this.setState({
+              emailError: ' ',
+              passwordError: 'Invalid login. Try again.',
+            })
+            throw new Error("Bad response from server");
+          }
+        })
       })
     } 
     catch (err) {

@@ -35,8 +35,8 @@ export default function(sequelize, DataTypes) {
         // TODO: it seems like there should be a cleaner way to acheive this.
         // assigned the first instance of User.HasMany above to User.Tasks trows and error.
         User.Roles = User.belongsToMany(models.Role, { as: 'Roles', through: 'UserRole' })
-      }
-    }
+      },
+    },
   })
   
   return User

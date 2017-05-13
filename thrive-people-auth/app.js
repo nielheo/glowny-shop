@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken' // used to create, sign, and verify tokens
 //import User   = require('./app/models/user') // get our mongoose model
 import morgan from 'morgan'
-import db from './app/models'
+import db, { User, Role, UserRole } from './app/models'
 
 const env = process.env.NODE_ENV || 'development'
 const config = require('./config.json')[env]
@@ -21,10 +21,6 @@ db.sequelize
   }, function (err) { 
     console.log('Unable to connect to the database:', err)
   }) // connect to database
-
-
-
-const User = db['User'] 
 
 app.set('superSecret', config.secret) // secret variable
 
@@ -67,13 +63,26 @@ apiRoutes.post('/authenticate', function(req, res) {
   } else {
   // return the information including token as JSON
     User.findOne({
-      attributes: ['id', 'firstName', 'lastName', 'isActive', 'passwordHash'],
-      where: { email: req.body.email },
+      where: { email: req.body.email, isActive: true },
+      include: [
+        { model: Role },
+      ],
     }).then(user => {
       if (user) {
+        //user.Roles.findAll().then(result => result)
+        
         bcrypt.compare(req.body.password, user.passwordHash, function(err, res1) {
           if (res1) {
-            var token = jwt.sign(user.dataValues, app.get('superSecret'), 
+            var claims = {
+              id: user.id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              roles: user.Roles.map(role => role.code),
+            }
+            console.log(user.Roles)
+
+            var token = jwt.sign(claims, app.get('superSecret'), 
               { expiresIn: 60 * 30 })
 
             res.json({

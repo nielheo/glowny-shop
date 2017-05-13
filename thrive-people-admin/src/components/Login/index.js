@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as types from '../../actions/actionTypes.js'
 import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
+import jwt_decode from 'jwt-decode'
 //import {yellow400} from 'material-ui/styles/colors'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -82,6 +83,8 @@ class Login extends React.Component {
         }
         return response.json().then(response => {
           if(response.success && response.token) {
+            var decoded = jwt_decode(response.token)
+            console.log(decoded)
             setUserToken(response.token)
             this.props.history.push('/')
           } else {

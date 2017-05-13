@@ -5,9 +5,6 @@ export default function(sequelize, DataTypes) {
     userId: DataTypes.UUID,
     roleId: DataTypes.UUID,
   })
-
-  
-  UserRole.sync({force: true})
   
   return UserRole
 }

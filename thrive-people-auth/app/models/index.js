@@ -34,23 +34,31 @@ db.Sequelize = Sequelize
 
 var User = db['User']
 var Role = db['Role']
+var UserRole = db['UserRole']
+
+User.belongsToMany(Role, { through: UserRole })
+Role.belongsToMany(User, { through: UserRole })
+
 
 if (env === 'development' || env === 'test') {
   Role.sync({ force: true }).then(function () {
     // Table created
     Role.create({
       title: 'Super Admin',
+      code: 'Admin_Super',
       type: 'admin',
     }).then((role1) => 
       Role.create({
         title: 'User Admin',
+        code: 'Admin_User',
         type: 'admin',
       }).then((role2) => 
         Role.create({
           title: 'Client Admin',
+          code: 'Admin_Client',
           type: 'admin',
         }).then((role3) => {
-          User.sync({force: true}).then(function () {
+          User.sync({ force: true }).then(function () {
             // Table created
             User.create({
               email: 'super-admin@thrive-people.com',

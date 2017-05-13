@@ -5,7 +5,7 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import AppBar from 'material-ui/AppBar'
 import Header from './Header'
-import { getUserToken } from './Common/Cookies'
+import { getUserToken, getFullName } from './Common/Cookies'
 
 const styles = {
   container: {

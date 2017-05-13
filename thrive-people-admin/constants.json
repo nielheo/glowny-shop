@@ -1,4 +1,5 @@
 {
   "backendUrl":"http://localhost:5555",
-  "backendUrlGraphql": "http://localhost:4000/graphql"
+  "backendUrlGraphql": "http://localhost:4000/graphql",
+  "backendUrlAuth": "http://localhost:8080/api/authenticate"
 }

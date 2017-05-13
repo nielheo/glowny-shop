@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { setUserToken } from '../Common/Cookies'
 import debounce from 'lodash.debounce'
-import { backendUrl } from '../../../constants.json'
+import { backendUrlAuth } from '../../../constants.json'
 
 const styles = {
   container: {
@@ -55,6 +55,7 @@ class Login extends React.Component {
   _loginButtonClick = () => {
     this.setState({ buttonClick: true })
     if (this.state.email !== '' && this.state.password !== '') {
+      console.log('Loggining in')
       this.props._updateHomeOnProgressAction(true)
       this._login()
     } 
@@ -62,19 +63,23 @@ class Login extends React.Component {
 
   _login = async () => {
     try { 
-      await fetch(backendUrl+'/connect/token', {
+      await fetch(backendUrlAuth, {
+        mode: 'no-cors',
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'grant_type=password&username=' + this.state.email + '&password=' + this.state.password, 
-        
+        body: 'email=' + this.state.email + '&password=' + this.state.password, 
       })
+      .then(response => response)
       .then((response) => {
-        console.log(response)
+        console.log(response.headers.get('Content-Type'))
+        var contentType = response.headers.get("content-type")
+        console.log(contentType)
+        console.log(response.json)
         this.props._updateHomeOnProgressAction(false)
-        if (response.status >= 400 && response.status < 600) {
+        if ((response.status >= 400 && response.status < 600) || !response.success) {
           this.setState({
             emailError: ' ',
             passwordError: 'Invalid login. Try again.',

@@ -32,7 +32,7 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
-if (env === 'development') {
+if (env === 'test') {
   var User = db['User']
   var Role = db['Role']
 
@@ -110,12 +110,12 @@ if (env === 'development') {
 
 } 
 
-if (env === 'test') {
+if (env === 'development') {
   var User = db['User']
   var Role = db['Role']
 
-  Role.sync({force: true})
-  User.sync({force: true})
+  Role.sync()
+  User.sync()
 }
 
 

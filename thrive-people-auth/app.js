@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import jwt from 'jsonwebtoken' // used to create, sign, and verify tokens
 //import User   = require('./app/models/user') // get our mongoose model
 import morgan from 'morgan'
-import db, { User, Role, UserRole } from './app/models'
+import db, { User, Role } from './app/models'
 
 const env = process.env.NODE_ENV || 'development'
 const config = require('./config.json')[env]
@@ -80,15 +80,16 @@ apiRoutes.post('/authenticate', function(req, res) {
               email: user.email,
               roles: user.Roles.map(role => role.code),
             }
-            console.log(user.Roles)
+            //console.log(user.Roles)
 
-            var token = jwt.sign(claims, app.get('superSecret'), 
-              { expiresIn: 60 * 30 })
+            var token = jwt.sign(claims, app.get('superSecret'))
+            //var refreshed = jwt.refresh(token, 3600, app.get('superSecret'))
 
             res.json({
               success: true,
               message: 'Enjoy your token!',
               token: token,
+            //  refreshToken: refreshed,
             })
           } else {
             res.status(400)

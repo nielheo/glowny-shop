@@ -1,9 +1,11 @@
-const {
+import  {
   Environment,
   Network,
   RecordSource,
   Store,
-} = require('relay-runtime');
+} from 'relay-runtime'
+
+import { getUserToken } from './components/Common/Cookies'
 
 // Define a function that fetches the results of an operation (query/mutation/etc)
 // and returns its results as a Promise:
@@ -17,7 +19,8 @@ function fetchQuery(
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json', 
+      'x-access-token': getUserToken(),
     }, // Add authentication and other headers here
     body: JSON.stringify({
       query: operation.text, // GraphQL text from input

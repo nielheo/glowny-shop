@@ -1,16 +1,22 @@
 {
   "development": {
-    "dialect": "sqlite",
-    "storage": "./db.development.sqlite"
+    "username": "tp",
+    "password": "P@ssw0rd",
+    "database": "thrive_people_dev",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "test": {
-    "dialect": "sqlite",
-    "storage": ":memory:"
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "123qwe!@#",
-    "database": "thrive_people",
+    "password": null,
+    "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

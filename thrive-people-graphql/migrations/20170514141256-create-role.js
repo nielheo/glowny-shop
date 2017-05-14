@@ -3,14 +3,24 @@ const uuid = require('uuid')
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
+    
     const buffer = new Buffer(32)
     return[ 
       queryInterface
         .createTable('Roles', {
           id: { type: Sequelize.UUID, primaryKey: true },
-          code: Sequelize.STRING,
-          title: Sequelize.STRING,
-          type: Sequelize.STRING,
+          code: {
+            type: Sequelize.STRING,
+            allowNull: false,
+          },
+          title: {
+            type: Sequelize.STRING,
+            allowNull: false,
+          },
+          type: {
+            type: Sequelize.STRING,
+            allowNull: false,
+          },
           createdAt: {
             type: Sequelize.DATE,
             allowNull: false,
@@ -24,21 +34,21 @@ module.exports = {
         id: uuid(),
         code: 'Admin_Super',
         title: 'Super Admin',
-        type: 'Admin',
+        type: 'admin',
         createdAt: new Date(),
         updatedAt: new Date(),
       }, {
         id: uuid(),
         code: 'Admin_Client',
         title: 'Client Admin',
-        type: 'Admin',
+        type: 'admin',
         createdAt: new Date(),
         updatedAt: new Date(),
       }, {
         id: uuid(),
         code: 'Admin_User',
         title: 'User Admin',
-        type: 'Admin',
+        type: 'admin',
         createdAt: new Date(),
         updatedAt: new Date(),
       }])

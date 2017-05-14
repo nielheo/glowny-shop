@@ -110,13 +110,4 @@ if (env === 'test') {
 
 } 
 
-if (env === 'development') {
-  var User = db['User']
-  var Role = db['Role']
-
-  Role.sync()
-  User.sync()
-}
-
-
 module.exports = db

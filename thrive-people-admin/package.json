@@ -8,6 +8,7 @@
     "lodash.debounce": "^4.0.8",
     "material-ui": "^0.18.0",
     "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "react-relay": "1.0.0-rc.3",

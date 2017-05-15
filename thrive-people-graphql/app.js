@@ -14,6 +14,7 @@ var schema = new GraphQLSchema({
 
 const app = express()
 
+/*
 app.use(function(req, res, next) {
   //console.log(req.headers)
   var token = req.headers['x-access-token']
@@ -23,6 +24,7 @@ app.use(function(req, res, next) {
     jwt.verify(token, 'iLoveAngelPhatchakorn', function(err, decoded) {      
       if (err) {
         res.status(403)
+        console.log(err)
         return res.json({ success: false, message: 'Failed to authenticate token.' });    
       } else {
         // if everything is good, save to request for use in other routes
@@ -38,7 +40,7 @@ app.use(function(req, res, next) {
     //console.log('no token')
   }
   next()
-})
+})*/
 
 app.use('/graphql', cors(), graphqlHTTP((request) => {
   return ({

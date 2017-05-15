@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 import {
   BrowserRouter as Router,
   Route,
@@ -17,6 +19,7 @@ import Logout from './components/Logout'
 import NotFound from './components/NotFound'
 import AboutUs from './components/AboutUs'
 import Users from './components/Users'
+import UserAdd from './components/UserAdd'
 import Forgot from './components/Forgot' 
 
 const muiTheme = getMuiTheme({
@@ -35,23 +38,30 @@ class App extends Component {
         <MuiThemeProvider muiTheme={muiTheme}>
           <Router>
             <Layout>
-              <Switch>
-                <Route path='/login' component={Login}/>
-                <Route path='/logout' component={Logout}/>
-                <Route path='/forgotpassword' component={Forgot}/>
-                <Route path='/404' component={NotFound}/>
-                <PrivateRoute exact path='/' component={Home} />
-                <PrivateRoute path='/aboutus' component={AboutUs} />
-                <PrivateRoute path='/users' component={Users} />
-                <PrivateNotFound to='/404'/>
-              </Switch>
+              <ReactCSSTransitionGroup
+                transitionName="fade"
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}
+              >
+                <Switch>
+                  <Route path='/login' component={Login}/>
+                  <Route path='/logout' component={Logout}/>
+                  <Route path='/forgotpassword' component={Forgot}/>
+                  <Route path='/404' component={NotFound}/>
+                  <PrivateRoute exact path='/' component={Home} />
+                  <PrivateRoute path='/aboutus' component={AboutUs} />
+                  <PrivateRoute path='/users/add' component={UserAdd} />
+                  <PrivateRoute path='/users' component={Users} />
+                  <PrivateNotFound to='/404'/>
+                </Switch>
+              </ReactCSSTransitionGroup>
             </Layout>
           </Router>
         </MuiThemeProvider>
       </Provider>
 
 
-    );
+    )
   }
 }
 
@@ -85,4 +95,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )}/>
 )
 
-export default App;
+export default App

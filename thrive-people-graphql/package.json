@@ -34,7 +34,7 @@
     "webpack": "^2.5.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "sequelize db:migrate && node server.js",
     "test": "npm run test-unit",
     "test-unit": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --compilers js:babel-core/register src/sequelize/tests/unit/*.test.js"
   },

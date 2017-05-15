@@ -5,7 +5,8 @@ import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import AppBar from 'material-ui/AppBar'
 import Header from './Header'
-import { getUserToken, getFullName } from './Common/Cookies'
+import { getUserToken } from './Common/Cookies'
+import Paper from 'material-ui/Paper'
 
 const styles = {
   container: {
@@ -49,7 +50,12 @@ export default class LayoutPage extends React.Component {
             }
           </Menu>
         </Drawer>
-        <div style={styles.container}>{this.props.children}</div>
+        <div style={styles.container}>
+          <Paper zDepth={1} style={styles.container}>
+            {this.props.children}
+          </Paper>
+        </div>
+        
       </div>
     );
   }

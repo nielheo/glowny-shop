@@ -14,6 +14,15 @@ import {
   TableRow,
 } from 'material-ui/Table'
 
+const styles = {
+  emptyRow: {
+    textAlign: 'center',
+    width: '100%',
+    color: '#999999',
+    paddingTop: 20,
+  }
+}
+
 class UserList extends React.Component {
   constructor(props) {
     super(props)
@@ -56,6 +65,9 @@ class UserList extends React.Component {
             }
           </TableBody>
         </Table>
+        { (!users || !users.length) && 
+          <div style={styles.emptyRow}>No data to display</div>
+        }
         <Snackbar
             open={this.state.snackbarOpen}
             message={this.state.snackbarMessage}

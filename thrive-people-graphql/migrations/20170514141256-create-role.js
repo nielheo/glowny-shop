@@ -21,6 +21,10 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false,
           },
+          isSuper: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+          },
           createdAt: {
             type: Sequelize.DATE,
             allowNull: false,
@@ -35,6 +39,7 @@ module.exports = {
         code: 'Admin_Super',
         title: 'Super Admin',
         type: 'admin',
+        isSuper: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       }, {
@@ -42,6 +47,7 @@ module.exports = {
         code: 'Admin_Client',
         title: 'Client Admin',
         type: 'admin',
+        isSuper: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       }, {
@@ -49,6 +55,7 @@ module.exports = {
         code: 'Admin_User',
         title: 'User Admin',
         type: 'admin',
+        isSuper: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       }])

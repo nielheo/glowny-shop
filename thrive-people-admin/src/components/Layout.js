@@ -10,7 +10,8 @@ import Paper from 'material-ui/Paper'
 
 const styles = {
   container: {
-    padding: 15,
+    padding: 20,
+    paddingTop: 25,
   },
   drawer: {
     backgroundColor: '#FFFFFF',
@@ -50,11 +51,7 @@ export default class LayoutPage extends React.Component {
             }
           </Menu>
         </Drawer>
-        <div style={styles.container}>
-          <Paper zDepth={1} style={styles.container}>
-            {this.props.children}
-          </Paper>
-        </div>
+        <div style={styles.container}>{this.props.children}</div>
         
       </div>
     );

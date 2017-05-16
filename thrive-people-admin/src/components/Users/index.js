@@ -10,6 +10,7 @@ import Users from './Users'
 import RaisedButton from 'material-ui/RaisedButton'
 import Divider from 'material-ui/Divider'
 
+
 const styles = {
   addButton: {
     float: 'right',
@@ -29,7 +30,7 @@ const styles = {
     width: '50%',
     display: 'table-cell',
     paddingLeft: 10,
-    fontSize: '1.5em',
+    fontSize: '1.4em',
   },
   columnRight: {
     width: '50%',
@@ -45,7 +46,7 @@ export default class index extends Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query indexQuery {
+          query indexUsersQuery {
             viewer {
               ...Users_viewer
             }

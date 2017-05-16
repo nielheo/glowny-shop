@@ -11,9 +11,7 @@ import UserList from './UserList'
 class Users extends React.Component {
   render() {
     return (
-      
-        <UserList users={this.props.viewer.users} />
-
+      <UserList users={this.props.viewer.users} />
     )
   }
 }

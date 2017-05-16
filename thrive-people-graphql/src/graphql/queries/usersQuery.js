@@ -2,6 +2,7 @@ import {GraphQLString,GraphQLList,GraphQLNonNull, GraphQLInt} from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import { userType } from '../types'
 import { siteEnum } from '../enums'
+
 var models = require('../../sequelize/models')
 
 var usersQuery = {

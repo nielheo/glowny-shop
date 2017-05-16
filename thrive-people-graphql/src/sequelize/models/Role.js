@@ -7,7 +7,8 @@ export default function(sequelize, DataTypes) {
     type: {
       type:   DataTypes.ENUM,
       values: ['admin', 'supplier', 'member']
-    }
+    },
+    isSuper: DataTypes.BOOLEAN,
   }, {
     classMethods: {
       associate: function(models) {

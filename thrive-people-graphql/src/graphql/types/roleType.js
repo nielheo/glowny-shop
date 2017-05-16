@@ -1,6 +1,6 @@
 'use strict'
 import {attributeFields} from 'graphql-sequelize'
-import {GraphQLObjectType,GraphQLString} from 'graphql'
+import {GraphQLObjectType,GraphQLString,GraphQLBoolean} from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import userType from './userType'
 import { siteEnum } from '../enums'
@@ -15,6 +15,7 @@ const roleType = new GraphQLObjectType({
 	fields: {
 		id: { type: GraphQLString },
 		title: { type: GraphQLString },
+		isSuper: { type: GraphQLBoolean },
     type: { type: siteEnum },
 	}
 })

@@ -19,6 +19,7 @@ const mutation = graphql`
     }
 `
 
+/*
 function getConfigs(id, isActive) {
   return [{
     type: 'FIELDS_CHANGE',
@@ -38,7 +39,7 @@ function getOptimisticResponse (complete, todoId, viewerId) {
     },
     viewer: viewerPayload,
   }
-}
+}*/
 
 function commit(environment, id, isActive) {
   return commitMutation(

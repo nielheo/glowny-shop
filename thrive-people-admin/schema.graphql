@@ -3,11 +3,34 @@ schema {
   mutation: mutation
 }
 
+input AddUserInput {
+  # User email
+  email: String!
+
+  # User first name
+  firstName: String!
+
+  # User first name
+  lastName: String!
+
+  # Site type status
+  type: Site!
+
+  # List or role id
+  roles: [String]!
+}
+
 type mutation {
   # Update user active status
   updateUserActive(
     # User id
     input: UpdateUserActiveInput!
+  ): User
+
+  # Add New User
+  addUser(
+    # Add Usrr Input
+    input: AddUserInput!
   ): User
 }
 

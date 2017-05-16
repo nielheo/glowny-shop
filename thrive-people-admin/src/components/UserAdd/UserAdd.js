@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-
 import Roles from './Roles'
+
+import AddUserMutation from './AddUserMutation'
+import environment from '../../createRelayEnvironment'
 
 const styles = {
   addButton: {
@@ -77,6 +79,9 @@ class UserAdd extends React.Component {
     this.state = {
       roles: roles,
       superRoles: superRoles,
+      email: '',
+      firstName: '',
+      lastName: '',
     }
   }
 
@@ -116,6 +121,24 @@ class UserAdd extends React.Component {
     })
   }
 
+  _handleValueChanged = (field, event) => {
+    this.setState({
+      [field]: event.target.value,
+    })
+  }
+
+  _handleSubmit = () => {
+    var input = {
+      email: this.state.email,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      type: 'admin',
+      roles: this.state.superRoles.filter(s => s.checked).map(s => s.id)
+        || this.state.roles.filter(s => s.checked).map(s => s.id)
+    }
+    AddUserMutation(environment, input)
+  }
+
   render() {
     const { roles } = this.state
     const { superRoles } = this.state
@@ -129,16 +152,22 @@ class UserAdd extends React.Component {
           <TextField
             hintText='email'
             floatingLabelText='Email'
+            value={this.state.email}
+            onChange={this._handleValueChanged.bind(this, 'email')}
             style={styles.textFieldFullWidth}
           />
           <TextField
             hintText='first name'
             floatingLabelText='First Name'
+            value={this.state.firstName}
+            onChange={this._handleValueChanged.bind(this, 'firstName')}
             style={styles.textFieldHalfWidth}
           />
           <TextField
             hintText='last name'
             floatingLabelText='Last Name'
+            value={this.state.lastName}
+            onChange={this._handleValueChanged.bind(this, 'lastName')}
             style={styles.textFieldHalfWidth}
           />
           <Roles 
@@ -149,9 +178,9 @@ class UserAdd extends React.Component {
           <RaisedButton 
             label='Submit'
             //fullWidth={true} 
+            onClick={this._handleSubmit}
             secondary={true} 
-            style={styles.button}
-            onClick={this._loginButtonClick} />
+            style={styles.button} />
           <Link style={styles.link} to='/users'>Cancel</Link>
         </Paper>
 

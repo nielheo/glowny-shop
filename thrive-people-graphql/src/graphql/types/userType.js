@@ -3,7 +3,7 @@ import {attributeFields} from 'graphql-sequelize'
 import {GraphQLObjectType,GraphQLList,GraphQLString,GraphQLBoolean,GraphQLEnumType} from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import roleType from './roleType'
-import { siteEnum } from '../enums'
+import { siteType } from '../enums'
 var models = require('../../sequelize/models')
 import {_} from 'underscore'
 
@@ -15,7 +15,7 @@ const userType = new GraphQLObjectType({
 		email: { type: GraphQLString },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
-		type: { type: siteEnum },
+		type: { type: siteType },
     isActive: { type: GraphQLBoolean },
 		roles: {
       type: new GraphQLList(roleType),

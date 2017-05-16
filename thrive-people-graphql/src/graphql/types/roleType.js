@@ -3,7 +3,7 @@ import {attributeFields} from 'graphql-sequelize'
 import {GraphQLObjectType,GraphQLString,GraphQLBoolean} from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import userType from './userType'
-import { siteEnum } from '../enums'
+import { siteType } from '../enums'
 var models = require('../../sequelize/models')
 import {_} from 'underscore'
 
@@ -16,7 +16,7 @@ const roleType = new GraphQLObjectType({
 		id: { type: GraphQLString },
 		title: { type: GraphQLString },
 		isSuper: { type: GraphQLBoolean },
-    type: { type: siteEnum },
+    type: { type: siteType },
 	}
 })
 

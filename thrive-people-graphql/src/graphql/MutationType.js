@@ -1,11 +1,12 @@
 import { GraphQLObjectType } from 'graphql'
 
-import { updateUserActiveMutation } from './mutations'
+import { updateUserActiveMutation, addUserMutation } from './mutations'
 
 const MutationType = new GraphQLObjectType({
 	name: 'mutation',
 	fields: {
 		updateUserActive: updateUserActiveMutation,
+		addUser: addUserMutation,
 	}
 })
 

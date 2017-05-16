@@ -1,7 +1,7 @@
 import {GraphQLString,GraphQLList,GraphQLNonNull,GraphQLInt} from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import { roleType } from '../types'
-import { siteEnum } from '../enums'
+import { siteType } from '../enums'
 
 var models = require('../../sequelize/models')
 
@@ -14,7 +14,7 @@ var usersQuery = {
       type: GraphQLInt
     },
 		type: {
-			type: new GraphQLNonNull(siteEnum)
+			type: new GraphQLNonNull(siteType)
 		}
   },
 	resolve: resolver(models.Role, {

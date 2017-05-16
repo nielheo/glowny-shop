@@ -1,1 +1,1 @@
-export { default as siteEnum } from './siteEnum'
+export { default as siteType } from './siteType'

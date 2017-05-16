@@ -43,7 +43,15 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: false,
           }
-        })
+        }),
+      queryInterface.addIndex(
+        'Users',
+        ['email'],
+        {
+          indexName: 'UserEmailUniqueIndex',
+          indicesType: 'UNIQUE'
+        }
+      )
     ]
   },
 

@@ -63,14 +63,14 @@ class index extends React.Component {
     const superRoles = props.roles.filter(role => role.isSuper).map(role => {
       return {
         ...role,
-        checked: user.roles.filter(userRole => userRole.id === role.id).length,
+        checked: user ? user.roles.filter(userRole => userRole.id === role.id).length : false,
         disabled: false,
       }
     })
     const roles = props.roles.filter(role => !role.isSuper).map(role => {
       return {
         ...role,
-        checked: user.roles.filter(userRole => userRole.id === role.id).length,
+        checked: user ? user.roles.filter(userRole => userRole.id === role.id).length : false,
         disabled: superRoles.filter(superRole => superRole.checked).length,
       }
     })

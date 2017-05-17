@@ -11,6 +11,7 @@ import {
 import Toggle from 'material-ui/Toggle'
 import UpdateUserActiveMutation from './UpdateUserActiveMutation'
 import environment from '../../createRelayEnvironment'
+import FlatButton from 'material-ui/FlatButton'
 
 class UserItem extends React.Component 
 { 
@@ -22,7 +23,7 @@ class UserItem extends React.Component
   render() {
     const { user } = this.props
     return(
-        <TableRow>
+        <TableRow hoverable={true}>
           <TableRowColumn>{user.firstName}</TableRowColumn>
           <TableRowColumn>{user.lastName}</TableRowColumn>
           <TableRowColumn>{user.email}</TableRowColumn>
@@ -30,6 +31,9 @@ class UserItem extends React.Component
           <TableRowColumn>
             <Toggle defaultToggled={user.isActive} 
                 onClick={this._isActiveClickHandler.bind(this, user.id)}/>
+          </TableRowColumn>
+          <TableRowColumn>
+            <FlatButton label='...' href={'/users/edit/' + user.id }/>
           </TableRowColumn>
         </TableRow>
     )

@@ -76,12 +76,12 @@ type User {
 type Viewer {
   users(
     # id of the user
-    id: Int
+    id: String
     type: Site!
   ): [User]
   roles(
     # id of the role
-    id: Int
+    id: String
     type: Site!
   ): [Role]
 }

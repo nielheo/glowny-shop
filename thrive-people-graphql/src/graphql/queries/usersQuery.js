@@ -11,7 +11,7 @@ var usersQuery = {
 	args: {
     id: {
       description: 'id of the user',
-      type: GraphQLInt
+      type: GraphQLString
     },
 		type: {
 			type: new GraphQLNonNull(siteType)

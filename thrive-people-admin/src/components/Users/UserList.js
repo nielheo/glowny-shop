@@ -56,6 +56,7 @@ class UserList extends React.Component {
               <TableHeaderColumn>Email</TableHeaderColumn>
               <TableHeaderColumn>Role(s)</TableHeaderColumn>
               <TableHeaderColumn>Active</TableHeaderColumn>
+              <TableHeaderColumn></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false}>

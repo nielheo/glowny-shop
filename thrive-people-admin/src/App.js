@@ -20,6 +20,7 @@ import NotFound from './components/NotFound'
 import AboutUs from './components/AboutUs'
 import Users from './components/Users'
 import UserAdd from './components/UserAdd'
+import UserEdit from './components/UserEdit'
 import Forgot from './components/Forgot' 
 
 const muiTheme = getMuiTheme({
@@ -51,6 +52,7 @@ class App extends Component {
                   <PrivateRoute exact path='/' component={Home} />
                   <PrivateRoute path='/aboutus' component={AboutUs} />
                   <PrivateRoute path='/users/add' component={UserAdd} />
+                  <PrivateRoute path='/users/edit/:userId' component={UserEdit} />
                   <PrivateRoute path='/users' component={Users} />
                   <PrivateNotFound to='/404'/>
                 </Switch>

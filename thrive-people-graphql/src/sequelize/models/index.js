@@ -32,6 +32,13 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
+var User = db['User']
+var Role = db['Role']
+var UserRole = db['User_Role']
+
+User.belongsToMany(Role, { through: UserRole })
+Role.belongsToMany(User, { through: UserRole })
+
 if (env === 'test') {
   var User = db['User']
   var Role = db['Role']

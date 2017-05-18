@@ -1,5 +1,5 @@
 import React from 'react'
-import {cyan500} from 'material-ui/styles/colors'
+import { cyan500 } from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
@@ -17,17 +17,17 @@ const styles = {
   },
   AppBar: {
     backgroundColor: cyan500,
-  }
+  },
 };
 
 export default class LayoutPage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {open: false}
+    this.state = { open: false }
   }
 
-  _navigationClickHandler = () => this.setState({open: !this.state.open})
-  _handleClose = () => this.setState({open: false})
+  _navigationClickHandler = () => this.setState({ open: !this.state.open })
+  _handleClose = () => this.setState({ open: false })
 
   render() {
     return (
@@ -38,7 +38,7 @@ export default class LayoutPage extends React.Component {
           width={250}
           open={this.state.open}
           containerStyle={styles.drawer}
-          onRequestChange={(open) => this.setState({open})}
+          onRequestChange={(open) => this.setState({ open })}
         >
           <AppBar iconElementLeft={<span></span>} title='Thrive People' style={styles.AppBar} />
           <Menu>

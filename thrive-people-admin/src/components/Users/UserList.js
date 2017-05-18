@@ -3,7 +3,7 @@ import UserItem from './UserItem'
 import Snackbar from 'material-ui/Snackbar'
 import {
   graphql,
-  createFragmentContainer
+  createFragmentContainer,
 } from 'react-relay'
 
 import {
@@ -20,7 +20,7 @@ const styles = {
     width: '100%',
     color: '#999999',
     paddingTop: 20,
-  }
+  },
 }
 
 class UserList extends React.Component {
@@ -86,5 +86,5 @@ export default createFragmentContainer(UserList, {
       id
       ...UserItem_user
     }
-  `
+  `,
 })

@@ -6,7 +6,7 @@ import {
 } from 'material-ui/Table'
 import {
   graphql,
-  createFragmentContainer
+  createFragmentContainer,
 } from 'react-relay'
 import Toggle from 'material-ui/Toggle'
 import UpdateUserActiveMutation from './UpdateUserActiveMutation'
@@ -54,5 +54,5 @@ export default createFragmentContainer(UserItem, {
         title
       }
     }
-  `
+  `,
 })

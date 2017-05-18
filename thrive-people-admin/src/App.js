@@ -5,7 +5,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from 'react-router-dom'
 import store from './store/store.js'
 import { Provider } from 'react-redux'
@@ -67,18 +67,18 @@ class App extends Component {
   }
 }
 
-const PrivateNotFound = ({to, ...rest }) => (
+const PrivateNotFound = ({ to, ...rest }) => (
   <Route {...rest} render={props => (
     getUserToken() 
     ? (
       <Redirect to={{
         pathname: to,
-        state: { from: props.location }
+        state: { from: props.location },
       }}/>
     ) : (
       <Redirect to={{
         pathname: '/login',
-        state: { from: props.location }
+        state: { from: props.location },
       }}/>
     )
   )}/>
@@ -91,7 +91,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     ) : (
       <Redirect to={{
         pathname: '/login',
-        state: { from: props.location }
+        state: { from: props.location },
       }}/>
     )
   )}/>

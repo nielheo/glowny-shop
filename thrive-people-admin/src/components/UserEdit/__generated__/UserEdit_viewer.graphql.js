@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule UserEdit_viewer.graphql
- * @generated SignedSource<<d6be1d7276a653dacd2c09baa93af47c>>
+ * @generated SignedSource<<12b1ca42c842c770bd497680e20242da>>
  * @flow
  * @nogrep
  */
@@ -26,7 +26,6 @@ export type UserEdit_viewer_roles = {
 export type UserEdit_viewer_users_roles = {
   id?: ?string;
   title?: ?string;
-  isSuper?: ?boolean;
 };
 
 export type UserEdit_viewer_users = {
@@ -160,13 +159,6 @@ const fragment /*: ConcreteFragment*/ = {
               "alias": null,
               "args": null,
               "name": "title",
-              "storageKey": null
-            },
-            {
-              "kind": "ScalarField",
-              "alias": null,
-              "args": null,
-              "name": "isSuper",
               "storageKey": null
             }
           ],

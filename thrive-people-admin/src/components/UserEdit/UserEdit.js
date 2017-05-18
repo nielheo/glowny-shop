@@ -37,5 +37,5 @@ export default createFragmentContainer(UserEdit, {
         }
       }
     }
-  `
+  `,
 })

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import {
   QueryRenderer,
-  graphql
+  graphql,
 } from 'react-relay'
 
 import environment from '../../createRelayEnvironment'
@@ -36,7 +36,7 @@ const styles = {
     width: '50%',
     display: 'table-cell',
     textAlign: 'right',
-  }
+  },
 }
 
 export default class index extends Component { 
@@ -52,7 +52,7 @@ export default class index extends Component {
             }
           }
         `}
-        render={({error, props}) => {
+        render={({ error, props }) => {
           if (error) {
             return <div>{error.message}</div>
           } else if (props) {

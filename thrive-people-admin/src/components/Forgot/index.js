@@ -78,7 +78,7 @@ class Login extends React.Component {
             emailError: ' ',
             passwordError: 'Invalid login. Try again.',
           })
-          throw new Error("Bad response from server");
+          throw new Error('Bad response from server');
         }
         return response.json()
       })
@@ -95,6 +95,7 @@ class Login extends React.Component {
       //this._changeLoadingStatus(false);
       response = null;
     }
+    console.log(response)
   }
 
   _updateField(name, value) {

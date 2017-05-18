@@ -1,6 +1,6 @@
 const defaultState = {
   fetching: false,
-  data: {}
+  data: {},
 }
 
 export default function(state = defaultState, action) {

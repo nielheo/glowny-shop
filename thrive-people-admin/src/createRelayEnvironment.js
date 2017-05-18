@@ -12,8 +12,6 @@ import { getUserToken } from './components/Common/Cookies'
 function fetchQuery(
   operation,
   variables,
-  cacheConfig,
-  uploadables,
 ) {
   return fetch('http://localhost:4000/graphql', {
     method: 'POST',

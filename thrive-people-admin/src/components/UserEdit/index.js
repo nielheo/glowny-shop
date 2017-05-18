@@ -2,7 +2,7 @@ import React from 'react'
 
 import {
   QueryRenderer,
-  graphql
+  graphql,
 } from 'react-relay'
 import environment from '../../createRelayEnvironment'
 
@@ -27,7 +27,7 @@ class index extends React.Component {
         variables={{
           userId: this.props.match.params.userId,
         }}
-        render={({error, props}) => {
+        render={({ error, props }) => {
           if (error) {
             return <div>{error.message}</div>
           } else if (props) {

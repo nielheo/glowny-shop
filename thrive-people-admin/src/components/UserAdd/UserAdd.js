@@ -24,5 +24,5 @@ export default createFragmentContainer(UserAdd, {
         isSuper
       }
     }
-  `
+  `,
 })

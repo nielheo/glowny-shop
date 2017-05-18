@@ -79,7 +79,7 @@ class Login extends React.Component {
             emailError: ' ',
             passwordError: 'Invalid login. Try again.',
           })
-          throw new Error("Bad response from server");
+          throw new Error('Bad response from server');
         }
         return response.json().then(response => {
           if(response.success && response.token) {
@@ -92,7 +92,7 @@ class Login extends React.Component {
               emailError: ' ',
               passwordError: 'Invalid login. Try again.',
             })
-            throw new Error("Bad response from server");
+            throw new Error('Bad response from server');
           }
         })
       })

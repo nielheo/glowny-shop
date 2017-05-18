@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule indexUserEditQuery.graphql
- * @generated SignedSource<<cc07b20f244093f50dfee02627694710>>
- * @relayHash 7ffa02535eab54546072d1faf461f965
+ * @generated SignedSource<<c274e49c6e28ea4771a3da5652d6f092>>
+ * @relayHash ef118ecaa82ee3a12f35e5569677f38b
  * @flow
  * @nogrep
  */
@@ -44,7 +44,6 @@ fragment UserEdit_viewer on Viewer {
     roles {
       id
       title
-      isSuper
     }
   }
 }
@@ -248,13 +247,6 @@ const batch /*: ConcreteBatch*/ = {
                     "args": null,
                     "name": "title",
                     "storageKey": null
-                  },
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "args": null,
-                    "name": "isSuper",
-                    "storageKey": null
                   }
                 ],
                 "storageKey": null
@@ -276,7 +268,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query indexUserEditQuery(\n  $userId: String\n) {\n  viewer {\n    ...UserEdit_viewer\n    users(type: admin, id: $userId) {\n      id\n    }\n  }\n}\n\nfragment UserEdit_viewer on Viewer {\n  roles(type: admin) {\n    id\n    title\n    isSuper\n  }\n  users(type: admin, id: $userId) {\n    id\n    email\n    firstName\n    lastName\n    roles {\n      id\n      title\n      isSuper\n    }\n  }\n}\n"
+  "text": "query indexUserEditQuery(\n  $userId: String\n) {\n  viewer {\n    ...UserEdit_viewer\n    users(type: admin, id: $userId) {\n      id\n    }\n  }\n}\n\nfragment UserEdit_viewer on Viewer {\n  roles(type: admin) {\n    id\n    title\n    isSuper\n  }\n  users(type: admin, id: $userId) {\n    id\n    email\n    firstName\n    lastName\n    roles {\n      id\n      title\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

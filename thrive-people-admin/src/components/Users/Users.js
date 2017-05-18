@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   graphql,
-  createFragmentContainer
+  createFragmentContainer,
 } from 'react-relay'
 
 
@@ -23,5 +23,5 @@ export default createFragmentContainer(Users, {
         ...UserList_users
       }
     }
-  `
+  `,
 })

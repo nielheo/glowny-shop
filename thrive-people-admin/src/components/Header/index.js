@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import * as types from '../../actions/actionTypes.js'
 import { withRouter } from 'react-router'
 import {
-  Link
+  Link,
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
@@ -21,14 +21,14 @@ const styles = {
   },
   appBar: {
     backgroundColor: cyan500,
-  }
+  },
 };
 
 class Header extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   }
   render() {
     const { location } = this.props

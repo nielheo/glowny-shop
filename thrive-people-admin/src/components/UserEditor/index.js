@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Roles from './Roles'
 
 import AddUserMutation from './AddUserMutation'
+import UpdateUserMutation from './UpdateUserMutation'
 import environment from '../../createRelayEnvironment'
 
 const styles = {
@@ -58,7 +59,7 @@ const styles = {
 class index extends React.Component {
   constructor(props) {
     super(props)
-    const {user} = props
+    const { user } = props
 
     const superRoles = props.roles.filter(role => role.isSuper).map(role => {
       return {
@@ -78,6 +79,7 @@ class index extends React.Component {
     this.state = {
       roles: roles,
       superRoles: superRoles,
+      id: user ? user.id : '',
       email: user && user.email,
       firstName: user && user.firstName,
       lastName: user && user.lastName,
@@ -134,14 +136,18 @@ class index extends React.Component {
     console.log(roles)
 
     var input = {
+      id: this.state.id,
       email: this.state.email,
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       type: 'admin',
-      roles: roles
+      roles: roles,
     }
-    var a = AddUserMutation(environment, input)
-    console.log(a)
+    if (this.state.id) {
+      UpdateUserMutation(environment, input)
+    } else {
+      AddUserMutation(environment, input)
+    }
   }
 
   render() {

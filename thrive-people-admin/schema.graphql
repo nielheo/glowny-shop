@@ -21,16 +21,22 @@ input AddUserInput {
 }
 
 type mutation {
+  # Add New User
+  addUser(
+    # Add User Input
+    input: AddUserInput!
+  ): User
+
+  # Add New User
+  updateUser(
+    # Add User Input
+    input: UpdateUserInput!
+  ): User
+
   # Update user active status
   updateUserActive(
     # User id
     input: UpdateUserActiveInput!
-  ): User
-
-  # Add New User
-  addUser(
-    # Add Usrr Input
-    input: AddUserInput!
   ): User
 }
 
@@ -59,6 +65,26 @@ input UpdateUserActiveInput {
 
   # active status
   isActive: Boolean!
+}
+
+input UpdateUserInput {
+  # User Id
+  id: String!
+
+  # User email
+  email: String!
+
+  # User first name
+  firstName: String!
+
+  # User first name
+  lastName: String!
+
+  # Site type status
+  type: Site!
+
+  # List or role id
+  roles: [String]!
 }
 
 # A user

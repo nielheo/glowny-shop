@@ -1,4 +1,4 @@
-import {commitMutation, graphql} from 'react-relay'
+import { commitMutation, graphql } from 'react-relay'
 
 const mutation = graphql`
   mutation AddUserMutation (
@@ -24,7 +24,9 @@ function commit(environment, input) {
     environment,
     {
       mutation,
-      variables: {input: input},
+      variables: { input: input },
+      onComplete: 
+        console.log('compolete'),
     }
   )
 }

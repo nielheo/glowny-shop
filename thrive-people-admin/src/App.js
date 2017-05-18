@@ -61,8 +61,6 @@ class App extends Component {
           </Router>
         </MuiThemeProvider>
       </Provider>
-
-
     )
   }
 }
@@ -74,12 +72,12 @@ const PrivateNotFound = ({ to, ...rest }) => (
       <Redirect to={{
         pathname: to,
         state: { from: props.location },
-      }}/>
+      }} { ...this.props } />
     ) : (
       <Redirect to={{
         pathname: '/login',
         state: { from: props.location },
-      }}/>
+      }} { ...this.props } />
     )
   )}/>
 )

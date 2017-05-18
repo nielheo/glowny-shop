@@ -132,9 +132,6 @@ class index extends React.Component {
     var roles = this.state.superRoles.filter(s => s.checked).map(s => s.id)
     if (roles.length === 0)
       roles = this.state.roles.filter(s => s.checked).map(s => s.id)
-    console.log(this.state)
-    console.log(roles)
-
     var input = {
       id: this.state.id,
       email: this.state.email,
@@ -144,9 +141,9 @@ class index extends React.Component {
       roles: roles,
     }
     if (this.state.id) {
-      UpdateUserMutation(environment, input)
+      UpdateUserMutation(environment, input, this.props.history.push('/users'))
     } else {
-      AddUserMutation(environment, input)
+      AddUserMutation(environment, input, this.props.history.push('/users'))
     }
   }
 

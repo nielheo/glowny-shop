@@ -10,7 +10,9 @@ class UserEdit extends React.Component {
 
   render() {
     return(
-      <UserEditor roles={this.props.viewer.roles} user={this.props.viewer.users[0]}>Edit</UserEditor>
+      <UserEditor { ...this.props } 
+        roles={this.props.viewer.roles} 
+        user={this.props.viewer.users[0]}>Edit</UserEditor>
     )
   }
 }

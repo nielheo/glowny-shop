@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
 import LinearProgress from 'material-ui/LinearProgress'
-import {cyan500} from 'material-ui/styles/colors'
+import { cyan500 } from 'material-ui/styles/colors'
 
 
 

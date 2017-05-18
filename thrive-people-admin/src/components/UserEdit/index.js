@@ -11,7 +11,6 @@ import UserEdit from './UserEdit'
 class index extends React.Component {
   render() {
     return(
-      
       <QueryRenderer
         environment={environment}
         query={graphql`
@@ -32,7 +31,7 @@ class index extends React.Component {
             return <div>{error.message}</div>
           } else if (props) {
             return (
-              <UserEdit viewer={props.viewer} />
+              <UserEdit { ...this.props } viewer={props.viewer} />
             ) 
           }
           return <div>Loading</div>

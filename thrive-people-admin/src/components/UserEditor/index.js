@@ -63,15 +63,15 @@ class index extends React.Component {
     const superRoles = props.roles.filter(role => role.isSuper).map(role => {
       return {
         ...role,
-        checked: user ? user.roles.filter(userRole => userRole.id === role.id).length : false,
+        checked: user ? user.roles.filter(userRole => userRole.id === role.id).length > 0 : false,
         disabled: false,
       }
     })
     const roles = props.roles.filter(role => !role.isSuper).map(role => {
       return {
         ...role,
-        checked: user ? user.roles.filter(userRole => userRole.id === role.id).length : false,
-        disabled: superRoles.filter(superRole => superRole.checked).length,
+        checked: user ? user.roles.filter(userRole => userRole.id === role.id).length > 0 : false,
+        disabled: superRoles.filter(superRole => superRole.checked).length > 0,
       }
     })
     
@@ -86,23 +86,23 @@ class index extends React.Component {
 
   _handleSuperRoleClicked = (id, event) => {
     var roles = []
-    this.state.roles.map(role => {
+    this.state.roles.map(role => 
       roles.push({
         ...role,
         disabled: event.target.checked,
       })
-    })
-    var supers = []
-    this.state.superRoles.map(role => {
-      supers.push({
+    )
+    var superRoles = []
+    this.state.superRoles.map(role => 
+      superRoles.push({
         ...role,
         checked: id === role.id ? event.target.checked : role.checked,
-      })
-    })
+      }))
+    
 
     this.setState({
-      roles: roles,
-      superRoles: supers,
+      roles,
+      superRoles,
     })
   }
 
@@ -147,7 +147,6 @@ class index extends React.Component {
   render() {
     const { roles } = this.state
     const { superRoles } = this.state
-    console.log(this.props)
     return(
       <Paper style={styles.container}>
           <div style={styles.rowHeader}>

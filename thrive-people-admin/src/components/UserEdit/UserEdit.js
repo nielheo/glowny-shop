@@ -9,7 +9,6 @@ import UserEditor from '../UserEditor/index'
 class UserEdit extends React.Component {
 
   render() {
-
     return(
       <UserEditor roles={this.props.viewer.roles} user={this.props.viewer.users[0]}>Edit</UserEditor>
     )

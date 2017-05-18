@@ -62,7 +62,7 @@ class UserList extends React.Component {
           <TableBody displayRowCheckbox={false}>
             {
               users && users.map(user => 
-                <UserItem key={user.id} user={user} key={user.id} setSnackbar={this._handleSetSnackbar} /> )
+                <UserItem key={user.id} user={user} setSnackbar={this._handleSetSnackbar} /> )
             }
           </TableBody>
         </Table>

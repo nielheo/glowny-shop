@@ -15,11 +15,14 @@ var usersQuery = {
     },
 		type: {
 			type: new GraphQLNonNull(siteType)
+		},
+		first: {
+			type: new GraphQLNonNull(GraphQLInt)
 		}
   },
-	resolve: resolver(models.User, {
-	//	include: false // disable auto including of associations based on AST - default: true
-	})
+	resolve: (_, args) => { 
+		return models.User.findAll({ limit: args.first, sort: 'email' })
+	}
 }
 
 export default usersQuery

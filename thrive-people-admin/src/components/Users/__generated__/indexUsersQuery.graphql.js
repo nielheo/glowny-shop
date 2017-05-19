@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule indexUsersQuery.graphql
- * @generated SignedSource<<073403903c1a70e43cff06334d23e77c>>
- * @relayHash ce2b78e89e5cc22ecae0f4dc87004616
+ * @generated SignedSource<<d756e56fcceba527e90eecfc5d049320>>
+ * @relayHash b5e5569909e00d37502e7b13aa38b2fe
  * @flow
  * @nogrep
  */
@@ -26,7 +26,7 @@ query indexUsersQuery {
 }
 
 fragment Users_viewer on Viewer {
-  users(type: admin) {
+  users(type: admin, first: 10) {
     ...UserList_users
   }
 }
@@ -97,6 +97,12 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "LinkedField",
             "alias": null,
             "args": [
+              {
+                "kind": "Literal",
+                "name": "first",
+                "value": 10,
+                "type": "Int!"
+              },
               {
                 "kind": "Literal",
                 "name": "type",
@@ -175,7 +181,7 @@ const batch /*: ConcreteBatch*/ = {
                 ]
               }
             ],
-            "storageKey": "users{\"type\":\"admin\"}"
+            "storageKey": "users{\"first\":10,\"type\":\"admin\"}"
           }
         ],
         "storageKey": null
@@ -191,7 +197,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query indexUsersQuery {\n  viewer {\n    ...Users_viewer\n  }\n}\n\nfragment Users_viewer on Viewer {\n  users(type: admin) {\n    ...UserList_users\n  }\n}\n\nfragment UserList_users on User {\n  id\n  ...UserItem_user\n}\n\nfragment UserItem_user on User {\n  id\n  firstName\n  lastName\n  email\n  isActive\n  roles {\n    id\n    title\n  }\n}\n"
+  "text": "query indexUsersQuery {\n  viewer {\n    ...Users_viewer\n  }\n}\n\nfragment Users_viewer on Viewer {\n  users(type: admin, first: 10) {\n    ...UserList_users\n  }\n}\n\nfragment UserList_users on User {\n  id\n  ...UserItem_user\n}\n\nfragment UserItem_user on User {\n  id\n  firstName\n  lastName\n  email\n  isActive\n  roles {\n    id\n    title\n  }\n}\n"
 };
 
 module.exports = batch;

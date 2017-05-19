@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule Users_viewer.graphql
- * @generated SignedSource<<9e7f8f9f53aaeb82854aa40462150e04>>
+ * @generated SignedSource<<80caf25d73420731951666680818e2e5>>
  * @flow
  * @nogrep
  */
@@ -31,6 +31,12 @@ const fragment /*: ConcreteFragment*/ = {
       "args": [
         {
           "kind": "Literal",
+          "name": "first",
+          "value": 10,
+          "type": "Int!"
+        },
+        {
+          "kind": "Literal",
           "name": "type",
           "value": "admin",
           "type": "Site!"
@@ -46,7 +52,7 @@ const fragment /*: ConcreteFragment*/ = {
           "args": null
         }
       ],
-      "storageKey": "users{\"type\":\"admin\"}"
+      "storageKey": "users{\"first\":10,\"type\":\"admin\"}"
     }
   ],
   "type": "Viewer"

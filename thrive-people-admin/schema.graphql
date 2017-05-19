@@ -104,6 +104,7 @@ type Viewer {
     # id of the user
     id: String
     type: Site!
+    first: Int!
   ): [User]
   roles(
     # id of the role

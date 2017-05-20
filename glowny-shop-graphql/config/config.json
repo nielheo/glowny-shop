@@ -2,7 +2,7 @@
   "development": {
     "username": "tp",
     "password": "P@ssw0rd",
-    "database": "thrive_people_dev",
+    "database": "glowny_shop_dev",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "secret": "iLoveAngelPhatchakorn"
@@ -10,14 +10,14 @@
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "glowny_shop_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "glowny_shop_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

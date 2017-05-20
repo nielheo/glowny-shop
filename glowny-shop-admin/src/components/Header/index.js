@@ -37,7 +37,7 @@ class Header extends React.Component {
       { location.pathname !== '/login' && location.pathname !== '/404' &&
       <AppBar
         style={styles.appBar}
-        title={<Link to='/' style={styles.title}>Thrive People</Link>}
+        title={<Link to='/' style={styles.title}>Glowny Shop</Link>}
         iconClassNameRight="muidocs-icon-navigation-expand-more"
         onLeftIconButtonTouchTap={this.props.onNavigationClick}
       /> }

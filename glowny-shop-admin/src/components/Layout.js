@@ -40,7 +40,7 @@ export default class LayoutPage extends React.Component {
           containerStyle={styles.drawer}
           onRequestChange={(open) => this.setState({ open })}
         >
-          <AppBar iconElementLeft={<span></span>} title='Thrive People' style={styles.AppBar} />
+          <AppBar iconElementLeft={<span></span>} title='Glowny Shop' style={styles.AppBar} />
           <Menu>
             <MenuItem href='/' primaryText='Home' />
             <MenuItem href='/users' primaryText='Users' />

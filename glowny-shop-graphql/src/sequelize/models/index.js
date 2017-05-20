@@ -100,7 +100,7 @@ if (env === 'test') {
           User.sync({force: true}).then(function () {
             // Table created
             User.create({
-              email: 'super-admin@thrive-people.com',
+              email: 'super-admin@glowny-shop.com',
               firstName: 'Super',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',
@@ -112,7 +112,7 @@ if (env === 'test') {
             
             
             User.create({
-              email: 'user-admin@thrive-people.com',
+              email: 'user-admin@glowny-shop.com',
               firstName: 'User',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',
@@ -123,7 +123,7 @@ if (env === 'test') {
             })
 
             User.create({
-              email: 'client-admin@thrive-people.com',
+              email: 'client-admin@glowny-shop.com',
               firstName: 'Client',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',
@@ -134,7 +134,7 @@ if (env === 'test') {
             })
 
             User.create({
-              email: 'daniel@thrive-people.com',
+              email: 'daniel@glowny-shop.com',
               firstName: 'Client',
               lastName: 'Admin',
               password: 'P@ssw0rd_123',

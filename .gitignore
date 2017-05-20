@@ -23,4 +23,4 @@ _ReSharper*/
 node_modules*/
 
 *.sqlite
-glowny-shop-auth/db.development.sqlite
+glowny-shop-graphql/db.development.sqlite

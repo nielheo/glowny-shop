@@ -8,8 +8,8 @@
     "secret": "iLoveAngelPhatchakorn"
   },
   "test": {
-    "username": "root",
-    "password": null,
+    "username": "tp",
+    "password": "P@ssw0rd",
     "database": "glowny_shop_test",
     "host": "127.0.0.1",
     "dialect": "mysql"

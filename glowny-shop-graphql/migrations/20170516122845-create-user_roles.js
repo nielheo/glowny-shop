@@ -3,6 +3,7 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return [
+      queryInterface.describeTable('Users').done(
       queryInterface
         .createTable('User_Roles', {
           id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
@@ -34,7 +35,7 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: false,
           }
-        }),
+        }))
     ]
   },
 

@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule indexUserEditQuery.graphql
- * @generated SignedSource<<c274e49c6e28ea4771a3da5652d6f092>>
- * @relayHash ef118ecaa82ee3a12f35e5569677f38b
+ * @generated SignedSource<<2521c2e748b0cd00433621f9fe89697c>>
+ * @relayHash d80cb79658638132c3920e14024a6dda
  * @flow
  * @nogrep
  */
@@ -24,7 +24,7 @@ query indexUserEditQuery(
 ) {
   viewer {
     ...UserEdit_viewer
-    users(type: admin, id: $userId) {
+    users(type: admin, id: $userId, first: 1) {
       id
     }
   }
@@ -36,7 +36,7 @@ fragment UserEdit_viewer on Viewer {
     title
     isSuper
   }
-  users(type: admin, id: $userId) {
+  users(type: admin, id: $userId, first: 1) {
     id
     email
     firstName
@@ -80,6 +80,12 @@ const batch /*: ConcreteBatch*/ = {
             "kind": "LinkedField",
             "alias": null,
             "args": [
+              {
+                "kind": "Literal",
+                "name": "first",
+                "value": 1,
+                "type": "Int!"
+              },
               {
                 "kind": "Variable",
                 "name": "id",
@@ -182,6 +188,12 @@ const batch /*: ConcreteBatch*/ = {
             "alias": null,
             "args": [
               {
+                "kind": "Literal",
+                "name": "first",
+                "value": 1,
+                "type": "Int!"
+              },
+              {
                 "kind": "Variable",
                 "name": "id",
                 "variableName": "userId",
@@ -268,7 +280,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query indexUserEditQuery(\n  $userId: String\n) {\n  viewer {\n    ...UserEdit_viewer\n    users(type: admin, id: $userId) {\n      id\n    }\n  }\n}\n\nfragment UserEdit_viewer on Viewer {\n  roles(type: admin) {\n    id\n    title\n    isSuper\n  }\n  users(type: admin, id: $userId) {\n    id\n    email\n    firstName\n    lastName\n    roles {\n      id\n      title\n    }\n  }\n}\n"
+  "text": "query indexUserEditQuery(\n  $userId: String\n) {\n  viewer {\n    ...UserEdit_viewer\n    users(type: admin, id: $userId, first: 1) {\n      id\n    }\n  }\n}\n\nfragment UserEdit_viewer on Viewer {\n  roles(type: admin) {\n    id\n    title\n    isSuper\n  }\n  users(type: admin, id: $userId, first: 1) {\n    id\n    email\n    firstName\n    lastName\n    roles {\n      id\n      title\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

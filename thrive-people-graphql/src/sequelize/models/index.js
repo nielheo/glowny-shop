@@ -39,6 +39,46 @@ var UserRole = db['User_Role']
 User.belongsToMany(Role, { through: UserRole })
 Role.belongsToMany(User, { through: UserRole })
 
+if (env === 'development') {
+  Role.findOrCreate({ 
+    defaults: {
+      code: 'Admin_Super',
+      title: 'Super Admin',
+      type: 'admin',
+      isSuper: true,
+    },
+    where: {code: 'Admin_Super'} 
+  }).spread((role, created) => {
+    console.log('=======================')
+    console.log(role.get({
+      plain: true
+    }))
+    console.log(role.id)
+    console.log(created)
+    if (role) {
+      User.findOrCreate({ 
+        defaults: {
+          email: 'niel.heo@gmail.com',
+          firstName: 'Daniel',
+          lastName: 'Heo',
+          type: 'admin',
+          isActive: true,
+          password: 'P@ssw0rd',
+        },
+        where: { email: 'niel.heo@gmail.com' }}).spread((user, created) => {
+          console.log(user.id)
+          console.log(role.id)
+          UserRole.findOrCreate({
+            where: { userId: user.id, roleId: role.id },
+            default: {
+              userId: user.Id, roleId: role.Id
+            }
+          })
+        })
+    }
+  })
+}
+
 if (env === 'test') {
   var User = db['User']
   var Role = db['Role']

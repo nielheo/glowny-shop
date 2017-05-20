@@ -17,7 +17,7 @@ class index extends React.Component {
           query indexUserEditQuery ($userId: String) {
             viewer {
               ...UserEdit_viewer
-              users(type:admin, id: $userId) {
+              users(type:admin, id: $userId, first: 1) {
                 id
               }
             }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import Snackbar from 'material-ui/Snackbar'
 import Roles from './Roles'
 
 import AddUserMutation from './AddUserMutation'
@@ -83,6 +84,8 @@ class index extends React.Component {
       email: user && user.email,
       firstName: user && user.firstName,
       lastName: user && user.lastName,
+      snackbarOpen: false,
+      snackbarMessage: '',
     }
   }
 
@@ -128,6 +131,15 @@ class index extends React.Component {
     })
   }
 
+  _afterSaveSuccess = (message) => {
+    
+    this.setState({
+      snackbarOpen: true,
+      snackBarMessage: message,
+    })
+    this.props.history.push('/users')
+  }
+
   _handleSubmit = () => {
     var roles = this.state.superRoles.filter(s => s.checked).map(s => s.id)
     if (roles.length === 0)
@@ -141,9 +153,9 @@ class index extends React.Component {
       roles: roles,
     }
     if (this.state.id) {
-      UpdateUserMutation(environment, input, this.props.history.push('/users'))
+      UpdateUserMutation(environment, input, this._afterSaveSuccess('User succesfully added'))
     } else {
-      AddUserMutation(environment, input, this.props.history.push('/users'))
+      AddUserMutation(environment, input, this._afterSaveSuccess('User succesfully updated'))
     }
   }
 
@@ -190,6 +202,12 @@ class index extends React.Component {
             secondary={true} 
             style={styles.button} />
           <Link style={styles.link} to='/users'>Cancel</Link>
+          <Snackbar
+            open={this.state.snackbarOpen}
+            message={this.state.snackbarMessage}
+            autoHideDuration={2500}
+            onRequestClose={this.handleRequestClose}
+          />
         </Paper>
     )
   }

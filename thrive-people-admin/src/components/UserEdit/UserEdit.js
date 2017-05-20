@@ -28,7 +28,7 @@ export default createFragmentContainer(UserEdit, {
         title
         isSuper
       }
-      users(type:admin, id:$userId) {
+      users(type:admin, id:$userId, first: 1) {
         id
         email
         firstName

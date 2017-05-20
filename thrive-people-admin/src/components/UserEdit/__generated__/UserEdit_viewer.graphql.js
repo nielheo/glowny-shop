@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule UserEdit_viewer.graphql
- * @generated SignedSource<<12b1ca42c842c770bd497680e20242da>>
+ * @generated SignedSource<<c58e140593a8ad4ae2c0311c02192b9c>>
  * @flow
  * @nogrep
  */
@@ -94,6 +94,12 @@ const fragment /*: ConcreteFragment*/ = {
       "kind": "LinkedField",
       "alias": null,
       "args": [
+        {
+          "kind": "Literal",
+          "name": "first",
+          "value": 1,
+          "type": "Int!"
+        },
         {
           "kind": "Variable",
           "name": "id",

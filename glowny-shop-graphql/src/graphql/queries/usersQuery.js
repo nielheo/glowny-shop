@@ -21,7 +21,18 @@ var usersQuery = {
 		}
   },
 	resolve: (_, args) => { 
-		return models.User.findAll({ limit: args.first, sort: 'email' })
+		var where = {}
+		Object.keys(args).map(key => {
+			if (key !== 'first') {
+				where[key] = args[key]
+			}
+		})
+		console.log(where)
+		return models.User.findAll({ 
+			limit: args.first, 
+			sort: 'email',
+			where: where
+	 })
 	}
 }
 

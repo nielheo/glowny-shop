@@ -44,8 +44,8 @@ module.exports = {
         updatedAt: new Date(),
       }, {
         id: uuid(),
-        code: 'Admin_Client',
-        title: 'Client Admin',
+        code: 'Admin_Shop',
+        title: 'Shop Admin',
         type: 'admin',
         isSuper: false,
         createdAt: new Date(),
@@ -56,6 +56,14 @@ module.exports = {
         title: 'User Admin',
         type: 'admin',
         isSuper: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }, {
+        id: uuid(),
+        code: 'Shop_Super',
+        title: 'Super Admin',
+        type: 'shop',
+        isSuper: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       }])

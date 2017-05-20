@@ -14,6 +14,7 @@ const roleType = new GraphQLObjectType({
 	description: 'A role',
 	fields: {
 		id: { type: GraphQLString },
+		code: { type: GraphQLString },
 		title: { type: GraphQLString },
 		isSuper: { type: GraphQLBoolean },
     type: { type: siteType },

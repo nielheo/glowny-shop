@@ -58,14 +58,15 @@ if (env === 'development' || env === 'test') {
     if (role) {
       User.findOrCreate({ 
         defaults: {
-          email: 'niel.heo@gmail.com',
+          id: 'User1',
+          email: 'super@glowny-shop.com',
           firstName: 'Daniel',
           lastName: 'Heo',
           type: 'admin',
           isActive: true,
           password: 'P@ssw0rd',
         },
-        where: { email: 'niel.heo@gmail.com' }}).spread((user, created) => {
+        where: { email: 'super@glowny-shop.com' }}).spread((user, created) => {
           UserRole.findOrCreate({
             where: { userId: user.id, roleId: role.id },
             default: {
@@ -73,6 +74,55 @@ if (env === 'development' || env === 'test') {
             }
           })
         })
+    }
+  })
+}
+
+if (env === 'test') {
+  Role.findOrCreate({ 
+    defaults: {
+      code: 'Admin_User',
+      title: 'User Admin',
+      type: 'admin',
+      isSuper: false,
+    },
+    where: {code: 'Admin_User'} 
+  }).spread((adminUser, created) => {
+    if (adminUser) {
+      Role.findOrCreate({ 
+        defaults: {
+          code: 'Admin_Shop',
+          title: 'Shop Admin',
+          type: 'admin',
+          isSuper: false,
+        },
+        where: {code: 'Admin_Shop'} 
+      }).spread((adminShop, created) => {
+        User.findOrCreate({ 
+          defaults: {
+            id: 'User2',
+            email: 'admin@glowny-shop.com',
+            firstName: 'Daniel',
+            lastName: 'Heo',
+            type: 'admin',
+            isActive: true,
+            password: 'P@ssw0rd',
+          },
+          where: { email: 'admin@glowny-shop.com' }}).spread((user, created) => {
+            UserRole.findOrCreate({
+              where: { userId: user.id, roleId: adminUser.id },
+              default: {
+                userId: user.Id, roleId: adminUser.Id
+              }
+            })
+            UserRole.findOrCreate({
+              where: { userId: user.id, roleId: adminShop.id },
+              default: {
+                userId: user.Id, roleId: adminShop.Id
+              }
+            })
+          })
+      })
     }
   })
 }

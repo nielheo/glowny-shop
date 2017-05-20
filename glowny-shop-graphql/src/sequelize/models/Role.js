@@ -7,7 +7,7 @@ export default function(sequelize, DataTypes) {
     title: DataTypes.STRING,
     type: {
       type:   DataTypes.ENUM,
-      values: ['admin', 'supplier', 'member']
+      values: ['admin', 'shop', 'member']
     },
     isSuper: DataTypes.BOOLEAN,
   }, {

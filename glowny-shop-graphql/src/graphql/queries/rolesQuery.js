@@ -15,7 +15,7 @@ var usersQuery = {
     },
 		type: {
 			type: new GraphQLNonNull(siteType)
-		}
+		},
   },
 	resolve: resolver(models.Role, {
 	//	include: false // disable auto including of associations based on AST - default: true

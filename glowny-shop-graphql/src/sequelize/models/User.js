@@ -9,7 +9,7 @@ export default function(sequelize, DataTypes) {
     lastName: DataTypes.STRING,
     type: {
       type:   DataTypes.ENUM,
-      values: ['admin', 'supplier', 'member']
+      values: ['admin', 'shop', 'member']
     },
     isActive: DataTypes.BOOLEAN,
     passwordHash: DataTypes.STRING,

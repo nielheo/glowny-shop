@@ -48,6 +48,7 @@ type query {
 # A role
 type Role {
   id: String
+  code: String
   title: String
   isSuper: Boolean
   type: Site

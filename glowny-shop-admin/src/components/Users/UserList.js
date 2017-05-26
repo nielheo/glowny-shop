@@ -14,7 +14,7 @@ import {
   TableRow,
 } from 'material-ui/Table'
 
-const styles = {
+const styles = {  
   emptyRow: {
     textAlign: 'center',
     width: '100%',

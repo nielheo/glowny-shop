@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as types from '../../actions/actionTypes.js'
-//import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode'
 import { setUserToken } from '../Common/Cookies'
 import debounce from 'lodash.debounce'
 import { backendUrlAuth } from '../../../constants.json'
@@ -40,7 +40,7 @@ class index extends React.Component {
           Accept: 'application/json',
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'email=' + this.state.email + '&password=' + this.state.password + '&site=admin', 
+        body: 'email=' + this.state.email + '&password=' + this.state.password, 
       })
       .then((response) => {
         this.props._updateHomeOnProgressAction(false)
@@ -54,8 +54,8 @@ class index extends React.Component {
         }
         return response.json().then(response => {
           if(response.success && response.token) {
-            //var decoded = jwt_decode(response.token)
-            //console.log(decoded)
+            var decoded = jwt_decode(response.token)
+            console.log(decoded)
             setUserToken(response.token)
             this.props.history.push('/')
           } else {

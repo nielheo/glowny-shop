@@ -40,7 +40,7 @@ class Login extends React.Component {
   }
 
   _updateField = (name, value) => {
-    //console.log(this)
+    console.log(this)
     this.props.updateField(name, value)
   }
 
@@ -50,7 +50,7 @@ class Login extends React.Component {
 
   render() {
     //const { onLoginClicked } = this.props
-    //console.log(this.props)
+    console.log(this.props)
     return (
       <Paper style={styles.container}>
         <div style={styles.header} >Login</div>

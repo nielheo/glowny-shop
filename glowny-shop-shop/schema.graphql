@@ -1,0 +1,115 @@
+schema {
+  query: query
+  mutation: mutation
+}
+
+input AddUserInput {
+  # User email
+  email: String!
+
+  # User first name
+  firstName: String!
+
+  # User first name
+  lastName: String!
+
+  # Site type status
+  type: Site!
+
+  # List or role id
+  roles: [String]!
+}
+
+type mutation {
+  # Add New User
+  addUser(
+    # Add User Input
+    input: AddUserInput!
+  ): User
+
+  # Add New User
+  updateUser(
+    # Add User Input
+    input: UpdateUserInput!
+  ): User
+
+  # Update user active status
+  updateUserActive(
+    # User id
+    input: UpdateUserActiveInput!
+  ): User
+}
+
+type query {
+  echo(message: String): String
+  viewer: Viewer
+}
+
+# A role
+type Role {
+  id: String
+  code: String
+  title: String
+  isSuper: Boolean
+  type: Site
+}
+
+enum Site {
+  admin
+  supplier
+  client
+}
+
+input UpdateUserActiveInput {
+  # User id
+  id: String!
+
+  # active status
+  isActive: Boolean!
+}
+
+input UpdateUserInput {
+  # User Id
+  id: String!
+
+  # User email
+  email: String!
+
+  # User first name
+  firstName: String!
+
+  # User first name
+  lastName: String!
+
+  # Site type status
+  type: Site!
+
+  # List or role id
+  roles: [String]!
+}
+
+# A user
+type User {
+  id: String
+  email: String
+  firstName: String
+  lastName: String
+  type: Site
+  isActive: Boolean
+  roles: [Role]
+}
+
+# A viewer
+type Viewer {
+  users(
+    # id of the user
+    id: String
+    type: Site!
+    first: Int!
+  ): [User]
+  roles(
+    # id of the role
+    id: String
+    type: Site!
+  ): [Role]
+}

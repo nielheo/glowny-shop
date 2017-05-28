@@ -1,0 +1,5 @@
+{
+  "backendUrl":"http://localhost:5555",
+  "backendUrlGraphql": "http://localhost:4000/graphql",
+  "backendUrlAuth": "http://localhost:4000/auth"
+}

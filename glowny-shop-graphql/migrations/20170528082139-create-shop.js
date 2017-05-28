@@ -29,14 +29,6 @@ module.exports = {
             allowNull: false,
           }
         }),
-      queryInterface.bulkInsert('Shops',[{
-        id: uuid(),
-        code: 'Glowny_Cloth',
-        name: 'Glowny Clothing',
-        isActive: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }])
     ]
   },
 

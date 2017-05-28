@@ -3,9 +3,10 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return [
-      queryInterface.describeTable('Users').done(
+      queryInterface.describeTable('Shops').done(
       queryInterface
         .createTable('User_Shops', {
+          id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
           userId: { 
             type: Sequelize.UUID, 
             allowNull: false,
@@ -20,7 +21,7 @@ module.exports = {
             type: Sequelize.UUID,
             allowNull: false,
             references: {
-              model: 'Roles',
+              model: 'Shops',
               key: 'id'
             },
             onUpdate: 'cascade',

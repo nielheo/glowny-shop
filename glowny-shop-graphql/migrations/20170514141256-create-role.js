@@ -18,7 +18,8 @@ module.exports = {
             allowNull: false,
           },
           type: {
-            type: Sequelize.STRING,
+            type:   Sequelize.ENUM,
+            values: ['admin', 'shop', 'member'],
             allowNull: false,
           },
           isSuper: {

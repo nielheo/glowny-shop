@@ -47,12 +47,17 @@ var apiRoutes = express.Router()
 // route to authenticate a user (POST http://localhost:8080/api/authenticate)
 apiRoutes.post('/auth', function(req, res) {
   //console.log(req)
-  if(!req.body.email || !req.body.password) {
+  if (!req.body.site) {
+    res.status(400)
+    res.json({ success: false, message: 'Site is required.' })
+  }
+  else if(!req.body.email || !req.body.password ) {
+    res.status(400)
     res.json({ success: false, message: 'Email and Password are required.' })
   } else {
   // return the information including token as JSON
     User.findOne({
-      where: { email: req.body.email, isActive: true },
+      where: { email: req.body.email, type: req.body.site, isActive: true },
       include: [
         { model: Role },
       ],

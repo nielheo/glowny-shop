@@ -34,10 +34,14 @@ db.Sequelize = Sequelize
 
 var User = db['User']
 var Role = db['Role']
+var Shop = db['Shop']
 var UserRole = db['User_Role']
 
 User.belongsToMany(Role, { through: UserRole })
 Role.belongsToMany(User, { through: UserRole })
+//User.belongsTo(ShopUser)
+//Shop.hasMany(ShopUser)
+
 
 if (env === 'development' || env === 'test') {
   Role.findOrCreate({ 

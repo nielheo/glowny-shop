@@ -1,7 +1,7 @@
 import {tester} from 'graphql-tester'
 import expect from 'expect.js'
 
-describe('viewer/users', () => {
+describe('viewer/roles', () => {
   let test = tester({
       url: 'http://localhost:4000/graphql',
       contentType: 'application/json'

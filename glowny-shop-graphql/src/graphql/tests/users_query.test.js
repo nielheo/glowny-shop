@@ -8,7 +8,7 @@ describe('viewer/users', () => {
   })
 
   describe('select', function () {
-    it('select users count is 2', function () {
+    it('select users(type:admin) count is 2', function () {
       return test('{ "query": "{viewer{ users(first:10, type:admin) {  id  firstName  } }}" }')
       .then(result => {
         expect(result.status).to.equal(200)
@@ -87,6 +87,15 @@ describe('viewer/users', () => {
         expect(result.success).to.equal(true)
         expect(result.data.viewer.users.length).to.equal(1)
         expect(result.data.viewer.users[0].roles.length).to.equal(2)
+      })
+    })
+
+    it('select users(type=shop) count is 1', function () {
+      return test('{ "query": "{viewer{ users(first:10, type:shop) {  id  firstName  } }}" }')
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.users.length).to.equal(1)
       })
     })
   })

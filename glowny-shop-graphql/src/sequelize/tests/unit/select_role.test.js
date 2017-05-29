@@ -2,7 +2,7 @@
 
 import expect from 'expect.js'
 
-describe('models/task', function () {
+describe('models/role', function () {
   before(function () {
       return require('../../models').sequelize//.sync()
   })

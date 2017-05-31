@@ -10,10 +10,10 @@ export default function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
 
-        Shop.belongsToMany(models.User, { as: 'Users', through: 'User_Shop', foreignKey: 'id', otherKey: 'shopId' });
+        Shop.hasMany(models.User, { as: 'Users' });
         // TODO: it seems like there should be a cleaner way to acheive this.
         // assigned the first instance of User.HasMany above to User.Tasks trows and error.
-        Shop.Users = Shop.belongsToMany(models.User, { as: 'Users', through: 'User_Shop', foreignKey: 'id', otherKey: 'shopId' });
+        Shop.Users = Shop.hasMany(models.User, { as: 'Users' });
       }
     }
   })

@@ -10,20 +10,26 @@ describe('models/user_shop', function () {
   beforeEach(function () {
     this.User = require('../../models').User
     this.Role = require('../../models').Role
-    this.UserShop = require('../../models').User_Shop
+    this.Shop = require('../../models').Shop
   })
 
   describe('select user_shops', function () {
-    it('select user_shops count = 1', function () {
-      return this.UserShop.findAll().then(userShop => {
+
+    it('select user_shops.userId=Cloth_Super count = 1', function () {
+      return this.User.findAll({where: {id: 'Cloth_Super'}}).then(userShop => {
         expect(userShop.length).to.equal(1)
       })
     })
 
     it('select user_shops.userId=Cloth_Super count = 1', function () {
-      return this.UserShop.findAll({where: {userId: 'Cloth_Super'}}).then(userShop => {
+      return this.User.findAll({
+        include: {
+				  model: this.Shop,
+					where: { code: 'Glowny_Cloth' }
+        }}).then(userShop => {
         expect(userShop.length).to.equal(1)
       })
     })
   })
 })
+

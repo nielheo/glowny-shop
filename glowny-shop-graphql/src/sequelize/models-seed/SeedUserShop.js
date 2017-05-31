@@ -34,6 +34,7 @@ export default function SeedUserRole (db, env) {
               type: 'shop',
               isActive: true,
               password: 'P@ssw0rd',
+              shopId: glownyCloth.id
             },
             where: { email: 'super@glowny-cloth.com' }}).spread((user, created) => {
               console.log('============')
@@ -42,12 +43,6 @@ export default function SeedUserRole (db, env) {
                 where: { userId: user.id, roleId: adminShop.id },
                 default: {
                   userId: user.id, roleId: adminShop.id
-                }
-              })
-              UserShop.findOrCreate({
-                where: { userId: user.id, shopId: glownyCloth.id  },
-                default: {
-                  userId: user.id, shopId: glownyCloth.id
                 }
               })
             })

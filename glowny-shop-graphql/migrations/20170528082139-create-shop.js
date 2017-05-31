@@ -28,12 +28,28 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: false,
           }
-        }),
+        }).done(
+          queryInterface
+            .addColumn(
+              'Users',
+              'shopId', {
+                type: Sequelize.UUID, 
+                allowNull: true,
+                references: {
+                  model: 'Shops',
+                  key: 'id'
+                },
+                onUpdate: 'cascade',
+                onDelete: 'cascade'
+              }
+            )
+        )
     ]
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface
-      .dropTable('Shops')
+    return
+      queryInterface.removeColumn('Users', 'shopId').done(
+        queryInterface.dropTable('Shops'))
   }
 };

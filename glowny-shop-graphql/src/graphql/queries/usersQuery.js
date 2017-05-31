@@ -16,6 +16,10 @@ var usersQuery = {
 		type: {
 			type: new GraphQLNonNull(siteType)
 		},
+		shopCode: {
+      description: 'code of shop. This is required when type = shop',
+      type: GraphQLString
+    },
 		first: {
 			type: new GraphQLNonNull(GraphQLInt)
 		}
@@ -23,16 +27,36 @@ var usersQuery = {
 	resolve: (_, args) => { 
 		var where = {}
 		Object.keys(args).map(key => {
-			if (key !== 'first') {
+			if (key !== 'first' && key !== 'shopCode') {
 				where[key] = args[key]
 			}
 		})
-		console.log(where)
-		return models.User.findAll({ 
-			limit: args.first, 
-			sort: 'email',
-			where: where
-	 })
+		if (args['type'] === 'shop') {
+			if (!args['shopCode']) {
+				throw new Error('shopCode is required')
+			} else {
+				//where['shop.id'] = args['shopId']
+				//console.log()
+
+				//var shopId = Sequelize.literal('Shop.id')
+				
+				return models.User.findAll({ 
+					limit: args.first, 
+					sort: 'email',
+					where: where,
+					include: {
+							model: models.Shop,
+							where: { code: args['shopCode'] }
+					}
+				})
+			}
+		} else {
+			return models.User.findAll({ 
+				limit: args.first, 
+				sort: 'email',
+				where: where
+			})
+		}
 	}
 }
 

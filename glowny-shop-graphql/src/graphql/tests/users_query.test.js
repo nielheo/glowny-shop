@@ -91,11 +91,37 @@ describe('viewer/users', () => {
     })
 
     it('select users(type=shop) count is 1', function () {
-      return test('{ "query": "{viewer{ users(first:10, type:shop) {  id  firstName  } }}" }')
+      return test('{ "query": "{viewer{ users(first:10, type:shop, shopId:\'Glowny_Cloth\') {  id  firstName  } }}" }')
       .then(result => {
         expect(result.status).to.equal(200)
         expect(result.success).to.equal(true)
         expect(result.data.viewer.users.length).to.equal(1)
+      })
+    })
+
+    it('select users(type=shop) with no shopId, return error', function () {
+      return test('{ "query": "{viewer{ users(first:10, type:shop) {  id  firstName  } }}" }')
+      .then(result => {
+        expect(result.status).to.equal(400)
+        expect(result.success).to.equal(false)
+      })
+    })
+
+    
+
+    it('select users first:1 - return all expected fields', function () {
+      return test('{ "query": "{viewer{ users(first:1, type:admin) {  id  firstName lastName type isActive email roles { id }  } }}" }')
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.users.length).to.equal(1)
+        expect(result.data.viewer.users[0].id).to.not.be.empty()
+        expect(result.data.viewer.users[0].email).to.not.be.empty()
+        expect(result.data.viewer.users[0].firstName).to.not.be.empty()
+        expect(result.data.viewer.users[0].lastName).to.not.be.empty()
+        expect(result.data.viewer.users[0].type).to.not.be.empty()
+        expect(result.data.viewer.users[0].isActive).to.be.ok()
+        expect(result.data.viewer.users[0].roles).to.be.an('array')
       })
     })
   })

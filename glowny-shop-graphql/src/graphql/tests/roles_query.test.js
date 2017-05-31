@@ -32,6 +32,20 @@ describe('viewer/roles', () => {
         expect(result.success).to.equal(false)
       })
     })
+
+    it('select users first:1 - return all expected fields', function () {
+      return test('{ "query": "{ viewer { roles(type:admin) { id code title isSuper type } } }" }')
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.roles).to.be.an('array')
+        expect(result.data.viewer.roles[0].id).to.not.be.empty()
+        expect(result.data.viewer.roles[0].code).to.not.be.empty()
+        expect(result.data.viewer.roles[0].title).to.not.be.empty()
+        expect(result.data.viewer.roles[0].type).to.not.be.empty()
+        expect(result.data.viewer.roles[0].isSuper).to.not.be.ok()
+      })
+    })
   })
     
 })

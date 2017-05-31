@@ -43,8 +43,8 @@ var UserShop = db['User_Shop']
 
 User.belongsToMany(Role, { through: UserRole })
 Role.belongsToMany(User, { through: UserRole })
-User.belongsTo(Shop, { through: UserShop, foreignKey: 'id', otherKey: 'userId' })
-Shop.belongsToMany(User, { through: UserShop, foreignKey: 'id', otherKey: 'shopId' })
+User.belongsTo(Shop, { foreignKey: 'shopId' })
+Shop.hasMany(User)
 
 //User.belongsTo(ShopUser)
 //Shop.hasMany(ShopUser)

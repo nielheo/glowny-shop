@@ -37,8 +37,6 @@ export default function SeedUserRole (db, env) {
               shopId: glownyCloth.id
             },
             where: { email: 'super@glowny-cloth.com' }}).spread((user, created) => {
-              console.log('============')
-              console.log(user.id)
               UserRole.findOrCreate({
                 where: { userId: user.id, roleId: adminShop.id },
                 default: {
@@ -47,6 +45,78 @@ export default function SeedUserRole (db, env) {
               })
             })
         })
+        Role.findOrCreate({ 
+          defaults: {
+            code: 'Shop_User',
+            title: 'User Admin',
+            type: 'shop',
+            isSuper: false,
+          },
+          where: {code: 'Shop_User'} 
+        }).spread((roleShopUser, created) => {
+          User.findOrCreate({ 
+            defaults: {
+              id: 'Cloth_User',
+              email: 'user@glowny-cloth.com',
+              firstName: 'User',
+              lastName: 'Glowny Cloth',
+              type: 'shop',
+              isActive: true,
+              password: 'P@ssw0rd',
+              shopId: glownyCloth.id
+            },
+            where: { email: 'user@glowny-cloth.com' }}).spread((userUser, created) => {
+              UserRole.findOrCreate({
+                where: { userId: userUser.id, roleId: roleShopUser.id },
+                default: {
+                  userId: userUser.id, roleId: roleShopUser.id
+                }
+              })
+            })
+        })
+      }
+    })
+
+
+    Shop.findOrCreate({ 
+      defaults: {
+        code: 'Daniel_Shop',
+        name: 'Daniel Shop',
+        isActive: false,
+      },
+      where: {code: 'Daniel_Shop'} 
+    }).spread((danielShop, created) => {
+      if (danielShop) {
+        Role.findOrCreate({ 
+          defaults: {
+            code: 'Shop_Super',
+            title: 'Super Admin',
+            type: 'shop',
+            isSuper: true,
+          },
+          where: {code: 'Shop_Super'} 
+        }).spread((adminShop, created) => {
+          User.findOrCreate({ 
+            defaults: {
+              id: 'daniel_super',
+              email: 'super@daniel-shop.com',
+              firstName: 'Super',
+              lastName: 'Daniel Shop',
+              type: 'shop',
+              isActive: true,
+              password: 'P@ssw0rd',
+              shopId: danielShop.id
+            },
+            where: { email: 'super@daniel-shop.com' }}).spread((userDanielSuper, created) => {
+              UserRole.findOrCreate({
+                where: { userId: userDanielSuper.id, roleId: adminShop.id },
+                default: {
+                  userId: userDanielSuper.id, roleId: adminShop.id
+                }
+              })
+            })
+        })
+        
       }
     })
   }

@@ -14,9 +14,9 @@ describe('models/user_role', function () {
   })
 
   describe('select user', function () {
-    it('select user_roles count = 4', function () {
+    it('select user_roles count = 6', function () {
       return this.UserRole.findAll().then(userRole => {
-        expect(userRole.length).to.equal(4)
+        expect(userRole.length).to.equal(6)
       })
     })
 

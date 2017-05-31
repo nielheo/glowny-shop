@@ -13,9 +13,9 @@ describe('models/user', function () {
   })
 
   describe('select user', function () {
-    it('select users count = 3', function () {
+    it('select users count = 5', function () {
       return this.User.findAll().then(user => {
-        expect(user.length).to.equal(3)
+        expect(user.length).to.equal(5)
       })
     })
 
@@ -25,9 +25,9 @@ describe('models/user', function () {
       })
     })
 
-    it('select user.type=shop expect count = 1', function () {
+    it('select user.type=shop expect count = 3', function () {
       return this.User.findAll({ where: { type: 'shop' }}).then(user => {
-        expect(user.length).to.equal(1)
+        expect(user.length).to.equal(3)
       })
     })
   })

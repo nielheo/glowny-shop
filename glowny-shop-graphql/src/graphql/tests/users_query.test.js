@@ -90,8 +90,17 @@ describe('viewer/users', () => {
       })
     })
 
-    it('select users(type=shop) count is 1', function () {
-      return test('{ "query": "{viewer{ users(first:10, type:shop, shopId:\'Glowny_Cloth\') {  id  firstName  } }}" }')
+    it('select users(type=shop shopCode=Glowny_Cloth) count is 2', function () {
+      return test(`{ "query": "{viewer{ users(first:10, type:shop, shopCode:\\\"Glowny_Cloth\\\") {  id  firstName  } }}" }`)
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.users.length).to.equal(2)
+      })
+    })
+
+    it('select users(type=shop shopCode=Daniel_Shop) count is 1', function () {
+      return test(`{ "query": "{viewer{ users(first:10, type:shop, shopCode:\\\"Daniel_Shop\\\") {  id  firstName  } }}" }`)
       .then(result => {
         expect(result.status).to.equal(200)
         expect(result.success).to.equal(true)
@@ -99,15 +108,14 @@ describe('viewer/users', () => {
       })
     })
 
-    it('select users(type=shop) with no shopId, return error', function () {
+    it('select users(type=shop) with no shopCode, return error', function () {
       return test('{ "query": "{viewer{ users(first:10, type:shop) {  id  firstName  } }}" }')
       .then(result => {
-        expect(result.status).to.equal(400)
+        expect(result.status).to.equal(200)
         expect(result.success).to.equal(false)
+        expect(result.errors).to.be.an('array')
       })
     })
-
-    
 
     it('select users first:1 - return all expected fields', function () {
       return test('{ "query": "{viewer{ users(first:1, type:admin) {  id  firstName lastName type isActive email roles { id }  } }}" }')

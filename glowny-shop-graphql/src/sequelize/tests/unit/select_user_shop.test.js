@@ -21,13 +21,13 @@ describe('models/user_shop', function () {
       })
     })
 
-    it('select user_shops.userId=Cloth_Super count = 1', function () {
+    it('select user_shops.userId=Cloth_Super count = 2', function () {
       return this.User.findAll({
         include: {
 				  model: this.Shop,
 					where: { code: 'Glowny_Cloth' }
         }}).then(userShop => {
-        expect(userShop.length).to.equal(1)
+        expect(userShop.length).to.equal(2)
       })
     })
   })

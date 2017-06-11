@@ -74,6 +74,13 @@ class index extends React.Component {
       console.log(err)
       //this._changeLoadingStatus(false);
      // response = null;
+
+      this.setState({
+          emailError: ' ',
+          passwordError: 'Invalid login. Try again.',
+          buttonClicked: false,
+      })
+      throw new Error('Bad response from server');
     }
   }
 

@@ -8,7 +8,7 @@ import QueryType from './src/graphql/QueryType'
 import MutationType from './src/graphql/MutationType'
 import { GraphQLSchema } from 'graphql'
 import cors from 'cors'
-import db, { User, Role } from './src/sequelize/models'
+import db, { User, Role, Shop, User_Role } from './src/sequelize/models'
 
 const env = process.env.NODE_ENV || 'development'
 const config = require('./config/config.json')[env]
@@ -42,99 +42,77 @@ app.use(function(req, res, next) {
   next()
 })
 
-var apiRoutes = express.Router() 
-
-// route to authenticate a user (POST http://localhost:8080/api/authenticate)
-apiRoutes.post('/auth', function(req, res) {
-  //console.log(req)
-  if (!req.body.site) {
-    res.status(400)
-    res.json({ success: false, message: 'Site is required.' })
-  }
-  else if(!req.body.email || !req.body.password ) {
-    res.status(400)
-    res.json({ success: false, message: 'Email and Password are required.' })
-  } else {
-  // return the information including token as JSON
-    User.findOne({
-      where: { email: req.body.email, type: req.body.site, isActive: true },
-      include: [
-        { model: Role },
-      ],
-    }).then(user => {
-      if (user) {
-        //user.Roles.findAll().then(result => result)
-        console.log(req.body.password)
-        console.log(user.passwordHash)
-        bcrypt.compare(req.body.password, user.passwordHash, function(err, res1) {
-          if (res1) {
-            var claims = {
-              id: user.id,
-              firstName: user.firstName,
-              lastName: user.lastName,
-              email: user.email,
-              roles: user.Roles.map(role => role.code),
-            }
-            //console.log(user.Roles)
-
-            var token = jwt.sign(claims, app.get('superSecret'))
-            //var refreshed = jwt.refresh(token, 3600, app.get('superSecret'))
-
-            res.json({
-              success: true,
-              message: 'Enjoy your token!',
-              token: token,
-            //  refreshToken: refreshed,
-            })
-          } else {
-            res.status(400)
-            res.json({ success: false, message: 'Authentication failed.' })
-          }
+const checkCredential = (user, req, res) => {
+  if (user) {
+    bcrypt.compare(req.body.password, user.passwordHash, function(err, res1) {
+      if (res1) {
+        var roles;
+        User_Role.findAll({ where: { userId: user.id }}).then(userRoles => {
+          Role.findAll({ where: { id: userRoles.map(userRole => userRole.roleId) }})
+            .then(roles => {
+              var claims = {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                roles: roles.map(role => role.code),
+              }
+          
+              var token = jwt.sign(claims, app.get('superSecret'))
+          
+              res.json({
+                success: true,
+                message: 'Enjoy your token!',
+                token: token,
+              //  refreshToken: refreshed,
+              })
+          })
         })
+        
       } else {
         res.status(400)
         res.json({ success: false, message: 'Authentication failed.' })
       }
     })
+  } else {
+    res.status(400)
+    res.json({ success: false, message: 'Authentication failed.' })
   }
-  // find the user
-  /*User.findAll({
-  where: {
-      email: res.body.email,
-    },
-  })
-  User.findOne({
-    name: req.body.name,
-  }, function(err, user) {
+}
 
-    if (err) throw err
 
-    if (!user) {
-      res.json({ success: false, message: 'Authentication failed. User not found.' })
-    } else if (user) {
+var apiRoutes = express.Router() 
 
-      // check if password matches
-      if (user.password != req.body.password) {
-        res.json({ success: false, message: 'Authentication failed. Wrong password.' })
-      } else {
-
-        // if user is found and password is right
-        // create a token
-        var token = jwt.sign(user, app.get('superSecret'), {
-          expiresInMinutes: 1440 // expires in 24 hours
-        })
-
-        // return the information including token as JSON
-        res.json({
-          success: true,
-          message: 'Enjoy your token!',
-          token: token
-        })
-      }   
-
+apiRoutes.post('/auth', function(req, res) {
+  //console.log(req)
+  if (!req.body.site) {
+    res.status(400)
+    res.json({ success: false, message: 'Site is required.' })
+  } else if (req.body.site === 'shop' && !req.body.shopCode  ) {
+    res.status(400)
+    res.json({ success: false, message: 'Shop code is required.' })
+  } else if(!req.body.email || !req.body.password ) {
+    res.status(400)
+    res.json({ success: false, message: 'Email and Password are required.' })
+  } else {
+  // return the information including token as JSON
+    if (req.body.site === 'shop') {
+      User.findOne({
+        where: { email: req.body.email, type: req.body.site, isActive: true },
+        include: [
+          { model: Shop, where: { code: req.body.shopCode } }
+        ],
+      }).then(user => {
+        checkCredential(user, req, res)
+      })
+    } else {
+      User.findOne({
+        where: { email: req.body.email, type: req.body.site, isActive: true },
+      }).then(user => {
+        checkCredential(user, req, res)
+      })
     }
-
-  })*/
+  }
 })
 
 app.use('/', apiRoutes)

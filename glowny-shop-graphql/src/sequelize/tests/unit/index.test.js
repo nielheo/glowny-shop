@@ -36,4 +36,24 @@ describe('models/index', function () {
     var models = require('../../models')
     expect(models.Shop.Users).to.be.ok()
   })
+
+  it('returns the product model', function () {
+    var models = require('../../models')
+    expect(models.Product).to.be.ok()
+  })
+
+  it('returns the product.shop model', function () {
+    var models = require('../../models')
+    expect(models.Product.Shop).to.be.ok()
+  })
+
+  it('returns the product.createdUser model', function () {
+    var models = require('../../models')
+    expect(models.Product.CreatedUser).to.be.ok()
+  })
+
+  it('returns the product.updatedUser model', function () {
+    var models = require('../../models')
+    expect(models.Product.UpdatedUser).to.be.ok()
+  })
 })

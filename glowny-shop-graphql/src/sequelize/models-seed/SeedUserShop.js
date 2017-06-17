@@ -12,7 +12,7 @@ export default function SeedUserRole (db, env) {
         code: 'Glowny_Cloth',
         systemCurr: 'THB',
         name: 'Glowny Clothing',
-        isActive: false,
+        isActive: true,
       },
       where: {code: 'Glowny_Cloth'} 
     }).spread((glownyCloth, created) => {
@@ -84,7 +84,7 @@ export default function SeedUserRole (db, env) {
         code: 'Daniel_Shop',
         name: 'Daniel Shop',
         systemCurr: 'IDR',
-        isActive: false,
+        isActive: true,
       },
       where: {code: 'Daniel_Shop'} 
     }).spread((danielShop, created) => {

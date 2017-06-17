@@ -10,7 +10,7 @@ export default function SeedUserRole (db, env) {
         code: 'Glowny_Cloth',
         systemCurr: 'THB',
         name: 'Glowny Clothing',
-        isActive: false,
+        isActive: true,
       },
       where: {code: 'Glowny_Cloth'} 
     }).spread((glownyCloth, created) => {
@@ -47,7 +47,7 @@ export default function SeedUserRole (db, env) {
                   sku: 'GC.0002',
                   name: 'Product 2',
                   description: 'This is product #2 from Glowny Cloth',
-                  price: 450000,
+                  price: 625000,
                   isActive: true,
                   createdBy: user.id,
                   updatedBy: user.id,
@@ -89,7 +89,7 @@ export default function SeedUserRole (db, env) {
                 sku: 'DH.0001',
                 name: 'Daniel Shop Product 1',
                 description: 'Daniel Shop - Product #1',
-                price: 450000,
+                price: 850000,
                 isActive: true,
                 createdBy: user.id,
                 updatedBy: user.id,

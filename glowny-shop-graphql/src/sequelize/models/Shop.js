@@ -5,6 +5,7 @@ export default function(sequelize, DataTypes) {
     id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV4, primaryKey: true },
     code: DataTypes.STRING,
     name: DataTypes.STRING,
+    systemCurr: DataTypes.STRING(3),
     isActive: DataTypes.BOOLEAN,
   }, {
     classMethods: {

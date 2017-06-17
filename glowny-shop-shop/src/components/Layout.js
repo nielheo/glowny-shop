@@ -1,5 +1,5 @@
 import React from 'react'
-import { cyan500 } from 'material-ui/styles/colors'
+//import { fullBlack } from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
@@ -12,12 +12,12 @@ const styles = {
     padding: 20,
     paddingTop: 25,
   },
-  drawer: {
-    backgroundColor: '#FFFFFF',
+  /*drawer: {
+    backgroundColor: '#FFD600',
   },
   AppBar: {
-    backgroundColor: cyan500,
-  },
+    backgroundColor: fullBlack,
+  },*/
 };
 
 export default class LayoutPage extends React.Component {
@@ -40,10 +40,10 @@ export default class LayoutPage extends React.Component {
           containerStyle={styles.drawer}
           onRequestChange={(open) => this.setState({ open })}
         >
-          <AppBar iconElementLeft={<span></span>} title='Glowny Shop' style={styles.AppBar} />
+          <AppBar iconElementLeft={<span></span>} title='Glowny Clothing' style={styles.AppBar} />
           <Menu>
             <MenuItem href='/' primaryText='Home' />
-            <MenuItem href='/users' primaryText='Users' />
+            <MenuItem href='/product' primaryText='Products' />
             { getUserToken() 
               ? <MenuItem href='/logout' primaryText='Log Out' />
               : <MenuItem href='/login' primaryText='Login' />

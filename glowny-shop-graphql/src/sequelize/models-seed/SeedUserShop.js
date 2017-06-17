@@ -6,10 +6,11 @@ export default function SeedUserRole (db, env) {
   var UserRole = db['User_Role']
   var UserShop = db['User_Shop']
 
-  if (env === 'test') {
+  if (env === 'development' || env === 'test') {
     Shop.findOrCreate({ 
       defaults: {
         code: 'Glowny_Cloth',
+        systemCurr: 'THB',
         name: 'Glowny Clothing',
         isActive: false,
       },
@@ -82,6 +83,7 @@ export default function SeedUserRole (db, env) {
       defaults: {
         code: 'Daniel_Shop',
         name: 'Daniel Shop',
+        systemCurr: 'IDR',
         isActive: false,
       },
       where: {code: 'Daniel_Shop'} 

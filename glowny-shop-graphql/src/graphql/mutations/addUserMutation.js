@@ -27,6 +27,10 @@ const AddUserInput = new GraphQLInputObjectType({
       description: 'Site type status',
       type: new GraphQLNonNull(siteType)
     },
+    shopCode: {
+      description: 'Unique Code of your shop',
+      type: GraphQLString
+    },
     roles: {
       description: 'List or role id',
       type: new GraphQLNonNull(new GraphQLList(GraphQLString))

@@ -16,6 +16,9 @@ input AddUserInput {
   # Site type status
   type: Site!
 
+  # Unique Code of your shop
+  shopCode: String
+
   # List or role id
   roles: [String]!
 }
@@ -56,8 +59,8 @@ type Role {
 
 enum Site {
   admin
-  supplier
-  client
+  shop
+  member
 }
 
 input UpdateUserActiveInput {
@@ -105,6 +108,9 @@ type Viewer {
     # id of the user
     id: String
     type: Site!
+
+    # code of shop. This is required when type = shop
+    shopCode: String
     first: Int!
   ): [User]
   roles(

@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types'
 import AppBar from 'material-ui/AppBar'
 import LinearProgress from 'material-ui/LinearProgress'
-import { cyan500 } from 'material-ui/styles/colors'
+//import { full } from 'material-ui/styles/colors'
 
 
 
@@ -19,9 +19,9 @@ const styles = {
     color: '#FFFFFF',
     textDecoration: 'none',
   },
-  appBar: {
-    backgroundColor: cyan500,
-  },
+  //appBar: {
+  //  backgroundColor: cyan500,
+  //},
 };
 
 class Header extends React.Component {
@@ -34,10 +34,10 @@ class Header extends React.Component {
     const { location } = this.props
     return (
       <section>
-      { location.pathname !== '/login' && location.pathname !== '/404' &&
+      { location.pathname !== '/login' && location.pathname !== '/404' && location.pathname !== '/material' &&
       <AppBar
-        style={styles.appBar}
-        title={<Link to='/' style={styles.title}>Glowny Shop</Link>}
+        //style={styles.appBar}
+        title={<Link to='/' style={styles.title}>Glowny Clothing</Link>}
         iconClassNameRight="muidocs-icon-navigation-expand-more"
         onLeftIconButtonTouchTap={this.props.onNavigationClick}
       /> }

@@ -19,7 +19,7 @@ class Users extends React.Component {
 export default createFragmentContainer(Users, {
   viewer: graphql`
     fragment Users_viewer on Viewer {
-      users(type: admin, first: 10) {
+      users(type: shop, first: 10, shopCode: "glowny_cloth") {
         ...UserList_users
       }
     }

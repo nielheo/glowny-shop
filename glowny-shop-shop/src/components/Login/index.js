@@ -40,7 +40,7 @@ class index extends React.Component {
           Accept: 'application/json',
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'email=' + this.state.email + '&password=' + this.state.password, 
+        body: 'email=' + this.state.email + '&password=' + this.state.password + '&site=shop&shopCode=glowny_cloth', 
       })
       .then((response) => {
         this.props._updateHomeOnProgressAction(false)

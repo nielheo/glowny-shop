@@ -16,6 +16,10 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false,
           },
+          systemCurr: {
+            type: Sequelize.STRING(3),
+            allowNull: false,
+          },
           isActive: {
             type: Sequelize.BOOLEAN,
             allowNull: false,
@@ -28,28 +32,12 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: false,
           }
-        }).done(
-          queryInterface
-            .addColumn(
-              'Users',
-              'shopId', {
-                type: Sequelize.UUID, 
-                allowNull: true,
-                references: {
-                  model: 'Shops',
-                  key: 'id'
-                },
-                onUpdate: 'cascade',
-                onDelete: 'cascade'
-              }
-            )
-        )
+        })
+            
     ]
   },
 
   down: function (queryInterface, Sequelize) {
-    return
-      queryInterface.removeColumn('Users', 'shopId').done(
-        queryInterface.dropTable('Shops'))
+    return queryInterface.dropTable('Shops')
   }
 };

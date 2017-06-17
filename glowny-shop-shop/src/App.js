@@ -19,15 +19,38 @@ import Logout from './components/Logout'
 import NotFound from './components/NotFound'
 import AboutUs from './components/AboutUs'
 import Users from './components/Users'
+import Product from './components/Product'
+import Material from './components/Material'
 import UserAdd from './components/UserAdd'
 import UserEdit from './components/UserEdit'
 import Forgot from './components/Forgot' 
 
+
+import {
+//  cyan500, 
+//  grey100,  grey500,
+//  white, darkBlack, fullBlack, yellowA700,
+ // fullBlack, red100, blue100,
+} from 'material-ui/styles/colors'
+
 const muiTheme = getMuiTheme({
   palette: {
-    //textColor: grey900,
-    //primary1Color: grey900,
-    //accent1Color: cyan500,
+    primary1Color: '#00796B',
+    primary2Color: '#009688',
+    primary3Color: '#B2DFDB',
+    accent1Color: '#FF5722',
+    accent2Color: '#FFCCBC',
+    accent3Color: '#E64A19',
+    textColor: '#212121',
+    alternateTextColor: '#FFFFFF',
+    canvasColor: '#FFFFFF',
+    borderColor: '#BDBDBD',
+    /*
+    //disabledColor: fade(darkBlack, 0.3),
+    pickerHeaderColor: fullBlack,
+    //clockCircleColor: fade(darkBlack, 0.07),
+    shadowColor: fullBlack,
+    */
   },
 })
 
@@ -47,6 +70,7 @@ class App extends Component {
                 <Switch>
                   <Route path='/login' component={Login}/>
                   <Route path='/logout' component={Logout}/>
+                  <Route path='/material' component={Material}/>
                   <Route path='/forgotpassword' component={Forgot}/>
                   <Route path='/404' component={NotFound}/>
                   <PrivateRoute exact path='/' component={Home} />
@@ -54,6 +78,8 @@ class App extends Component {
                   <PrivateRoute path='/users/add' component={UserAdd} />
                   <PrivateRoute path='/users/edit/:userId' component={UserEdit} />
                   <PrivateRoute path='/users' component={Users} />
+                  <PrivateRoute path='/product' component={Product} />
+                  
                   <PrivateNotFound to='/404'/>
                 </Switch>
               </ReactCSSTransitionGroup>

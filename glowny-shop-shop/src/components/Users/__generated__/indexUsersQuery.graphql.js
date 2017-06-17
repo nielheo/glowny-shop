@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule indexUsersQuery.graphql
- * @generated SignedSource<<d756e56fcceba527e90eecfc5d049320>>
- * @relayHash b5e5569909e00d37502e7b13aa38b2fe
+ * @generated SignedSource<<59986201298f395c68dd42d02b930f56>>
+ * @relayHash 424d86fae26773e416ebd007baf04447
  * @flow
  * @nogrep
  */
@@ -26,7 +26,7 @@ query indexUsersQuery {
 }
 
 fragment Users_viewer on Viewer {
-  users(type: admin, first: 10) {
+  users(type: shop, first: 10, shopCode: "glowny_cloth") {
     ...UserList_users
   }
 }
@@ -105,8 +105,14 @@ const batch /*: ConcreteBatch*/ = {
               },
               {
                 "kind": "Literal",
+                "name": "shopCode",
+                "value": "glowny_cloth",
+                "type": "String"
+              },
+              {
+                "kind": "Literal",
                 "name": "type",
-                "value": "admin",
+                "value": "shop",
                 "type": "Site!"
               }
             ],
@@ -181,7 +187,7 @@ const batch /*: ConcreteBatch*/ = {
                 ]
               }
             ],
-            "storageKey": "users{\"first\":10,\"type\":\"admin\"}"
+            "storageKey": "users{\"first\":10,\"shopCode\":\"glowny_cloth\",\"type\":\"shop\"}"
           }
         ],
         "storageKey": null
@@ -197,7 +203,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query indexUsersQuery {\n  viewer {\n    ...Users_viewer\n  }\n}\n\nfragment Users_viewer on Viewer {\n  users(type: admin, first: 10) {\n    ...UserList_users\n  }\n}\n\nfragment UserList_users on User {\n  id\n  ...UserItem_user\n}\n\nfragment UserItem_user on User {\n  id\n  firstName\n  lastName\n  email\n  isActive\n  roles {\n    id\n    title\n  }\n}\n"
+  "text": "query indexUsersQuery {\n  viewer {\n    ...Users_viewer\n  }\n}\n\nfragment Users_viewer on Viewer {\n  users(type: shop, first: 10, shopCode: \"glowny_cloth\") {\n    ...UserList_users\n  }\n}\n\nfragment UserList_users on User {\n  id\n  ...UserItem_user\n}\n\nfragment UserItem_user on User {\n  id\n  firstName\n  lastName\n  email\n  isActive\n  roles {\n    id\n    title\n  }\n}\n"
 };
 
 module.exports = batch;

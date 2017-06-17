@@ -5,41 +5,56 @@ module.exports = {
     const buffer = new Buffer(32)
     return[ 
       queryInterface
-        .createTable('Users', {
+        .createTable('Products', {
           id: { 
             type: Sequelize.UUID, 
             primaryKey: true 
-          },
-          email: {
-            type: Sequelize.STRING,
-            allowNull: false,
-          },
-          firstName: {
-            type: Sequelize.STRING,
-            allowNull: false,
-          },
-          lastName: {
-            type: Sequelize.STRING,
-            allowNull: false,
-          },
-          type: {
-            type:   Sequelize.ENUM,
-            values: ['admin', 'shop', 'member'],
-            allowNull: false,
-          },
-          isActive: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false,
-          },
-          passwordHash: {
-            type: Sequelize.STRING,
-            allowNull: false,
           },
           shopId: {
             type: Sequelize.UUID, 
             allowNull: true,
             references: {
               model: 'Shops',
+              key: 'id'
+            },
+            onUpdate: 'cascade',
+            onDelete: 'cascade'
+          },
+          sku: {
+            type: Sequelize.STRING(50),
+            allowNull: false,
+          },
+          name: {
+            type: Sequelize.STRING(100),
+            allowNull: false,
+          },
+          description: {
+            type: Sequelize.STRING,
+            allowNull: false,
+          },
+          price: {
+            type: Sequelize.DECIMAL(18,4),
+            allowNull: false,
+          },
+          isActive: {
+            type: Sequelize.BOOLEAN,
+            allowNull: false,
+          },
+          createdBy: {
+            type: Sequelize.UUID,
+            allowNull: false,
+            references: {
+              model: 'Users',
+              key: 'id'
+            },
+            onUpdate: 'cascade',
+            onDelete: 'cascade'
+          },
+          updatedBy: {
+            type: Sequelize.UUID,
+            allowNull: false,
+            references: {
+              model: 'Users',
               key: 'id'
             },
             onUpdate: 'cascade',
@@ -55,10 +70,10 @@ module.exports = {
           }
         }).done(
           queryInterface.addIndex(
-            'Users',
-            ['email'],
+            'Products',
+            ['shopId', 'sku'],
             {
-              indexName: 'UserEmailUniqueIndex',
+              indexName: 'ProductSkuUniqueIndex',
               indicesType: 'UNIQUE'
             }
           ))
@@ -67,6 +82,6 @@ module.exports = {
 
   down: function (queryInterface, Sequelize) {
     return queryInterface
-      .dropTable('Users')
+      .dropTable('Products')
   }
 };

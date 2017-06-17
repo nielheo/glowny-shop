@@ -34,6 +34,33 @@ describe('viewer/products', () => {
       })
     })
 
+    it('select with correct sku', function () {
+      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", sku: \\"GC.0001\\") { id } } }" }')
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.products.length).to.equal(1)
+      })
+    })
+
+    it('select with wrong sku', function () {
+      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", sku: \\"GS.0001\\") { id } } }" }')
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.products.length).to.equal(0)
+      })
+    })
+
+    it('select with sku from other shop', function () {
+      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", sku: \\"DH.0001\\") { id } } }" }')
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.products.length).to.equal(0)
+      })
+    })
+
     it('select users first:1 - return all expected fields', function () {
       return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\") { id sku name description curr price } } }" }')
       .then(result => {

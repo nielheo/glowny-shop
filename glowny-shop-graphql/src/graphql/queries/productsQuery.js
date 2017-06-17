@@ -8,24 +8,27 @@ var usersQuery = {
 	type: new GraphQLList(productType),
 	//resolve: (_, args) => citiesResolver(args)
 	args: {
-    //id: {
-    //  description: 'id of the role',
-    //  type: GraphQLString
-    //},
+    sku: {
+      description: 'id of the product',
+      type: GraphQLString
+    },
 		shopCode: {
 			type: new GraphQLNonNull(GraphQLString)
 		},
   },
 	resolve: (_, args) => { 
 		return models.Shop.findOne({ where: { code: args['shopCode']}, raw: true}).then(shop => {
+			var where = {}
+			where['shopId'] = shop.id
+			if(args['sku']) {
+				where['sku'] = args['sku']
+			}
 			return models.Product.findAll({ 
-				where: { shopId: shop.id },
+				where: where,
 				raw: true,
 			}).then(result  => { 
-				console.log(result)
 				return result.map(result => { return { ...result, curr: shop.systemCurr }})
 			})		
-			
 		})
 	}
 }

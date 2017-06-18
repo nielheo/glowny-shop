@@ -18,17 +18,21 @@ var usersQuery = {
   },
 	resolve: (_, args) => { 
 		return models.Shop.findOne({ where: { code: args['shopCode']}, raw: true}).then(shop => {
-			var where = {}
-			where['shopId'] = shop.id
-			if(args['sku']) {
-				where['sku'] = args['sku']
+			if (shop) {
+				var where = {}
+				where['shopId'] = shop.id
+				if(args['sku']) {
+					where['sku'] = args['sku']
+				}
+				return models.Product.findAll({ 
+					where: where,
+					raw: true,
+				}).then(result  => { 
+					return result.map(result => { return { ...result, curr: shop.systemCurr }})
+				})		
+			} else {
+				return []
 			}
-			return models.Product.findAll({ 
-				where: where,
-				raw: true,
-			}).then(result  => { 
-				return result.map(result => { return { ...result, curr: shop.systemCurr }})
-			})		
 		})
 	}
 }

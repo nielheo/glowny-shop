@@ -43,6 +43,16 @@ type mutation {
   ): User
 }
 
+# A product
+type Product {
+  id: String
+  sku: String
+  name: String
+  description: String
+  curr: String
+  price: Float
+}
+
 type query {
   echo(message: String): String
   viewer: Viewer
@@ -118,4 +128,9 @@ type Viewer {
     id: String
     type: Site!
   ): [Role]
+  products(
+    # id of the product
+    sku: String
+    shopCode: String!
+  ): [Product]
 }

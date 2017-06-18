@@ -26,6 +26,15 @@ describe('viewer/products', () => {
       })
     })
 
+    it('select products count is 1', function () {
+      return test('{ "query": "{ viewer { products(shopCode:\\"xxxx\\") { id } } }" }')
+      .then(result => {
+        expect(result.status).to.equal(200)
+        expect(result.success).to.equal(true)
+        expect(result.data.viewer.products.length).to.equal(0)
+      })
+    })
+
     it('select roles without shopCode arg, should return error', function () {
       return test('{ "query": "{ viewer { products { id } } }" }')
       .then(result => {

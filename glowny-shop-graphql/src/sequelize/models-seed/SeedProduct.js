@@ -65,7 +65,7 @@ export default function SeedUserRole (db, env) {
         code: 'Daniel_Shop',
         name: 'Daniel Shop',
         systemCurr: 'IDR',
-        isActive: false,
+        isActive: true,
       },
       where: {code: 'Daniel_Shop'} 
     }).spread((danielShop, created) => {

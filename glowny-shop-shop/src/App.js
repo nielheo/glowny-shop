@@ -18,13 +18,14 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import NotFound from './components/NotFound'
 import AboutUs from './components/AboutUs'
-import Users from './components/Users'
 import Product from './components/Product'
-import Material from './components/Material'
+import ProductAdd from './components/ProductAdd'
+import ProductEdit from './components/ProductEdit'
+import Users from './components/Users'
 import UserAdd from './components/UserAdd'
 import UserEdit from './components/UserEdit'
 import Forgot from './components/Forgot' 
-
+import Material from './components/Material'
 
 import {
 //  cyan500, 
@@ -78,6 +79,8 @@ class App extends Component {
                   <PrivateRoute path='/users/add' component={UserAdd} />
                   <PrivateRoute path='/users/edit/:userId' component={UserEdit} />
                   <PrivateRoute path='/users' component={Users} />
+                  <PrivateRoute path='/product/add' component={ProductAdd} />
+                  <PrivateRoute path='/product/edit/:id' component={ProductEdit} />
                   <PrivateRoute path='/product' component={Product} />
                   
                   <PrivateNotFound to='/404'/>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "currency-formatter": "^1.2.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "lodash.debounce": "^4.0.8",

@@ -29,6 +29,7 @@ export default function SeedUserRole (db, env) {
             where: { email: 'admin@glowny-shop.com' }}).spread((user, created) => {
               Product.findOrCreate({ 
                 defaults: {
+                  id: 'ID:GC.0001',
                   shopId: glownyCloth.id,
                   sku: 'GC.0001',
                   name: 'Product 1',
@@ -43,6 +44,7 @@ export default function SeedUserRole (db, env) {
 
               Product.findOrCreate({ 
                 defaults: {
+                  id: 'ID:GC.0002',
                   shopId: glownyCloth.id,
                   sku: 'GC.0002',
                   name: 'Product 2',
@@ -85,6 +87,7 @@ export default function SeedUserRole (db, env) {
           where: { email: 'super@daniel-shop.com' }}).spread((user, created) => {
             Product.findOrCreate({ 
               defaults: {
+                id: 'ID:DH.0001',
                 shopId: danielShop.id,
                 sku: 'DH.0001',
                 name: 'Daniel Shop Product 1',

@@ -43,7 +43,7 @@ describe('viewer/roles', () => {
         expect(result.data.viewer.roles[0].code).to.not.be.empty()
         expect(result.data.viewer.roles[0].title).to.not.be.empty()
         expect(result.data.viewer.roles[0].type).to.not.be.empty()
-        expect(result.data.viewer.roles[0].isSuper).to.be.ok()
+        expect(result.data.viewer.roles[0].isSuper).to.not.be.ok()
       })
     })
   })

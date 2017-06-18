@@ -32,7 +32,15 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: false,
           }
-        })
+        }).done(
+          queryInterface.addIndex(
+            'Shops',
+            ['code'],
+            {
+              indexName: 'ShopCodeUniqueIndex',
+              indicesType: 'UNIQUE'
+            }
+          ))
             
     ]
   },

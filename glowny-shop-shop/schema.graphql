@@ -130,7 +130,7 @@ type Viewer {
   ): [Role]
   products(
     # id of the product
-    sku: String
+    id: String
     shopCode: String!
   ): [Product]
 }

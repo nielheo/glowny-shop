@@ -1,4 +1,5 @@
 import React from 'react'
+import currencyFormatter from 'currency-formatter'
 
 import {
   TableRow,
@@ -27,7 +28,7 @@ class ProductItem extends React.Component
           <TableRowColumn>{product.sku}</TableRowColumn>
           <TableRowColumn>{product.name}</TableRowColumn>
           <TableRowColumn>{product.description}</TableRowColumn>
-
+          <TableRowColumn>{currencyFormatter.format(product.price, {code: product.curr })}</TableRowColumn>
           <TableRowColumn>
             <FlatButton label='...' href={'/product/edit/' + product.id }/>
           </TableRowColumn>

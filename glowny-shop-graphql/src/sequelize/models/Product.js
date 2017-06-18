@@ -16,6 +16,10 @@ export default function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    curr: {
+      type: DataTypes.STRING(3),
+      allowNull: false,
+    },
     price: {
       type: DataTypes.DECIMAL(18,4),
       allowNull: false,

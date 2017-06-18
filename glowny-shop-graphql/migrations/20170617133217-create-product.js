@@ -32,6 +32,10 @@ module.exports = {
             type: Sequelize.STRING,
             allowNull: false,
           },
+          curr: {
+            type: Sequelize.STRING(3),
+            allowNull: false,
+          },
           price: {
             type: Sequelize.DECIMAL(18,4),
             allowNull: false,

@@ -28,7 +28,7 @@ var usersQuery = {
 					where: where,
 					raw: true,
 				}).then(result  => { 
-					return result.map(result => { return { ...result, curr: shop.systemCurr }})
+					return result//.map(result => { return { ...result, curr: shop.systemCurr }})
 				})		
 			} else {
 				return []

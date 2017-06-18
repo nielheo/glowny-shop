@@ -44,7 +44,7 @@ describe('viewer/products', () => {
     })
 
     it('select with correct sku', function () {
-      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", sku: \\"GC.0001\\") { id } } }" }')
+      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", id: \\"ID:GC.0001\\") { id } } }" }')
       .then(result => {
         expect(result.status).to.equal(200)
         expect(result.success).to.equal(true)
@@ -53,7 +53,7 @@ describe('viewer/products', () => {
     })
 
     it('select with wrong sku', function () {
-      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", sku: \\"GS.0001\\") { id } } }" }')
+      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", id: \\"ID:GS.0001\\") { id } } }" }')
       .then(result => {
         expect(result.status).to.equal(200)
         expect(result.success).to.equal(true)
@@ -62,7 +62,7 @@ describe('viewer/products', () => {
     })
 
     it('select with sku from other shop', function () {
-      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", sku: \\"DH.0001\\") { id } } }" }')
+      return test('{ "query": "{ viewer { products(shopCode:\\"glowny_cloth\\", id: \\"ID:DH.0001\\") { id } } }" }')
       .then(result => {
         expect(result.status).to.equal(200)
         expect(result.success).to.equal(true)

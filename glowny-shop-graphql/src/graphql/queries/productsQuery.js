@@ -8,7 +8,7 @@ var usersQuery = {
 	type: new GraphQLList(productType),
 	//resolve: (_, args) => citiesResolver(args)
 	args: {
-    sku: {
+    id: {
       description: 'id of the product',
       type: GraphQLString
     },
@@ -21,8 +21,8 @@ var usersQuery = {
 			if (shop) {
 				var where = {}
 				where['shopId'] = shop.id
-				if(args['sku']) {
-					where['sku'] = args['sku']
+				if(args['id']) {
+					where['id'] = args['id']
 				}
 				return models.Product.findAll({ 
 					where: where,

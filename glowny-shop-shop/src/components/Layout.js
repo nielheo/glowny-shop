@@ -9,8 +9,8 @@ import { getUserToken } from './Common/Cookies'
 
 const styles = {
   container: {
-    padding: 20,
-    paddingTop: 25,
+    padding: 15,
+    paddingTop: 20,
   },
   /*drawer: {
     backgroundColor: '#FFD600',

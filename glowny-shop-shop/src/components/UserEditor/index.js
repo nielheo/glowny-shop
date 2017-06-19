@@ -37,7 +37,7 @@ const styles = {
     position: 'relative',
     maxWidth: 650,
     margin: 'auto',
-    padding: 25,
+    padding: 20,
     paddingBottom: 75,
     paddingTop: 30,
   },

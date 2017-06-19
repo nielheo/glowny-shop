@@ -51,6 +51,7 @@ type Product {
   description: String
   curr: String
   price: Float
+  isActive: Boolean
 }
 
 type query {
@@ -65,6 +66,15 @@ type Role {
   title: String
   isSuper: Boolean
   type: Site
+}
+
+# A shop
+type Shop {
+  id: String
+  code: String
+  name: String
+  systemCurr: String
+  isActive: Boolean
 }
 
 enum Site {
@@ -133,4 +143,8 @@ type Viewer {
     id: String
     shopCode: String!
   ): [Product]
+  shops(
+    # code of shop
+    code: String!
+  ): [Shop]
 }

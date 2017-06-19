@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { StyleRoot } from 'radium'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import {
@@ -60,35 +61,37 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <MuiThemeProvider muiTheme={muiTheme}>
-          <Router>
-            <Layout>
-              <ReactCSSTransitionGroup
-                transitionName="fade"
-                transitionEnterTimeout={300}
-                transitionLeaveTimeout={300}
-              >
-                <Switch>
-                  <Route path='/login' component={Login}/>
-                  <Route path='/logout' component={Logout}/>
-                  <Route path='/material' component={Material}/>
-                  <Route path='/forgotpassword' component={Forgot}/>
-                  <Route path='/404' component={NotFound}/>
-                  <PrivateRoute exact path='/' component={Home} />
-                  <PrivateRoute path='/aboutus' component={AboutUs} />
-                  <PrivateRoute path='/users/add' component={UserAdd} />
-                  <PrivateRoute path='/users/edit/:userId' component={UserEdit} />
-                  <PrivateRoute path='/users' component={Users} />
-                  <PrivateRoute path='/product/add' component={ProductAdd} />
-                  <PrivateRoute path='/product/edit/:id' component={ProductEdit} />
-                  <PrivateRoute path='/product' component={Product} />
-                  
-                  <PrivateNotFound to='/404'/>
-                </Switch>
-              </ReactCSSTransitionGroup>
-            </Layout>
-          </Router>
-        </MuiThemeProvider>
+        <StyleRoot>
+          <MuiThemeProvider muiTheme={muiTheme}>
+            <Router>
+              <Layout>
+                <ReactCSSTransitionGroup
+                  transitionName="fade"
+                  transitionEnterTimeout={300}
+                  transitionLeaveTimeout={300}
+                >
+                  <Switch>
+                    <Route path='/login' component={Login}/>
+                    <Route path='/logout' component={Logout}/>
+                    <Route path='/material' component={Material}/>
+                    <Route path='/forgotpassword' component={Forgot}/>
+                    <Route path='/404' component={NotFound}/>
+                    <PrivateRoute exact path='/' component={Home} />
+                    <PrivateRoute path='/aboutus' component={AboutUs} />
+                    <PrivateRoute path='/users/add' component={UserAdd} />
+                    <PrivateRoute path='/users/edit/:userId' component={UserEdit} />
+                    <PrivateRoute path='/users' component={Users} />
+                    <PrivateRoute path='/product/add' component={ProductAdd} />
+                    <PrivateRoute path='/product/edit/:id' component={ProductEdit} />
+                    <PrivateRoute path='/product' component={Product} />
+                    
+                    <PrivateNotFound to='/404'/>
+                  </Switch>
+                </ReactCSSTransitionGroup>
+              </Layout>
+            </Router>
+          </MuiThemeProvider>
+        </StyleRoot>
       </Provider>
     )
   }

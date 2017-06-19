@@ -1,7 +1,6 @@
 import { GraphQLNonNull, GraphQLString, GraphQLBoolean, GraphQLInputObjectType,GraphQLList } from 'graphql'
 import { resolver } from 'graphql-sequelize'
-import { userType } from '../types'
-import { siteType } from '../enums'
+import { productType } from '../types'
 import Bluebird from 'bluebird'
 
 const uuid = require('uuid')
@@ -11,35 +10,40 @@ var models = require('../../sequelize/models')
 const AddUserInput = new GraphQLInputObjectType({
   name: 'AddUserInput',
   fields: {
-    email: {
-      description: 'User email',
-      type: new GraphQLNonNull(GraphQLString)
-    },
-    firstName: {
-      description: 'User first name',
-      type: new GraphQLNonNull(GraphQLString)
-    },
-    lastName: {
-      description: 'User first name',
-      type: new GraphQLNonNull(GraphQLString)
-    },
-    type: { 
-      description: 'Site type status',
-      type: new GraphQLNonNull(siteType)
-    },
     shopCode: {
-      description: 'Unique Code of your shop',
-      type: GraphQLString
+      description: 'Shop code',
+      type: new GraphQLNonNull(GraphQLString)
     },
-    roles: {
-      description: 'List or role id',
-      type: new GraphQLNonNull(new GraphQLList(GraphQLString))
-    }
+    sku: {
+      description: 'SKU',
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    name: {
+      description: 'Product name',
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    description: { 
+      description: 'Product description',
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    curr: { 
+      description: 'Price currency',
+      type: new GraphQLNonNull(GraphQLString)
+    },
+    price: { 
+      description: 'Price currency',
+      type: new GraphQLNonNull(GraphQLFloat)
+    },
+    isActive: { 
+      description: 'Put product for sales',
+      type: new GraphQLNonNull(GraphQLBoolean)
+    },
+    
   }
 })
 
-var addUserMutation = {
-	type: userType,
+var addProductMutation = {
+	type: productType,
   args: {
     input: {
       description: 'Add User Input',
@@ -51,7 +55,7 @@ var addUserMutation = {
     console.log(input)
     var id =  uuid()
     return models.sequelize.transaction(function (t) {
-      return models.User.create(
+      return models.Product.create(
       { 
         id: id,
         email: input.email,
@@ -84,4 +88,4 @@ var addUserMutation = {
   })
 }}
 
-export default addUserMutation
+export default addProductMutation

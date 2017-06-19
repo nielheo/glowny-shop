@@ -17,8 +17,6 @@ class UserEdit extends React.Component {
   }
 }
 
-
-
 export default createFragmentContainer(UserEdit, {
   
   viewer: graphql`

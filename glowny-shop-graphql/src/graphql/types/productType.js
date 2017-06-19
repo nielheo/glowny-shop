@@ -1,6 +1,6 @@
 'use strict'
 import {attributeFields} from 'graphql-sequelize'
-import {GraphQLObjectType,GraphQLList,GraphQLString,GraphQLFloat,GraphQLEnumType} from 'graphql'
+import {GraphQLObjectType,GraphQLList,GraphQLString,GraphQLFloat,GraphQLEnumType,GraphQLBoolean} from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import roleType from './roleType'
 import { siteType } from '../enums'
@@ -17,6 +17,7 @@ const productType = new GraphQLObjectType({
     description: { type: GraphQLString },
 		curr: { type: GraphQLString },
     price: { type: GraphQLFloat },
+    isActive: { type: GraphQLBoolean }
 	}
 })
 

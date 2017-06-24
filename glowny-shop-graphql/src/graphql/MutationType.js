@@ -4,16 +4,18 @@ import {
 	updateUserMutation, 
 	updateUserActiveMutation, 
 	addUserMutation, 
-	addProductMutation } 
+	addProductMutation,
+	updateProductMutation } 
 from './mutations'
 
 const MutationType = new GraphQLObjectType({
 	name: 'mutation',
 	fields: {
+		addProduct: addProductMutation,
 		addUser: addUserMutation,
+		updateProduct: updateProductMutation,
 		updateUser: updateUserMutation,
 		updateUserActive: updateUserActiveMutation,
-		addProduct: addProductMutation,
 	}
 })
 

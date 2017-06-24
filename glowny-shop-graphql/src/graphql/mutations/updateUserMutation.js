@@ -1,4 +1,10 @@
-import { GraphQLNonNull, GraphQLString, GraphQLBoolean, GraphQLInputObjectType,GraphQLList } from 'graphql'
+import { 
+  GraphQLNonNull, 
+  GraphQLString, 
+  GraphQLBoolean, 
+  GraphQLInputObjectType,
+  GraphQLList } from 'graphql'
+
 import { resolver } from 'graphql-sequelize'
 import { userType } from '../types'
 import { siteType } from '../enums'
@@ -42,11 +48,11 @@ var updateUserMutation = {
 	type: userType,
   args: {
     input: {
-      description: 'Add User Input',
+      description: 'Update User Input',
       type: new GraphQLNonNull(UpdateUserInput)
     },
   },
-  description: 'Add New User',
+  description: 'Update User',
   resolve: function(obj, { input }) {
     console.log(input)
     return models.sequelize.transaction(function (t) {

@@ -1,13 +1,13 @@
 import React from 'react'
+import Radium from 'radium'
 
 import cc from 'currency-codes'
 import { Link } from 'react-router-dom'
-import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import Snackbar from 'material-ui/Snackbar'
+//import Snackbar from 'material-ui/Snackbar'
 import AutoComplete from 'material-ui/AutoComplete'
-import Toggle from 'material-ui/Toggle'
+//import Toggle from 'material-ui/Toggle'
 //import Roles from './Roles'
 
 //import AddProductMutation from './AddProductMutation'
@@ -15,49 +15,35 @@ import Toggle from 'material-ui/Toggle'
 //import environment from '../../createRelayEnvironment'
 
 const styles = {
-  addButton: {
-    float: 'right',
-  },
-  rowHeader: {
-    display: 'table',
-    width: '100%', /*Optional*/
-    tableLayout: 'fixed', /*Optional*/
-    marginBottom: 15,
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: 5,
   },
   row: {
-    display: 'table',
-    width: '100%', /*Optional*/
-    tableLayout: 'fixed', /*Optional*/
+    flexDirection: 'row',
+    display: 'flex',
+    //alignItems: 'stretch',
+    marginBottom: 20,
+    '@media (max-width: 640px)': {
+      flexDirection: 'column',
+    },
   },
-  columnLeft: {
-    width: '50%',
-    display: 'table-cell',
-    fontSize: '1.5em',
-    paddingRight: '2%',
+  column: {
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 6,
+    marginLeft: 15,
+    marginRight: 15,
   },
   columnRight: {
-    width: '50%',
-    display: 'table-cell',
-    fontSize: '1.5em',
-    paddingLeft: '2%',
-  },
-  textFieldFullWidth: {
-    width: '100%',
-  },
-  textFieldHalfWidth: {
-    width: '50%',
-  },
-  textFieldCurr: {
-    width: 100,
-    paddingRight: 20,
-  },
-  container: {
-    textAlign: 'left',
-    position: 'relative',
-    width: '100%',
-    margin: 'auto',
-    padding: 20,
-    paddingBottom: 75,
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 6,
+    marginLeft: 15,
+    marginRight: 15,
+    alignItems: 'flex-end',
   },
   button: {
     marginTop: 12,
@@ -73,11 +59,11 @@ const styles = {
     float: 'right',
     marginRight: 10,
   },
-  toggle: {
-    display: 'block',
-    width: 160,
-    fontSize: '0.8em',
-    marginTop: 40,
+  rowHeader: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 15,
+    color: '#00796B',
   },
 }
 
@@ -134,50 +120,60 @@ class index extends React.Component {
       //AddProductMutation(environment, input, this._afterSaveSuccess('Product updated succesfully'))
     }*/
   }
+
+  _handleNewRequest = (choosenRequest) => {
+    console.log(choosenRequest)
+    this.setState({
+      curr: choosenRequest,
+    });
+  };
   
 
   render() {
     //const { roles } = this.state
     //const { superRoles } = this.state
-    console.log(this.state)
+    //console.log(this.state)
     return(
-      <Paper style={styles.container}>
-          { !this.state.id && 
-          <div style={styles.rowHeader}>
-              New Product
-          </div>
-          }
-          <div style={styles.row}>
-            <div style={styles.columnLeft}>
-              <TextField
-                hintText='Product Name'
-                floatingLabelText='Product Name'
-                value={this.state.name}
-                onChange={this._handleValueChanged.bind(this, 'name')}
-                style={styles.textFieldFullWidth}
-              />
-              <TextField
-                hintText='SKU'
-                floatingLabelText='SKU'
-                value={this.state.sku}
-                onChange={this._handleValueChanged.bind(this, 'sku')}
-                style={styles.textFieldFullWidth}
-              />
-              <TextField
-                hintText='Product Description'
-                floatingLabelText='Description'
-                value={this.state.description}
-                onChange={this._handleValueChanged.bind(this, 'description')}
-                multiLine={true}
-                rows={3}
-                rowsMax={5}
-                style={styles.textFieldFullWidth}
-              />
+      <div style={styles.container}>
+        { !this.state.id && 
+        <div style={styles.rowHeader}>
+            New Product
+        </div>
+        }
+        <div style={styles.row}>
+          <div style={styles.column}>
+            <TextField
+              hintText='Product Name'
+              floatingLabelText='Product Name'
+              value={this.state.name}
+              onChange={this._handleValueChanged.bind(this, 'name')}
+              fullWidth={true}
+            />
+            <TextField
+              hintText='SKU'
+              floatingLabelText='SKU'
+              value={this.state.sku}
+              onChange={this._handleValueChanged.bind(this, 'sku')}
+              fullWidth={true}
+            />
+            <TextField
+              hintText='Product Description'
+              floatingLabelText='Description'
+              value={this.state.description}
+              onChange={this._handleValueChanged.bind(this, 'description')}
+              multiLine={true}
+              rows={3}
+              rowsMax={5}
+              fullWidth={true}
+            />
+            <div style={styles.row}>
               <AutoComplete
                 hintText='Currency'
                 floatingLabelText='Currency'
                 value={this.state.curr}
                 dataSource={cc.codes()}
+                //onUpdateInput={this._handleUpdateInput}
+                onNewRequest={this._handleNewRequest}
                 searchText={this.state.curr}
                 filter={(searchText, key) => (key.indexOf(searchText) !== -1)}
                 openOnFocus={true}
@@ -189,31 +185,29 @@ class index extends React.Component {
                 value={this.state.price}
                 onChange={this._handleValueChanged.bind(this, 'price')}
               />
-              <Toggle
-                label='Active'
-                style={styles.toggle}
-                defaultToggled={this.state.isActive}
-              />
-            </div>
-            <div style={styles.columnRight}>
-            -
             </div>
           </div>
-          <RaisedButton 
-            label='Submit'
-            onClick={this._handleSubmit}
-            secondary={true} 
-            style={styles.button} />
-          <Link style={styles.link} to='/product'>Cancel</Link>
-          <Snackbar
-            open={this.state.snackbarOpen}
-            message={this.state.snackbarMessage}
-            autoHideDuration={2500}
-            onRequestClose={this.handleRequestClose}
-          />
-        </Paper>
+          <div style={styles.column}>
+            
+          </div>
+        </div>
+        <div style={styles.row}>
+          <div style={styles.column}>
+            <div style={styles.item}>
+              
+              <RaisedButton 
+                label='Submit'
+                //fullWidth={true} 
+                onClick={this._handleSubmit}
+                secondary={true} 
+                style={styles.button} />
+              <Link style={styles.link} to='/product'>Cancel</Link>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }
 
-export default index
+export default Radium(index)

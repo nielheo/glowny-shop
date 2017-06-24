@@ -33,6 +33,7 @@ import {
 //  grey100,  grey500,
 //  white, darkBlack, fullBlack, yellowA700,
  // fullBlack, red100, blue100,
+  darkBlack,fullBlack,
 } from 'material-ui/styles/colors'
 
 const muiTheme = getMuiTheme({
@@ -47,11 +48,11 @@ const muiTheme = getMuiTheme({
     alternateTextColor: '#FFFFFF',
     canvasColor: '#FFFFFF',
     borderColor: '#BDBDBD',
-    /*
-    //disabledColor: fade(darkBlack, 0.3),
+    disabledColor: darkBlack,
     pickerHeaderColor: fullBlack,
-    //clockCircleColor: fade(darkBlack, 0.07),
     shadowColor: fullBlack,
+    /*
+    //clockCircleColor: fade(darkBlack, 0.07),
     */
   },
 })

@@ -4,18 +4,20 @@ import {
   graphql,
   createFragmentContainer,
 } from 'react-relay'
+import ProductEditor from '../ProductEditor'
 //import UserEditor from '../UserEditor/index'
 
-class UserAdd extends React.Component {
+class ProductAdd extends React.Component {
   render() {
     console.log(this.props.viewer.products)
+    const { shops } = this.props.viewer
     return(
-      <div>Product Add</div>
+      <ProductEditor product={null} curr={shops && shops[0].systemCurr} />
     )
   }
 }
 
-export default createFragmentContainer(UserAdd, {
+export default createFragmentContainer(ProductAdd, {
   viewer: graphql`
     fragment ProductAdd_viewer on Viewer {
       shops(code:$shopCode) {

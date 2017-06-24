@@ -1,4 +1,10 @@
-import { GraphQLNonNull, GraphQLString, GraphQLBoolean, GraphQLInputObjectType,GraphQLList } from 'graphql'
+import { 
+  GraphQLNonNull, 
+  GraphQLString, 
+  GraphQLBoolean, 
+  GraphQLInputObjectType,
+  GraphQLList,
+  GraphQLFloat } from 'graphql'
 import { resolver } from 'graphql-sequelize'
 import { productType } from '../types'
 import Bluebird from 'bluebird'
@@ -7,8 +13,8 @@ const uuid = require('uuid')
 
 var models = require('../../sequelize/models')
 
-const AddUserInput = new GraphQLInputObjectType({
-  name: 'AddUserInput',
+const AddProductInput = new GraphQLInputObjectType({
+  name: 'AddProductInput',
   fields: {
     shopCode: {
       description: 'Shop code',
@@ -38,7 +44,10 @@ const AddUserInput = new GraphQLInputObjectType({
       description: 'Put product for sales',
       type: new GraphQLNonNull(GraphQLBoolean)
     },
-    
+    userId: {
+      description: 'Id of creator',
+      type: new GraphQLNonNull(GraphQLString)
+    }
   }
 })
 
@@ -46,46 +55,56 @@ var addProductMutation = {
 	type: productType,
   args: {
     input: {
-      description: 'Add User Input',
-      type: new GraphQLNonNull(AddUserInput)
+      description: 'Add Product Input',
+      type: new GraphQLNonNull(AddProductInput)
     },
   },
-  description: 'Add New User',
+  description: 'Add New Product',
   resolve: function(obj, { input }) {
     console.log(input)
     var id =  uuid()
     return models.sequelize.transaction(function (t) {
-      return models.Product.create(
-      { 
-        id: id,
-        email: input.email,
-        firstName: input.firstName,
-        lastName: input.lastName,
-        type: input.type, 
-        isActive: true,
-        password: 'P@ssw0rd',
-      }, {transaction: t})
-      .then(result =>
-        Bluebird.map(input.roles, function(role) {
-          return models.User_Role.create({
-            roleId: role,
-            userId: result.id
-          }, {transaction: t}).then(function() {
-            console.log("done");
-          }).catch(err => {
-            throw new Error()
+      return models.Shop.findOne({ where: { code: input.shopCode }}).then(shop => {
+        if (!shop) {
+          throw new Error('Shop code is invalid')
+        } else 
+        {
+          return models.Product.create({  
+            id: id,
+            shopId: shop.id,
+            sku: input.sku,
+            name: input.name,
+            description: input.description,
+            curr: input.curr,
+            price: input.price,
+            isActive: input.isActive,
+            createdBy: input.userId,
+            updatedBy: input.userId,
           })
-        })
-      )
+        }
+      })
     }).then(result => {
-      return models.User.findById(id).then(user => {
-        console.log('add user success')
-        //response(user).code(200)
-        return user
-    }).catch(err => {
-      console.log(err)
+      return models.Product.findById(id).then(product => {
+        console.log('add product success')
+        return product
+      })
+    }).catch(error => {
+      console.log(error)
+      throw new Error(error)
     })
-  })
 }}
 
 export default addProductMutation
+
+/*
+mutation {
+  addProduct(input: {shopCode: "Glowny_Cloth", sku: "SKU.001", name: "New Product 1", description: "Add New Product Mutation", curr: "IDR", price: 850000, isActive: true, userId: "User1"}) {
+    id
+    sku
+    name
+    description
+    curr
+    price
+    isActive
+  }
+}*/

@@ -3,6 +3,32 @@ schema {
   mutation: mutation
 }
 
+input AddProductInput {
+  # Shop code
+  shopCode: String!
+
+  # SKU
+  sku: String!
+
+  # Product name
+  name: String!
+
+  # Product description
+  description: String!
+
+  # Price currency
+  curr: String!
+
+  # Price currency
+  price: Float!
+
+  # Put product for sales
+  isActive: Boolean!
+
+  # Id of creator
+  userId: String!
+}
+
 input AddUserInput {
   # User email
   email: String!
@@ -24,15 +50,27 @@ input AddUserInput {
 }
 
 type mutation {
+  # Add New Product
+  addProduct(
+    # Add Product Input
+    input: AddProductInput!
+  ): Product
+
   # Add New User
   addUser(
     # Add User Input
     input: AddUserInput!
   ): User
 
-  # Add New User
+  # Update Product
+  updateProduct(
+    # Update Product Input
+    input: UpdateProductInput!
+  ): Product
+
+  # Update User
   updateUser(
-    # Add User Input
+    # Update User Input
     input: UpdateUserInput!
   ): User
 
@@ -81,6 +119,32 @@ enum Site {
   admin
   shop
   member
+}
+
+input UpdateProductInput {
+  # Product id
+  id: String!
+
+  # SKU
+  sku: String!
+
+  # Product name
+  name: String!
+
+  # Product description
+  description: String!
+
+  # Price currency
+  curr: String!
+
+  # Price currency
+  price: Float!
+
+  # Put product for sales
+  isActive: Boolean!
+
+  # Id of creator
+  userId: String!
 }
 
 input UpdateUserActiveInput {

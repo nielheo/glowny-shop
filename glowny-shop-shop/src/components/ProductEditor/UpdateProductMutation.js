@@ -1,10 +1,10 @@
 import { commitMutation, graphql } from 'react-relay'
 
 const mutation = graphql`
-  mutation AddProductMutation (
-    $input: AddProductInput!
+  mutation UpdateProductMutation (
+    $input: UpdateProductInput!
   ) {
-      addProduct(input: $input) 
+      updateProduct(input: $input) 
       {
         id
         sku
@@ -24,7 +24,7 @@ function commit(environment, input) {
       mutation,
       variables: { input: input },
       onComplete: 
-        console.log('Add Product Mutation complete'),
+        console.log('Update Product Mutation complete'),
     }
   )
 }

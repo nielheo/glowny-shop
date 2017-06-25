@@ -132,10 +132,9 @@ class index extends React.Component {
   }
 
   _afterSaveSuccess = (message) => {
-    
     this.setState({
       snackbarOpen: true,
-      snackBarMessage: message,
+      snackbarMessage: message,
     })
     this.props.history.push('/users')
   }

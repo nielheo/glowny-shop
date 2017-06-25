@@ -36,6 +36,11 @@ export const getUserToken = () => {
     return getCookie(USER_TOKEN)
 } 
 
+export const getUserTokenDecoded = () => {
+    var token = getUserToken();
+    return jwt_decode(token)
+}
+
 export const setUserToken = (token) => {
     console.log('setUserToken')
     setCookie(USER_TOKEN, token, 1)
@@ -53,4 +58,11 @@ export const getFullName = () => {
     if (!token) return null
     var decoded = jwt_decode(token)
     return decoded.firstName + ' ' + decoded.lastName
+}
+
+export const getId = () => {
+    const token = getUserToken()
+    if (!token) return null
+    var decoded = jwt_decode(token)
+    return decoded.id
 }

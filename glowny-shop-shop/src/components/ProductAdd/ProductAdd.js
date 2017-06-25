@@ -9,10 +9,11 @@ import ProductEditor from '../ProductEditor'
 
 class ProductAdd extends React.Component {
   render() {
-    console.log(this.props.viewer.products)
+    //console.log(this.props.viewer.products)
     const { shops } = this.props.viewer
+    var product = { curr: this.props.viewer.shops[0].systemCurr }
     return(
-      <ProductEditor product={null} curr={shops && shops[0].systemCurr} />
+      <ProductEditor product={product} { ...this.props } curr={shops && shops[0].systemCurr} />
     )
   }
 }

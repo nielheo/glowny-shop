@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import { withRouter } from 'react-router'
 
 import {
   QueryRenderer,
@@ -39,8 +40,9 @@ const styles = {
   },
 }
 
-export default class IndexPage extends React.Component {
+class IndexPage extends React.Component {
   render() {
+    console.log('/Product')
     return(
       <QueryRenderer
         environment={environment}
@@ -87,3 +89,5 @@ export default class IndexPage extends React.Component {
     )
   }
 }
+
+export default withRouter(IndexPage)

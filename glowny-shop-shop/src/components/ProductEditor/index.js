@@ -1,18 +1,23 @@
 import React from 'react'
 import Radium from 'radium'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import * as types from '../../actions/actionTypes.js'
+import { withRouter } from 'react-router'
 
 import cc from 'currency-codes'
-import { Link } from 'react-router-dom'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-//import Snackbar from 'material-ui/Snackbar'
+import FlatButton from 'material-ui/FlatButton'
 import AutoComplete from 'material-ui/AutoComplete'
 //import Toggle from 'material-ui/Toggle'
 //import Roles from './Roles'
 
-//import AddProductMutation from './AddProductMutation'
-//import UpdateProductMutation from './UpdateProductMutation'
-//import environment from '../../createRelayEnvironment'
+import AddProductMutation from './AddProductMutation'
+import UpdateProductMutation from './UpdateProductMutation'
+import environment from '../../createRelayEnvironment'
+import Constants from '../../../constants'
+import { getId } from '../Common/Cookies'
 
 const styles = {
   container: {
@@ -72,7 +77,7 @@ class index extends React.Component {
     super(props)
 
     const { product } = props
-    console.log(product)
+    //console.log(product)
     this.state = {
       id: product && product.id,
       sku: product && product.sku,
@@ -80,7 +85,7 @@ class index extends React.Component {
       description: product && product.description,
       curr: product && product.curr,
       price: product && product.price,
-      isActive: product && product.isActive,
+      isActive: product && product.isActive || false,
       snackbarOpen: false,
       snackbarMessage: '', 
     }
@@ -93,32 +98,33 @@ class index extends React.Component {
   }
 
   _afterSaveSuccess = (message) => {
-    
-    this.setState({
-      snackbarOpen: true,
-      snackBarMessage: message,
-    })
-    this.props.history.push('/users')
+    this.props._updateHomeSnackbarAction(true, message)
+    this.props.history.push('/product')
   }
 
 
   _handleSubmit = () => {
-    /*var input = {
+    var input = {
       id: this.state.id,
+      //shopCode: Constants.shopCode,
       sku: this.state.sku,
       name: this.state.name,
       description: this.state.description,
       curr: this.state.curr,
       price: this.state.price,
       isActive: this.state.isActive,
+      userId: getId(),
     }
     if (this.state.id) {
-      input = {}
-//      UpdateUserMutation(environment, input, this._afterSaveSuccess('User succesfully added'))
+      UpdateProductMutation(environment, input, this._afterSaveSuccess('Product succesfully updated'))
     } else {
-      
-      //AddProductMutation(environment, input, this._afterSaveSuccess('Product updated succesfully'))
-    }*/
+      input['shopCode'] = Constants.shopCode
+      AddProductMutation(environment, input, this._afterSaveSuccess('Product succesfully added'))
+    }
+  }
+
+  _handleCancel = () => {
+    this.props.history.push('/product')
   }
 
   _handleNewRequest = (choosenRequest) => {
@@ -132,7 +138,8 @@ class index extends React.Component {
   render() {
     //const { roles } = this.state
     //const { superRoles } = this.state
-    //console.log(this.state)
+    console.log(this.props)
+    
     return(
       <div style={styles.container}>
         { !this.state.id && 
@@ -201,7 +208,11 @@ class index extends React.Component {
                 onClick={this._handleSubmit}
                 secondary={true} 
                 style={styles.button} />
-              <Link style={styles.link} to='/product'>Cancel</Link>
+              <FlatButton 
+                label='Cancel'
+                onClick={this._handleCancel}
+                style={styles.button}
+              />
             </div>
           </div>
         </div>
@@ -210,4 +221,23 @@ class index extends React.Component {
   }
 }
 
-export default Radium(index)
+const _updateHomeSnackbarAction = (open, message) => ({
+  type: types.UPDATE_HOME_SNACKBAR,
+  snackbarOpen: open,
+  snackbarMessage: message,
+})
+
+const dispatchToProps = (dispatch) => ({
+  _updateHomeSnackbarAction: bindActionCreators(_updateHomeSnackbarAction, dispatch),
+})
+
+const stateToProps = (state) => ({
+  onProgress: state.homeReducer.onProgress,
+})
+
+const indexRedux = withRouter(connect(
+  stateToProps,
+  dispatchToProps,
+)(Radium(index)))
+
+export default indexRedux

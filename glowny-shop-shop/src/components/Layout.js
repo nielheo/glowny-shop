@@ -1,10 +1,13 @@
 import React from 'react'
-//import { fullBlack } from 'material-ui/styles/colors'
+import { connect } from 'react-redux'
+import Snackbar from 'material-ui/Snackbar'
+
 import Drawer from 'material-ui/Drawer'
 import Menu from 'material-ui/Menu'
 import MenuItem from 'material-ui/MenuItem'
 import AppBar from 'material-ui/AppBar'
 import Header from './Header'
+import { withRouter } from 'react-router'
 import { getUserToken } from './Common/Cookies'
 
 const styles = {
@@ -20,7 +23,7 @@ const styles = {
   },*/
 };
 
-export default class LayoutPage extends React.Component {
+class LayoutPage extends React.Component {
   constructor(props) {
     super(props)
     this.state = { open: false }
@@ -51,8 +54,24 @@ export default class LayoutPage extends React.Component {
           </Menu>
         </Drawer>
         <div style={styles.container}>{this.props.children}</div>
-        
+        <Snackbar
+            open={this.props.snackbarOpen}
+            message={this.props.snackbarMessage}
+            autoHideDuration={2500}
+            onRequestClose={this.handleRequestClose}
+          />
       </div>
     );
   }
 }
+
+const stateToProps = (state) => ({
+  snackbarOpen: state.homeReducer.snackbarOpen,
+  snackbarMessage: state.homeReducer.snackbarMessage,
+})
+
+const layoutPageRedux = withRouter(connect(
+  stateToProps,
+)(LayoutPage))
+
+export default layoutPageRedux

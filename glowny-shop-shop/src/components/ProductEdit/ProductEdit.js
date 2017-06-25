@@ -12,7 +12,7 @@ class ProductEdit extends React.Component {
     const { products } = this.props.viewer
     return(
       products && products.length &&
-      <ProductEditor product={products[0]} />
+      <ProductEditor product={products[0]} { ...this.props } />
     )
   }
 }

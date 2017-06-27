@@ -3,7 +3,7 @@
  *   relay-compiler
  *
  * @providesModule ProductItem_product.graphql
- * @generated SignedSource<<0e160232fab24759ab9c0b95faac0005>>
+ * @generated SignedSource<<76c01cfbc4e74d60f64fe684457bccff>>
  * @flow
  * @nogrep
  */
@@ -19,6 +19,7 @@ export type ProductItem_product = {
   description?: ?string;
   curr?: ?string;
   price?: ?number;
+  isActive?: ?boolean;
 };
 */
 
@@ -70,6 +71,13 @@ const fragment /*: ConcreteFragment*/ = {
       "alias": null,
       "args": null,
       "name": "price",
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "args": null,
+      "name": "isActive",
       "storageKey": null
     }
   ],

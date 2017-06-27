@@ -68,6 +68,12 @@ type mutation {
     input: UpdateProductInput!
   ): Product
 
+  # Update user active status
+  updateProductActive(
+    # Product id
+    input: UpdateProductActiveInput!
+  ): Product
+
   # Update User
   updateUser(
     # Update User Input
@@ -119,6 +125,14 @@ enum Site {
   admin
   shop
   member
+}
+
+input UpdateProductActiveInput {
+  # Product id
+  id: String!
+
+  # active status
+  isActive: Boolean!
 }
 
 input UpdateProductInput {

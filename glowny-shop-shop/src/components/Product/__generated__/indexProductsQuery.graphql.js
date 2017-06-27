@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule indexProductsQuery.graphql
- * @generated SignedSource<<3e76ecc80a7d891b4f9bbc8cf1c2a843>>
- * @relayHash a8c7d524a69f8e4d564e8baf5c0e2403
+ * @generated SignedSource<<abfb37b01847554d69075655dd1f6537>>
+ * @relayHash abf82d7f143754859a630ccddc12a28e
  * @flow
  * @nogrep
  */
@@ -49,6 +49,7 @@ fragment ProductItem_product on Product {
   description
   curr
   price
+  isActive
 }
 */
 
@@ -195,6 +196,13 @@ const batch /*: ConcreteBatch*/ = {
                     "args": null,
                     "name": "price",
                     "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "isActive",
+                    "storageKey": null
                   }
                 ]
               }
@@ -215,7 +223,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query indexProductsQuery(\n  $shopCode: String!\n) {\n  viewer {\n    ...Products_viewer\n    products(shopCode: $shopCode) {\n      id\n    }\n  }\n}\n\nfragment Products_viewer on Viewer {\n  products(shopCode: $shopCode) {\n    id\n    ...ProductList_products\n  }\n}\n\nfragment ProductList_products on Product {\n  id\n  ...ProductItem_product\n}\n\nfragment ProductItem_product on Product {\n  id\n  sku\n  name\n  description\n  curr\n  price\n}\n"
+  "text": "query indexProductsQuery(\n  $shopCode: String!\n) {\n  viewer {\n    ...Products_viewer\n    products(shopCode: $shopCode) {\n      id\n    }\n  }\n}\n\nfragment Products_viewer on Viewer {\n  products(shopCode: $shopCode) {\n    id\n    ...ProductList_products\n  }\n}\n\nfragment ProductList_products on Product {\n  id\n  ...ProductItem_product\n}\n\nfragment ProductItem_product on Product {\n  id\n  sku\n  name\n  description\n  curr\n  price\n  isActive\n}\n"
 };
 
 module.exports = batch;

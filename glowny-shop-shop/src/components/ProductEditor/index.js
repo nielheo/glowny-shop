@@ -10,7 +10,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import AutoComplete from 'material-ui/AutoComplete'
-//import Toggle from 'material-ui/Toggle'
+import Toggle from 'material-ui/Toggle'
 //import Roles from './Roles'
 
 import AddProductMutation from './AddProductMutation'
@@ -70,6 +70,9 @@ const styles = {
     marginLeft: 15,
     color: '#00796B',
   },
+  toggle: {
+    fontSize: 16,
+  },
 }
 
 class index extends React.Component {
@@ -88,6 +91,7 @@ class index extends React.Component {
       isActive: product && product.isActive || false,
       snackbarOpen: false,
       snackbarMessage: '', 
+      buttonClicked: false,
     }
   }
 
@@ -100,10 +104,24 @@ class index extends React.Component {
   _afterSaveSuccess = (message) => {
     this.props._updateHomeSnackbarAction(true, message)
     this.props.history.push('/product')
+  } 
+
+  _formValidate = () => {
+    if ((!this.state.sku || this.state.sku.trim() === '')
+        || (!this.state.name || this.state.name.trim() === '')
+        || (!this.state.description || this.state.description.trim() === '')
+        || (!this.state.curr || this.state.curr.trim() === ''))
+      return false
+    else
+      return true
   }
 
-
   _handleSubmit = () => {
+    this.setState({ buttonClicked: true })
+
+    if (!this._formValidate())
+      return
+
     var input = {
       id: this.state.id,
       //shopCode: Constants.shopCode,
@@ -133,13 +151,15 @@ class index extends React.Component {
       curr: choosenRequest,
     });
   };
+
+  _handleActiveToggled = (_, toggled) => {
+    this.setState({
+      isActive: toggled,
+    });
+  }
   
 
   render() {
-    //const { roles } = this.state
-    //const { superRoles } = this.state
-    console.log(this.props)
-    
     return(
       <div style={styles.container}>
         { !this.state.id && 
@@ -153,6 +173,9 @@ class index extends React.Component {
               hintText='Product Name'
               floatingLabelText='Product Name'
               value={this.state.name}
+              errorText={this.state.buttonClicked 
+                && (!this.state.name || this.state.name.trim() === '') 
+                && 'required' }
               onChange={this._handleValueChanged.bind(this, 'name')}
               fullWidth={true}
             />
@@ -160,6 +183,9 @@ class index extends React.Component {
               hintText='SKU'
               floatingLabelText='SKU'
               value={this.state.sku}
+              errorText={this.state.buttonClicked 
+                && (!this.state.sku || this.state.sku.trim() === '') 
+                && 'required' }
               onChange={this._handleValueChanged.bind(this, 'sku')}
               fullWidth={true}
             />
@@ -167,6 +193,9 @@ class index extends React.Component {
               hintText='Product Description'
               floatingLabelText='Description'
               value={this.state.description}
+              errorText={this.state.buttonClicked 
+                && (!this.state.description || this.state.description.trim() === '') 
+                && 'required' }
               onChange={this._handleValueChanged.bind(this, 'description')}
               multiLine={true}
               rows={3}
@@ -190,7 +219,22 @@ class index extends React.Component {
                 hintText='Price'
                 floatingLabelText='Price'
                 value={this.state.price}
+                errorText={this.state.buttonClicked 
+                  && (!this.state.price || this.state.price.trim() === '') 
+                  && 'required' }
                 onChange={this._handleValueChanged.bind(this, 'price')}
+              />
+              
+            </div>
+            <div style={styles.row}>
+              <Toggle
+                label={this.state.isActive ? 'For sell' : 'Not for sell' }
+                toggled={this.state.isActive}
+                onToggle={this._handleActiveToggled}
+                style={styles.toggle}
+                //defaultToggled={true}
+                labelPosition="right"
+              //  style={styles.toggle}
               />
             </div>
           </div>

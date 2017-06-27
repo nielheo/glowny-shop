@@ -13,6 +13,7 @@ import {
 //import UpdateUserActiveMutation from './UpdateUserActiveMutation'
 //import environment from '../../createRelayEnvironment'
 import FlatButton from 'material-ui/FlatButton'
+import Toggle from 'material-ui/Toggle'
 
 class ProductItem extends React.Component 
 { 
@@ -29,6 +30,11 @@ class ProductItem extends React.Component
           <TableRowColumn>{product.name}</TableRowColumn>
           <TableRowColumn>{product.description}</TableRowColumn>
           <TableRowColumn>{currencyFormatter.format(product.price, {code: product.curr })}</TableRowColumn>
+          <TableRowColumn>
+            <Toggle 
+              defaultToggled={product.isActive}
+            />
+          </TableRowColumn>
           <TableRowColumn>
             <FlatButton label='...' href={'/product/edit/' + product.id }/>
           </TableRowColumn>
@@ -47,6 +53,7 @@ export default createFragmentContainer(ProductItem, {
       description
       curr
       price
+      isActive
     }
   `,
 })

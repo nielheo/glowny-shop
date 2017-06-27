@@ -71,7 +71,8 @@
     "whatwg-fetch": "2.0.2"
   },
   "scripts": {
-    "start": "npm run get-schema && npm run relay && node scripts/start.js",
+    "start": "yarn run get-schema && yarn run relay && node scripts/start.js",
+    "starting": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "cross-env NODE_ENV=test mocha --compilers js:babel-core/register --require test/index.js \"./src/**/*.test.js\"",
     "relay": "relay-compiler --src ./src --schema schema.graphql",

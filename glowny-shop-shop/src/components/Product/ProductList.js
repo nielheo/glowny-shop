@@ -55,7 +55,7 @@ class ProductList extends React.Component {
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>Description</TableHeaderColumn>
               <TableHeaderColumn>Price</TableHeaderColumn>
-              
+              <TableHeaderColumn>For Sell</TableHeaderColumn>
               <TableHeaderColumn></TableHeaderColumn>
             </TableRow>
           </TableHeader>

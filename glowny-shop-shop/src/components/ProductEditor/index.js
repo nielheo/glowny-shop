@@ -11,6 +11,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FlatButton from 'material-ui/FlatButton'
 import AutoComplete from 'material-ui/AutoComplete'
 import Toggle from 'material-ui/Toggle'
+import Dialog from 'material-ui/Dialog'
 //import Roles from './Roles'
 
 import AddProductMutation from './AddProductMutation'
@@ -18,6 +19,9 @@ import UpdateProductMutation from './UpdateProductMutation'
 import environment from '../../createRelayEnvironment'
 import Constants from '../../../constants'
 import { getId } from '../Common/Cookies'
+
+import VariantList from './VariantList'
+import VariantEditor from './VariantEditor'
 
 const styles = {
   container: {
@@ -30,17 +34,27 @@ const styles = {
     flexDirection: 'row',
     display: 'flex',
     //alignItems: 'stretch',
-    marginBottom: 20,
+    marginBottom: 12,
     '@media (max-width: 640px)': {
       flexDirection: 'column',
     },
+  },
+  subTitle: {
+    fontSize: '16px',
+    marginTop: 12,
+    borderBottom: '1px solid #009688',
+    paddingBottom: 8,
+    width: '100%',
+    //marginBottom: 6,
+    fontWeight: '600',
+    color: '#009688',
   },
   column: {
     display: 'flex',
     flexDirection: 'column',
     flex: 6,
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 20,
+    marginRight: 20,
   },
   columnRight: {
     display: 'flex',
@@ -92,6 +106,12 @@ class index extends React.Component {
       snackbarOpen: false,
       snackbarMessage: '', 
       buttonClicked: false,
+      variants: [{ index: 0, name: 'Variant 1' }, 
+        { index: 1, name: 'Variant 2' }, 
+        { index: 2, name: 'Variant 3' }],
+      variantEditIndex: -1,
+      openVariantModal: false,
+      variantModalTitle: '',
     }
   }
 
@@ -146,7 +166,6 @@ class index extends React.Component {
   }
 
   _handleNewRequest = (choosenRequest) => {
-    console.log(choosenRequest)
     this.setState({
       curr: choosenRequest,
     });
@@ -155,11 +174,56 @@ class index extends React.Component {
   _handleActiveToggled = (_, toggled) => {
     this.setState({
       isActive: toggled,
-    });
+    })
+  }
+
+  _handleAddVariant = () => {
+    this.setState({
+      variantModalTitle: 'Add Variant',
+      openVariantModal: true,
+      variantForEdit: {
+        index: -9,
+        name: '',
+        variants: ['S', 'M'],
+      },
+    })
+  } 
+
+  _handleVariantClose = () => {
+    this.setState({
+      openVariantModal: false,
+      variantEditIndex: -1,
+    })
+  }
+
+  _handleStartEditVariant = (index) => {
+    this.setState({
+      variantEditIndex: index,
+      variantModalTitle: 'Edit Variant',
+      openVariantModal: true,
+    })
+  }
+
+  _handleCancelEditVariant = () => {
+    this.setState({
+      variantEditIndex: -1,
+    })
   }
   
-
   render() {
+    const variantActions = [
+      <FlatButton
+        label="Cancel"
+        //primary={true}
+        onTouchTap={this._handleVariantClose}
+      />,
+      <FlatButton
+        label="Submit"
+        secondary={true}
+        //disabled={true}
+        onTouchTap={this._handleVariantClose}
+      />,
+    ];
     return(
       <div style={styles.container}>
         { !this.state.id && 
@@ -239,7 +303,37 @@ class index extends React.Component {
             </div>
           </div>
           <div style={styles.column}>
-            
+            <div style={styles.row}>
+              <div style={styles.subTitle}>
+                Variants
+              </div>
+            </div>
+            <div style={styles.row}>
+              <VariantList variants={this.state.variants} 
+                editIndex={this.state.variantEditIndex} 
+                onStartEdit={this._handleStartEditVariant}
+                onCancelEdit={this._handleCancelEditVariant}
+              />
+            </div>
+            <div style={styles.row}>
+              <FlatButton 
+                label='Add Variant'
+                onClick={this._handleAddVariant}
+                secondary={true}
+                disabled={this.state.variantEditIndex !== -1}
+                //style={styles.button}
+              />
+            </div>
+            <Dialog
+              title={this.state.variantModalTitle}
+              actions={variantActions}
+              modal={true}
+              //autoDetectWindowHeight={true}
+              open={this.state.openVariantModal}
+              variant={this.state.variantForEdit}
+            >
+              <VariantEditor variant={this.state.variantForEdit} />
+            </Dialog>
           </div>
         </div>
         <div style={styles.row}>
@@ -249,14 +343,15 @@ class index extends React.Component {
               <RaisedButton 
                 label='Submit'
                 //fullWidth={true} 
-                onClick={this._handleSubmit}
+                onTouchTap={this._handleSubmit}
                 secondary={true} 
                 style={styles.button} />
               <FlatButton 
                 label='Cancel'
-                onClick={this._handleCancel}
+                onTouchTap={this._handleCancel}
                 style={styles.button}
               />
+              
             </div>
           </div>
         </div>
